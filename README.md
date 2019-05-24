@@ -1,6 +1,6 @@
 # Fitmate-Application
 ```
-cd fitmate_install
+cd fitmate_test
 npm install
 npm audit fix
 ```
