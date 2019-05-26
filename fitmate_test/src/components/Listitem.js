@@ -15,7 +15,6 @@ const Listitem = (props) => {
   );
 }
 
-
 const styles = StyleSheet.create({
   eachitem: {
     backgroundColor: '#eee',
