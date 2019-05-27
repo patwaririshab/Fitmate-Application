@@ -1,18 +1,12 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import startTabs from '../MainTabs/startMainTabs'
-
+import { firebaseConfig } from '../../firebaseconfig'
 import * as firebase from 'firebase';
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
-//Initialize Firebase
-const firebaseConfig = {
-  apiKey: "AIzaSyCigcPmpzEu-n7MhLPXDmBMCuHM8dmfQQo",
-  authDomain: "fitmate-react.firebaseapp.com",
-  databaseURL: "https://fitmate-react.firebaseio.com",
-  projectId: "fitmate-react",
-  storageBucket: "fitmate-react.appspot.com",
-};
+
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
