@@ -8,6 +8,10 @@ const startTabs = () => {
         screen:"fitmate.ExerciseScreen",
         label: "Start Challenge",
         title: "Start Challenge",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
         icon: require('../../../icons/exercise-icon.png'),
       },
 
@@ -15,6 +19,10 @@ const startTabs = () => {
         screen:"fitmate.FriendsScreen",
         label: "Manage friends",
         title: "Manage friends",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
         icon: require('../../../icons/friends-icon.png'),
       }
     ]

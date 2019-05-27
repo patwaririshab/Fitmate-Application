@@ -3,14 +3,11 @@ import {Platform, StyleSheet, Text, View , TextInput , Button , TouchableOpacity
 import Backgroundimg from '../../icons/exercise.png'
 
 const Friendgrp = (props) => {
-
-
   return(
     <TouchableOpacity style = {styles.container} onPress = {props.pressed}>
       <ImageBackground source={Backgroundimg} style={styles.imgback}>
        <Text style = {styles.titleText}>{props.groupname}</Text>
       </ImageBackground>
-
     </TouchableOpacity>
   );
 
