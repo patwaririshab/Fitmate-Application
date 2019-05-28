@@ -1,14 +1,10 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import startTabs from '../MainTabs/startMainTabs'
-import { firebaseConfig } from '../../firebaseconfig'
-import * as firebase from 'firebase';
+import firebase from '../../Firebase'
+
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
-
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
 
 class AuthScreen extends React.Component{
 
@@ -18,6 +14,7 @@ class AuthScreen extends React.Component{
     this.state = ({
       email: ' ',
       password: '',
+      name: "",
     })
 
   }
@@ -36,6 +33,27 @@ class AuthScreen extends React.Component{
         return;
       }
       firebase.auth().createUserWithEmailAndPassword(email,password)
+        .then((user) => {
+        // get user data from the auth trigger
+
+        const email = user.email; // The email of the user.
+        const displayName =  this.state.name; // The display name of the user.
+
+        // set account  doc
+        const account = {
+          name: displayName,
+          email:email
+        }
+        firebase.firestore().collection('accounts').doc(user.uid).set(account);
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+
+
     }
     catch(error){
       console.log(error.toString())
@@ -86,6 +104,16 @@ class AuthScreen extends React.Component{
             onChangeText={(email) => this.setState({email})}
             />
         </Item>
+
+        <Item floatingLabel>
+          <Label>Display Name</Label>
+          <Input
+            autoCorrect={false}
+            autoCapitalize="none"
+            onChangeText={(name) => this.setState({name})}
+            />
+        </Item>
+
 
         <Item floatingLabel>
           <Label>Password</Label>
