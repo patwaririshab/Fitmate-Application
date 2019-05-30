@@ -13,17 +13,17 @@ class ExerciseScreen extends React.Component{
       {
         key: "2",
         ExerciseName: "Sit Ups",
-        
+
       },
       {
         key: "3",
         ExerciseName: "Jumping Jacks",
-      
+
       },
     ]
   }
-  
-  exerciseitemclickedhandler = (item) => {
+
+  exerciseItemClickedHandler = (item) => {
     this.props.navigator.push({
       screen: 'fitmate.EachExerciseScreen', // unique ID registered with Navigation.registerScreen
       title: item.ExerciseName, // navigation bar title of the pushed screen (optional)
@@ -37,18 +37,18 @@ class ExerciseScreen extends React.Component{
   }
 
   render(){
-    const exercisedisp =(
+    const exerciseDisplay =(
       <FlatList
         style = {styles.listcontainer}
         data = {this.state.exercises}
-        renderItem={({item}) => <ExerciseItem pressed = {()=>{return this.exerciseitemclickedhandler(item)}} name = {item.ExerciseName}/>}
+        renderItem={({item}) => <ExerciseItem pressed = {()=>(this.exerciseItemClickedHandler(item))} name = {item.ExerciseName}/>}
       >
       </FlatList>
     )
-    
+
     return(
     <View style = {styles.outerview}>
-      {exercisedisp}
+      {exerciseDisplay}
     </View>
     );
   }

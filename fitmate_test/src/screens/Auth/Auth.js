@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import startTabs from '../MainTabs/startMainTabs'
 import firebase from '../../Firebase'
+import AuthContext from '../../Context/AuthContext'
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
@@ -15,6 +16,7 @@ class AuthScreen extends React.Component{
       email: ' ',
       password: '',
       name: "",
+      uid:""
     })
 
   }
@@ -26,43 +28,40 @@ class AuthScreen extends React.Component{
       }
     })
   }
-  signUpUser =  (email, password) => {
+  async signUpUser(){
+    console.log("Signing up");
+
     try{
       if(this.state.password.length < 6){
         alert("Please enter at least 6 characters")
         return;
       }
-      firebase.auth().createUserWithEmailAndPassword(email,password)
-        .then((user) => {
-        // get user data from the auth trigger
+      await firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password);
 
-        const email = user.email; // The email of the user.
-        const displayName =  this.state.name; // The display name of the user.
 
-        // set account  doc
-        const account = {
-          name: displayName,
-          email:email
-        }
-        firebase.firestore().collection('accounts').doc(user.uid).set(account);
-      })
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // ...
-      });
+      const user = firebase.auth().currentUser;
 
+      const account = {
+        name: this.state.name,
+        email: this.state.email,
+        userID: user.uid
+      }
+      this.setState({uid: user.uid});
+      await firebase.firestore().collection('users').doc(user.uid).set(account);
 
     }
     catch(error){
       console.log(error.toString())
+        alert(error);
     }
   }
 
-  logInUser = (email, password) => {
+  logInUser = () => {
+
+    console.log("Logging in");
+
     try{
-      firebase.auth().signInWithEmailAndPassword(email,password).then(function (user) {
+      firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(function (user) {
         // console.log(user)
       startTabs();
     })
@@ -72,29 +71,25 @@ class AuthScreen extends React.Component{
     }
   }
 
-  loginHandler = () => {
-    startTabs();
-  }
 
-
-  async logInWithFacebook(){
-    const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync('2371990063013333', {  permissions:['public_profile']  })
-
-    if (type == 'success') {
-
-      const credential = firebase.auth.FacebookAuthProvider.credential(token)
-
-      firebase.auth().signInWithCredential(credential).catch((error) => {
-        console.log(error)
-      })
-    }
-  }
+  // async logInWithFacebook(){
+  //   const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync('2371990063013333', {  permissions:['public_profile']  })
+  //
+  //   if (type == 'success') {
+  //
+  //     const credential = firebase.auth.FacebookAuthProvider.credential(token)
+  //
+  //     firebase.auth().signInWithCredential(credential).catch((error) => {
+  //       console.log(error)
+  //     })
+  //   }
+  // }
 
   render() {
     return (
     <Container style={styles.container}>
       <Form>
-
+        <AuthContext.Provider value = {{authenticated:true ,userUID:this.state.uid}}/>
         <Text style={{ textAlign: 'center', fontSize: 50, fontWeight: 'bold' }}> Fitmate</Text>
         <Item floatingLabel>
           <Label>Email</Label>
@@ -129,7 +124,7 @@ class AuthScreen extends React.Component{
           full
           rounded
           success
-          onPress={()=> this.logInUser(this.state.email,this.state.password)}
+          onPress={()=> this.logInUser()}
         >
           <Text style={{ color: 'white' }}> Login</Text>
         </Button>
@@ -138,7 +133,7 @@ class AuthScreen extends React.Component{
           full
           rounded
           warning
-          onPress={()=> this.signUpUser(this.state.email,this.state.password)}
+          onPress={()=> this.signUpUser()}
         >
           <Text style={{ color: 'white'}}> Sign Up</Text>
         </Button>

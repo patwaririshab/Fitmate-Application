@@ -1,14 +1,14 @@
 import React from 'react';
 import {Text ,View , FlatList, StyleSheet} from 'react-native'
-import Eachfriend from '../../components/Eachfriend'
+import EachFriend from '../../components/EachFriend'
 
-const Eachgroup = (props) => {
+const FriendGroupList = (props) => {
   return(
     <View   style = {styles.outerview}>
       <FlatList
         style = {styles.listcontainer}
         data = {props.FriendList}
-        renderItem={({item}) => <Eachfriend name = {item}/>}>
+        renderItem={({item}) => <EachFriend name = {item}/>}>
       </FlatList>
     </View>
   );
@@ -27,5 +27,4 @@ const styles = StyleSheet.create({
 
 });
 
-
-export default Eachgroup;
+export default FriendGroupList;

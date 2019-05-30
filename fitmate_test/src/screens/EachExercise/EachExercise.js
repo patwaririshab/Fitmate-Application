@@ -2,7 +2,6 @@ import React from 'react';
 import { Text, View , StyleSheet } from 'react-native'
 
 const EachExercise = (props) => {
-    
 
     return (
       <View style = {styles.outerview}>
@@ -10,8 +9,8 @@ const EachExercise = (props) => {
       </View>
     );
 }
-  
-  
+
+
 const styles = StyleSheet.create({
 
 listcontainer:{
@@ -25,6 +24,3 @@ outerview : {
 });
 
 export default EachExercise;
-
-
-

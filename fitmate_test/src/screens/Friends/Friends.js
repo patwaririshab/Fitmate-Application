@@ -1,6 +1,8 @@
 import React from 'react';
 import {View ,Text ,FlatList ,StyleSheet} from 'react-native';
-import Friendgrp from '../../components/FriendGrp.js'
+import FriendGroup from '../../components/FriendGroup.js'
+import AuthContext from '../../Context/AuthContext'
+import firebase  from '../../Firebase'
 
 class FriendsScreen extends React.Component{
   state = {
@@ -36,9 +38,9 @@ class FriendsScreen extends React.Component{
     ]
   }
 
-  friendgrpclickedhandler = (item) => {
+  friendGroupClickedHandler = (item) => {
     this.props.navigator.push({
-      screen: 'fitmate.EachgroupScreen', // unique ID registered with Navigation.registerScreen
+      screen: 'fitmate.FriendGroupListScreen', // unique ID registered with Navigation.registerScreen
       title: item.GroupName, // navigation bar title of the pushed screen (optional)
       subtitle: undefined, // navigation bar subtitle of the pushed screen (optional)
       passProps: item, // Object that will be passed as props to the pushed screen (optional)
@@ -49,14 +51,44 @@ class FriendsScreen extends React.Component{
     });
   }
 
+  static contextType = AuthContext;
+
+  componentDidMount(){
+    console.log("Friends Compponent did moutn");
+    let arr = [];
+
+
+    firebase.firestore().collection('users').get().then((snapshot)=>{
+      snapshot.docs.forEach((doc) => {
+        arr.push({
+          key:doc.data().email,
+          name:doc.data().name,
+          email:doc.data().email
+        })
+      });
+    });
+
+    console.log(arr);
+
+    let tempfriends = [...this.state.friends];
+
+    tempfriends.forEach((friendsgrp) => {
+      friendsgrp.FriendList = arr;
+    });
+
+    console.log(tempfriends);
+
+
+  }
+
   render(){
     // const templist = [{key:1 , height:"hello"} , {key:2 , height:"hello"}  ,{key:3 , height:"hello"}, {key:4 , height:"hello"}, {key:5 , height:"hello"}, {key:6 , height:"hello"},{key:7 , height:"hello"},{key:8 , height:"hello"}, {key:9 , height:"hello"}, {key:10 , height:"hello"} , {key:11 , height:"hello"}  ,{key:12 , height:"hello"}, {key:13 , height:"hello"}, {key:14 , height:"hello"}, {key:15 , height:"hello"},{key:16 , height:"hello"},{key:17 , height:"hello"}, {key:18 , height:"hello"} ]
 
-    const friendgrpdisp  = (
+    const friendGroupDisplay  = (
       <FlatList
         style = {styles.listcontainer}
         data = {this.state.friends}
-        renderItem={({item}) => <Friendgrp pressed = {() => this.friendgrpclickedhandler(item)} members = {item.FriendList} groupname = {item.GroupName}/>}>
+        renderItem={({item}) => <FriendGroup pressed = {() => this.friendGroupClickedHandler(item)} members = {item.FriendList} groupname = {item.GroupName}/>}>
 
       </FlatList>
       );
@@ -67,7 +99,7 @@ class FriendsScreen extends React.Component{
 
     return(
       <View style = {styles.overallcontainer}>
-        {friendgrpdisp}
+        {friendGroupDisplay}
       </View>
     );
   }
