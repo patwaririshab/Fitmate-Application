@@ -5,6 +5,16 @@ const startTabs = () => {
   Navigation.startTabBasedApp({
     tabs: [
       {
+        screen:"fitmate.ChallengesListScreen",
+        label: "View Challenges",
+        title: "View Challenges",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+        icon: require('../../../icons/exercise-icon.png'),
+      },
+      {
         screen:"fitmate.ExerciseScreen",
         label: "Start Challenge",
         title: "Start Challenge",

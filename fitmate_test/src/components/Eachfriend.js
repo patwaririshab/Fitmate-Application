@@ -3,15 +3,18 @@ import {View , Text ,StyleSheet , Image} from 'react-native';
 import Profile1 from '../../icons/profilepic.jpg'
 import Profile2 from '../../icons/profilepic2.jpg'
 
-const Eachfriend = (props) => {
+const EachFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
   return(
     <View style = {styles.container}>
       <Image
-          style = {styles.profilepic}
+          style = {styles.profilePicture}
           source={picture}
       />
-      <Text style = {styles.textstyle}>{props.name.key}</Text>
+      <View style = {styles.nameContainer}>
+        <Text style = {styles.textStyle}>{props.name.name}</Text>
+        <Text style = {styles.textStyle}>{props.name.email}</Text>
+      </View>
     </View>
   );
 }
@@ -30,16 +33,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  textstyle: {
+  textStyle: {
     fontSize: 20,
     fontWeight: 'bold'
   },
-  profilepic:{
+  profilePicture:{
     height: 50,
     width: 50,
     borderRadius: 100
+  },
+  nameContainer:{
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    backgroundColor: '#F5FCFF',
   }
 
 });
 
-export default Eachfriend;
+export default EachFriend;

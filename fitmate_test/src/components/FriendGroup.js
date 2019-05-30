@@ -2,10 +2,10 @@ import React from 'react';
 import {Platform, StyleSheet, Text, View , TextInput , Button , TouchableOpacity , ImageBackground} from 'react-native';
 import Backgroundimg from '../../icons/exercise.png'
 
-const Friendgrp = (props) => {
+const FriendGroup = (props) => {
   return(
     <TouchableOpacity style = {styles.container} onPress = {props.pressed}>
-      <ImageBackground source={Backgroundimg} style={styles.imgback}>
+      <ImageBackground source={Backgroundimg} style={styles.imageBack}>
        <Text style = {styles.titleText}>{props.groupname}</Text>
       </ImageBackground>
     </TouchableOpacity>
@@ -29,9 +29,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  imgback: {width: '100%', height: '100%' ,textAlign: "center"}
+  imageBack: {width: '100%', height: '100%' ,textAlign: "center"}
   ,
-  eachitem: {
+  eachItem: {
     backgroundColor: '#eee',
     width:"100%",
     height: 75,
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
 
-  viewitem:{
+  viewItem:{
     margin :5,
     width:"100%",
     textAlign: 'center'
@@ -47,4 +47,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default Friendgrp;
+export default FriendGroup;
