@@ -25,7 +25,7 @@ class ExerciseScreen extends React.Component{
 
   exerciseItemClickedHandler = (item) => {
     this.props.navigator.push({
-      screen: 'fitmate.EachExerciseScreen', // unique ID registered with Navigation.registerScreen
+      screen: 'fitmate.CameraScreen', // unique ID registered with Navigation.registerScreen
       title: item.ExerciseName, // navigation bar title of the pushed screen (optional)
       subtitle: undefined, // navigation bar subtitle of the pushed screen (optional)
       passProps: item, // Object that will be passed as props to the pushed screen (optional)

@@ -4,7 +4,7 @@ import { Text, View , StyleSheet } from 'react-native'
 const EachExercise = (props) => {
 
     return (
-      <View style = {styles.outerview}>
+      <View>
           <Text>{props.ExerciseName}</Text>
       </View>
     );
