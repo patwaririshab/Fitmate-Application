@@ -4,6 +4,7 @@ import FriendGroup from '../../components/FriendGroup.js'
 import AuthContext from '../../Context/AuthContext'
 import firebase  from '../../Firebase'
 
+
 class FriendsScreen extends React.Component{
   state = {
     friends:[
@@ -53,33 +54,50 @@ class FriendsScreen extends React.Component{
 
   static contextType = AuthContext;
 
-  componentDidMount(){
+
+  async componentDidMount(){
     console.log("Friends Compponent did moutn");
     let arr = [];
 
+    let allfriendgrps = [];
 
-    firebase.firestore().collection('users').get().then((snapshot)=>{
-      snapshot.docs.forEach((doc) => {
-        arr.push({
-          key:doc.data().email,
-          name:doc.data().name,
-          email:doc.data().email
+    const user = firebase.auth().currentUser;
+    console.log(user.uid);
+
+    await firebase.firestore().collection('friendGroups').where("OwnerID", "==", user.uid).get().then((snapshot)=>{
+      snapshot.docs.forEach((doc ,index) => {
+        doc.data().friends.forEach((friend) => {
+          arr.push({
+            key:friend.id,
+            name:friend.name,
+          })
         })
+        allfriendgrps.push({
+          key: index.toString(),
+          GroupName: doc.data().GroupName,
+          FriendList: [...arr]
+        });
+
+        console.log(allfriendgrps);
+
       });
     });
 
-    console.log(arr);
-
-    let tempfriends = [...this.state.friends];
-
-    tempfriends.forEach((friendsgrp) => {
-      friendsgrp.FriendList = arr;
+    this.setState({
+      friends: allfriendgrps
     });
 
-    console.log(tempfriends);
-
+    // let tempfriends = [...this.state.friends];
+    //
+    // tempfriends.forEach((friendsgrp) => {
+    //   friendsgrp.FriendList = arr;
+    // });
+    //
+    // console.log(tempfriends);
+    //
 
   }
+
 
   render(){
     // const templist = [{key:1 , height:"hello"} , {key:2 , height:"hello"}  ,{key:3 , height:"hello"}, {key:4 , height:"hello"}, {key:5 , height:"hello"}, {key:6 , height:"hello"},{key:7 , height:"hello"},{key:8 , height:"hello"}, {key:9 , height:"hello"}, {key:10 , height:"hello"} , {key:11 , height:"hello"}  ,{key:12 , height:"hello"}, {key:13 , height:"hello"}, {key:14 , height:"hello"}, {key:15 , height:"hello"},{key:16 , height:"hello"},{key:17 , height:"hello"}, {key:18 , height:"hello"} ]

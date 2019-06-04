@@ -6,6 +6,7 @@ import FriendsScreen from './src/screens/Friends/Friends.js';
 import FriendGroupListScreen from './src/screens/FriendGroupList/FriendGroupList.js';
 import EachExerciseScreen from './src/screens/EachExercise/EachExercise.js';
 import ChallengesListScreen from './src/screens/ChallengesList/ChallengesList.js';
+import AddFriendsScreen from './src/screens/AddFriends/AddFriends.js';
 
 
 Navigation.registerComponent("fitmate.AuthScreen", () => AuthScreen);
@@ -14,6 +15,7 @@ Navigation.registerComponent("fitmate.FriendsScreen", () => FriendsScreen);
 Navigation.registerComponent("fitmate.FriendGroupListScreen", () => FriendGroupListScreen);
 Navigation.registerComponent("fitmate.EachExerciseScreen", () => EachExerciseScreen);
 Navigation.registerComponent("fitmate.ChallengesListScreen", () => ChallengesListScreen);
+Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen);
 
 
 Navigation.startSingleScreenApp({
