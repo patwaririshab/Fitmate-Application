@@ -68,12 +68,13 @@ class ChallengesList extends React.Component{
     }
 
 
+
   render(){
     const ChallengeDisplay  = (
       <FlatList
         style = {styles.listcontainer}
         data = {this.state.Incomplete}
-        renderItem={({item}) => <EachChallenge pressed = {() => this.IssuedChallengeClickedHandler(item)} Number= {item.Number} Exercise = {item.Exercise} Initiator = {item.InitiatorName}/>}>
+        renderItem={({item}) => <EachChallenge pressed = {() => {}} Number= {item.Number} Exercise = {item.Exercise} Initiator = {item.InitiatorName}/>}>
 
       </FlatList>
       );

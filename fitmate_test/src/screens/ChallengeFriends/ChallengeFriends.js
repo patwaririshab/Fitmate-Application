@@ -7,15 +7,13 @@ import EachFriend from '../../components/EachFriend'
 import SearchedFriend from '../../components/SearchedFriend'
 
 
-class AddFriendsScreen extends React.Component{
+class ChallengeFriendsScreen extends React.Component{
   state = {
     text: "" ,
-    users:[
+    friends:[
 
     ],
-    filtered:[
 
-    ],
     userID:""
   }
 
@@ -28,9 +26,8 @@ class AddFriendsScreen extends React.Component{
     const user = firebase.auth().currentUser;
     console.log(user.uid);
 
-
-
     let arr = []
+
 
     let arrofFriends = []
     await firebase.firestore().collection('allFriends').doc(user.uid).get().then((doc) => {
@@ -38,23 +35,25 @@ class AddFriendsScreen extends React.Component{
     })
 
     await firebase.firestore().collection('users').get().then((snapshot)=>{
-
+        let i = 0;
       snapshot.docs.forEach((doc ,index) => {
 
         const friendStat = (arrofFriends.includes(doc.data().userID)) ? true : false;
-        arr.push({
-          key:index,
-          name: doc.data().name,
-          userid: doc.data().userID,
-          isFriend : friendStat
-        });
+        if(friendStat){
+          arr.push({
+            key:i,
+            name: doc.data().name,
+            userid: doc.data().userID,
+            isFriend : false
+          });
+          i++;
+        }
 
 
       });
 
-      this.setState({userID: user.uid ,users:[...arr]});
-      console.log("TESTING FIRNDS")
-      console.log(this.state.users);
+      this.setState({userID: user.uid ,friends:[...arr]});
+
     });
 
 
@@ -63,48 +62,60 @@ class AddFriendsScreen extends React.Component{
   }
 
  AddRemoveFriend = ( item ) => {
-   if(item.isFriend){
-     firebase.firestore().collection('allFriends').doc(this.state.userID).update({
-      Friends: firebase.firestore.FieldValue.arrayRemove(item.userid)
-    });
-    const tempArr = [...this.state.users]
-    tempArr[item.key].isFriend = false;
-    this.setState({
-      users: [...tempArr],
-      filtered: [...this.state.filtered]
-    });
-  }else{
-    firebase.firestore().collection('allFriends').doc(this.state.userID).update({
-     Friends: firebase.firestore.FieldValue.arrayUnion(item.userid)
-   });
-   const tempArr = [...this.state.users]
-   tempArr[item.key].isFriend = true;
+   console.log(item)
+   const tempArr = [...this.state.friends]
+   const stat = tempArr[item.key].isFriend;
+   tempArr[item.key].isFriend = !stat;
    this.setState({
-     users: [...tempArr],
-     filtered: [...this.state.filtered]
+     friends: [...tempArr],
    });
-  }
-
  }
 
  searchBtnPressedHandler = () => {
 
-    let searchtext = this.state.text;
-    if(this.state.text === ""){
+    // let searchtext = this.state.text;
+    // if(this.state.text === ""){
+    //
+    // }else{
+    //   let tempArr = this.state.users.filter((friend) => {
+    //     return friend.name.toLowerCase().includes(searchtext.toLowerCase());
+    //   })
+    //   let newtempArr = tempArr.map((friend) => {
+    //     return {key : friend.key.toString() ,index: friend.key}
+    //   })
+    //
+    //   this.setState({filtered : [...newtempArr]});
+    //
+    // }
+    //
+    // console.log(this.state.filtered)
+  }
 
-    }else{
-      let tempArr = this.state.users.filter((friend) => {
-        return friend.name.toLowerCase().includes(searchtext.toLowerCase());
-      })
-      let newtempArr = tempArr.map((friend) => {
-        return {key : friend.key.toString() ,index: friend.key}
-      })
+  async Submission(friend , ExerciseNum , Number , UserID){
 
-      this.setState({filtered : [...newtempArr]});
+      const exercise = parseInt(ExerciseNum, 10);
+      const num = parseInt(Number, 10);
 
-    }
+      if(friend.isFriend){
+        const newchallenge = {
+          Completed: false,
+          Exercise: exercise,
+          Number: num,
+          InitiatorID: UserID,
+          RecipientID:friend.userid,
+          Name:friend.name
+        }
+        await firebase.firestore().collection('challenges').doc().set(newchallenge);
+      }
 
-    console.log(this.state.filtered)
+
+  }
+
+  SubmitBtnPressedHandler = () => {
+    console.log(this.props.Exercise);
+
+    console.log(this.props.Number);
+    this.state.friends.forEach((friend) => this.Submission(friend , this.props.Exercise ,this.props.Number , this.state.userID ));
   }
 
   render(){
@@ -112,8 +123,8 @@ class AddFriendsScreen extends React.Component{
     const friendDisplay  = (
       <FlatList
         style = {styles.listcontainer}
-        data = {this.state.filtered}
-        renderItem={({item}) =>  <SearchedFriend addtext = "Add Friend" removetext = "Remove Friend" item = {this.state.users[item.index]} pressed = {() => this.AddRemoveFriend(this.state.users[item.index])}/>}>
+        data = {this.state.friends}
+        renderItem={({item}) =>  <SearchedFriend addtext = "Challenge Friend" removetext = "Dun Challenge Remove" item = {item} pressed = {() => this.AddRemoveFriend(item)}/>}>
 
       </FlatList>
       );
@@ -135,6 +146,14 @@ class AddFriendsScreen extends React.Component{
            title='Search'
            onPress = {this.searchBtnPressedHandler}
              />
+
+         <Button
+            raised
+            icon={{name: 'flame'}}
+            success
+            title='Submit Challenge'
+            onPress = {this.SubmitBtnPressedHandler}
+              />
 
         <Text>{this.state.searchtext}</Text>
         {friendDisplay}
@@ -188,4 +207,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default AddFriendsScreen;
+export default ChallengeFriendsScreen;
