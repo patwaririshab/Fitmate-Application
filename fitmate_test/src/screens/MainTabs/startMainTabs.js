@@ -34,6 +34,16 @@ const startTabs = () => {
           flex: 1
         },
         icon: require('../../../icons/friends-icon.png'),
+      },
+      {
+        screen:"fitmate.AddFriendsScreen",
+        label: "Add friends",
+        title: "Add friends",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+        icon: require('../../../icons/friends-icon.png'),
       }
     ]
   });

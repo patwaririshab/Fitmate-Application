@@ -7,12 +7,16 @@
     "test": "jest"
   },
   "dependencies": {
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
     "firebase": "6.0.2",
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
-    "react-native-navigation": "^1.1.493"
+    "react-native-elements": "^1.1.0",
+    "react-native-navigation": "^1.1.493",
+    "react-native-vector-icons": "^6.4.2"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",
@@ -20,7 +24,7 @@
     "babel-jest": "24.8.0",
     "jest": "24.8.0",
     "metro-react-native-babel-preset": "0.54.1",
-    "react-test-renderer": "16.8.3"
+    "react-test-renderer": "^16.8.3"
   },
   "jest": {
     "preset": "react-native"
