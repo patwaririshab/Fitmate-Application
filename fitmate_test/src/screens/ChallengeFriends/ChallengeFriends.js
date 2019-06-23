@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import AuthContext from '../../Context/AuthContext'
-import firebase from '../../Firebase'
-import { SearchBar, Button } from 'react-native-elements'
+
+import firebase  from '../../Firebase'
+import { SearchBar , Button} from 'react-native-elements'
+import EachFriend from '../../components/Eachfriend'
 import SearchedFriend from '../../components/SearchedFriend'
 
 

@@ -4,6 +4,7 @@ import AuthContext from '../../Context/AuthContext'
 import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
 import EachFriend from '../../components/EachFriend'
+
 import SearchedFriend from '../../components/SearchedFriend'
 
 

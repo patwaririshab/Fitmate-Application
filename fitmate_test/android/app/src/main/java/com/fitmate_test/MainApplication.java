@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -58,9 +59,9 @@ public class MainApplication extends NavigationApplication {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
 		return Arrays.<ReactPackage>asList(
-      new VectorIconsPackage(),
-     new AsyncStoragePackage()
-
+     new AsyncStoragePackage(),
+      new RNCameraPackage(),
+      new VectorIconsPackage()
 			// eg. new VectorIconsPackage()
 		);
 	}
