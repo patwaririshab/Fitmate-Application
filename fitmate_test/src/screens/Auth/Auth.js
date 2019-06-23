@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import React, { Component } from 'react';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 import startTabs from '../MainTabs/startMainTabs'
 import firebase from '../../Firebase'
 import AuthContext from '../../Context/AuthContext'
@@ -7,36 +7,38 @@ import AuthContext from '../../Context/AuthContext'
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
 
 
-class AuthScreen extends React.Component{
+class AuthScreen extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props)
 
     this.state = ({
       email: ' ',
       password: '',
       name: "",
-      uid:""
+      uid: ""
     })
 
   }
 
-  componentDidMount(){
-    firebase.auth().onAuthStateChanged((user) => {
+  async componentDidMount() {
+    await firebase.auth().onAuthStateChanged((user) => {
       if (user != null) {
-        console.log(user)
+        startTabs();
       }
     })
   }
-  async signUpUser(){
+  async signUpUser() {
     console.log("Signing up");
 
-    try{
-      if(this.state.password.length < 6){
+    try {
+      if (this.state.password.length < 6) {
         alert("Please enter at least 6 characters")
         return;
       }
-      await firebase.auth().createUserWithEmailAndPassword(this.state.email,this.state.password);
+      await firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).then((response) => {
+        console.log(response);
+      });
 
 
       const user = firebase.auth().currentUser;
@@ -46,13 +48,17 @@ class AuthScreen extends React.Component{
         email: this.state.email,
         userID: user.uid
       }
-      this.setState({uid: user.uid});
+      this.setState({ uid: user.uid });
       await firebase.firestore().collection('users').doc(user.uid).set(account);
+      const newFriends = {
+        Friends: []
+      }
+      await firebase.firestore().collection('allFriends').doc(user.uid).set(newFriends);
 
     }
-    catch(error){
+    catch (error) {
       console.log(error.toString())
-        alert(error);
+      alert(error);
     }
   }
 
@@ -60,13 +66,13 @@ class AuthScreen extends React.Component{
 
     console.log("Logging in");
 
-    try{
-      firebase.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then(function (user) {
-        // console.log(user)
-      startTabs();
-    })
+    try {
+      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
+        console.log(user)
+        startTabs();
+      })
     }
-    catch(error){
+    catch (error) {
       console.log(error.toString())
     }
   }
@@ -87,68 +93,68 @@ class AuthScreen extends React.Component{
 
   render() {
     return (
-    <Container style={styles.container}>
-      <Form>
-        <AuthContext.Provider value = {{authenticated:true ,userUID:this.state.uid}}/>
-        <Text style={{ textAlign: 'center', fontSize: 50, fontWeight: 'bold' }}> Fitmate</Text>
-        <Item floatingLabel>
-          <Label>Email</Label>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={(email) => this.setState({email})}
+      <Container style={styles.container}>
+        <Form>
+          <AuthContext.Provider value={{ authenticated: true, userUID: this.state.uid }} />
+          <Text style={{ textAlign: 'center', fontSize: 50, fontWeight: 'bold' }}> Fitmate</Text>
+          <Item floatingLabel>
+            <Label>Email</Label>
+            <Input
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(email) => this.setState({ email })}
             />
-        </Item>
+          </Item>
 
-        <Item floatingLabel>
-          <Label>Display Name</Label>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-            onChangeText={(name) => this.setState({name})}
+          <Item floatingLabel>
+            <Label>Display Name</Label>
+            <Input
+              autoCorrect={false}
+              autoCapitalize="none"
+              onChangeText={(name) => this.setState({ name })}
             />
-        </Item>
+          </Item>
 
 
-        <Item floatingLabel>
-          <Label>Password</Label>
-          <Input
-            autoCorrect={false}
-            autoCapitalize="none"
-            secureTextEntry={true}
-            onChangeText={(password) => this.setState({password})}
+          <Item floatingLabel>
+            <Label>Password</Label>
+            <Input
+              autoCorrect={false}
+              autoCapitalize="none"
+              secureTextEntry={true}
+              onChangeText={(password) => this.setState({ password })}
             />
-        </Item>
+          </Item>
 
-        <Button style={{ marginTop: 30 }}
-          full
-          rounded
-          success
-          onPress={()=> this.logInUser()}
-        >
-          <Text style={{ color: 'white' }}> Login</Text>
-        </Button>
+          <Button style={{ marginTop: 30 }}
+            full
+            rounded
+            success
+            onPress={() => this.logInUser()}
+          >
+            <Text style={{ color: 'white' }}> Login</Text>
+          </Button>
 
-        <Button style={{ marginTop: 10 }}
-          full
-          rounded
-          warning
-          onPress={()=> this.signUpUser()}
-        >
-          <Text style={{ color: 'white'}}> Sign Up</Text>
-        </Button>
+          <Button style={{ marginTop: 10 }}
+            full
+            rounded
+            warning
+            onPress={() => this.signUpUser()}
+          >
+            <Text style={{ color: 'white' }}> Sign Up</Text>
+          </Button>
 
-        <Button style={{ marginTop: 10 }}
-          full
-          rounded
-          primary
-          onPress={()=> this.logInWithFacebook()}
-        >
-          <Text style={{ color: 'white'}}> Login with Facebook</Text>
-        </Button>
+          <Button style={{ marginTop: 10 }}
+            full
+            rounded
+            primary
+            onPress={() => this.logInWithFacebook()}
+          >
+            <Text style={{ color: 'white' }}> Login with Facebook</Text>
+          </Button>
 
-      </Form>
-    </Container>
+        </Form>
+      </Container>
     );
   }
 }
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#F5FCFF',
     justifyContent: 'center',
-    padding:10,
+    padding: 10,
   },
 
 });

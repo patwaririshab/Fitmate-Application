@@ -1,4 +1,4 @@
-import {Navigation} from 'react-native-navigation';
+import { Navigation } from 'react-native-navigation';
 
 import AuthScreen from './src/screens/Auth/Auth.js';
 import ExerciseScreen from './src/screens/Exercise/Exercise.js';
@@ -22,14 +22,13 @@ Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen)
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
 
 Navigation.startSingleScreenApp({
-  screen:{
+  screen: {
     screen: "fitmate.AuthScreen",
-    title:"Login",
+    title: "Login",
     headerTitleStyle: {
       textAlign: 'center',
       flex: 1
     },
 
-
   }
-  })
+})
