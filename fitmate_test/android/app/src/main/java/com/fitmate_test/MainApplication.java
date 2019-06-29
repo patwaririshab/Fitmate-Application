@@ -3,6 +3,8 @@ package com.fitmate_test;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.rnfs.RNFSPackage;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -28,7 +30,6 @@ public class MainApplication extends NavigationApplication {
   //   protected List<ReactPackage> getPackages() {
   //     return Arrays.<ReactPackage>asList(
   //         new MainReactPackage(),
-
   //     );
   //   }
   //
@@ -61,7 +62,9 @@ public class MainApplication extends NavigationApplication {
 		return Arrays.<ReactPackage>asList(
      new AsyncStoragePackage(),
       new RNCameraPackage(),
-      new VectorIconsPackage()
+      new VectorIconsPackage(),
+			new RNFetchBlobPackage(),
+			new RNFSPackage()
 			// eg. new VectorIconsPackage()
 		);
 	}
