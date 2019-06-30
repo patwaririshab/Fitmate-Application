@@ -38,8 +38,8 @@ class ExerciseScreen extends React.Component {
       backButtonHidden: false,
     });
   }
-
-  exerciseItemClickedHandler = (item) => {
+  
+  exerciseViewItemClickedHandler = (item) => {
     this.props.navigator.push({
       screen: 'fitmate.EachExerciseScreen',
       title: item.ExerciseName,
@@ -48,7 +48,20 @@ class ExerciseScreen extends React.Component {
       animated: true,
       animationType: 'fade',
       backButtonTitle: undefined,
-      backButtonHidden: false,
+      backButtonHidden: false,                        
+    });
+  }
+
+  exerciseItemClickedHandler = (item) => {
+    this.props.navigator.push({                   
+      screen: 'fitmate.CameraScreen', // unique ID registered with Navigation.registerScreen
+      title: item.ExerciseName, // navigation bar title of the pushed screen (optional)
+      subtitle: undefined, // navigation bar subtitle of the pushed screen (optional)
+      passProps: {...item, onValueChanged: (e) => this.onValueChange(e) , selected: this.state.selectedF , pressed: (e ,item) => this.challengeFriendsHandler(item)} ,// Object that will be passed as props to the pushed screen (optional)
+      animated: true, // does the push have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the push have different transition animation (optional)
+      backButtonTitle: undefined, // override the back button title (optional)
+      backButtonHidden: false, // hide the back button altogether (optional)
     });
   }
 

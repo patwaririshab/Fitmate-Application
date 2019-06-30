@@ -2,8 +2,10 @@ import React from 'react';
 import { Platform, PermissionsAndroid, CameraRoll, FlatList, AppRegistry, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 
 import AuthContext from '../../Context/AuthContext'
-import firebase from '../../Firebase'
-import { SearchBar, Button } from 'react-native-elements'
+
+import firebase  from '../../Firebase'
+import { SearchBar , Button} from 'react-native-elements'
+import EachFriend from '../../components/Eachfriend'
 import SearchedFriend from '../../components/SearchedFriend'
 
 // import 'firebase/storage'

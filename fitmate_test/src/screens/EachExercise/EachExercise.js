@@ -7,7 +7,6 @@ const EachExercise = (props) => {
   return (
     <View style={styles.outerview}>
       <Text>{props.ExerciseName}</Text>
-
       <Item picker>
         <Picker
           mode="dropdown"
