@@ -3,8 +3,10 @@ package com.fitmate_test;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
+import com.rnfs.RNFSPackage;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -20,35 +22,6 @@ import java.util.List;
 
 public class MainApplication extends NavigationApplication {
 
-  // private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-  //   @Override
-  //   public boolean getUseDeveloperSupport() {
-  //     return BuildConfig.DEBUG;
-  //   }
-  //
-  //   @Override
-  //   protected List<ReactPackage> getPackages() {
-  //     return Arrays.<ReactPackage>asList(
-  //         new MainReactPackage(),
-  //     );
-  //   }
-  //
-  //   @Override
-  //   protected String getJSMainModuleName() {
-  //     return "index";
-  //   }
-  // };
-  //
-  // @Override
-  // public ReactNativeHost getReactNativeHost() {
-  //   return mReactNativeHost;
-  // }
-  //
-  // @Override
-  // public void onCreate() {
-  //   super.onCreate();
-  //   SoLoader.init(this, /* native exopackage */ false);
-  // }
 
   @Override
 	public boolean isDebug() {
@@ -59,12 +32,15 @@ public class MainApplication extends NavigationApplication {
 	protected List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
-		return Arrays.<ReactPackage>asList(
+
+    return Arrays.<ReactPackage>asList(
      new AsyncStoragePackage(),
-      new RNCameraPackage(),
       new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
+       new RNCameraPackage(),
 			new RNFSPackage()
+      new VectorIconsPackage()
+
 			// eg. new VectorIconsPackage()
 		);
 	}
