@@ -4,10 +4,11 @@ import Profile1 from '../../icons/profilepic.jpg'
 import Profile2 from '../../icons/profilepic2.jpg'
 import { Button } from 'native-base'
 
+
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
-  const Addremovebtn = props.item.isChallenged ? (
+  const Addremovebtn = props.yesOrNo ? (
     <Button style={{ flex: 1 }}
       full
       warning
