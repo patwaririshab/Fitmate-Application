@@ -11,8 +11,6 @@ import SearchedFriend from '../../components/SearchedFriend'
 // import 'firebase/storage'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
-// import RNFetchBlob from 'rn-fetch-blob'
-// import RNFS from 'react-native-fs'
 
 class ChallengeFriendsScreen extends React.Component {
   state = {
@@ -145,14 +143,17 @@ class ChallengeFriendsScreen extends React.Component {
         videoUpdated: false
       }
 
-      firebase.firestore().collection('challenges').add(newchallenge).then(docRef => {
-        console.log("DOC REF", docRef);
-        const newListofChallenges = [...this.state.currentChallengesId]
-        newListofChallenges.push(docRef.id)
-        this.setState({ currentChallengesId: [...newListofChallenges] });
-        console.log("DOC REF ADDED", this.state.currentChallengesId);
-      }).catch(err => { console.log("SUBMISSION ERROR", err) });
 
+      firebase.firestore().collection('challenges')
+        .add(newchallenge)
+        .then(docRef => {
+          console.log("DOC REF", docRef);
+          const newListofChallenges = [...this.state.currentChallengesId]
+          newListofChallenges.push(docRef.id)
+          this.setState({ currentChallengesId: [...newListofChallenges] });
+          console.log("DOC REF ADDED", this.state.currentChallengesId);
+        })
+        .catch(err => { console.log("SUBMISSION ERROR", err) });
 
 
       console.log("FINSIHED WITH SEDNING DATA")
@@ -256,10 +257,6 @@ class ChallengeFriendsScreen extends React.Component {
         .then(() => {
           uploadBlob.close();
           let currentVideoURLVal = imageRef.getDownloadURL()
-
-
-
-
           return currentVideoURLVal;
         })
         .then(url => {

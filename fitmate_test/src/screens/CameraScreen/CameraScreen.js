@@ -7,7 +7,6 @@ import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
 
 
-
 class CameraScreen extends Component {
   constructor(props) {
     super(props);
@@ -29,8 +28,10 @@ class CameraScreen extends Component {
     this.setState({ recording: false, processing: true });
     const type = `video/${codec}`;
 
-    this.props.videoDetailsChanged(uri, type)
+    this.props.videoDetailsChanged(uri, type);
 
+    alert("Return to previous screen to send challenge");
+    
     // this.props.navigator.push({
     //     screen: 'fitmate.UploadScreen',
     //     title: 'Upload Video',

@@ -75,7 +75,7 @@ class ExerciseScreen extends React.Component {
       <FlatList
         style={styles.listcontainer}
         data={this.state.exercises}
-        renderItem={({ item }) => <ExerciseItem pressed={() => (this.exerciseItemClickedHandler(item))} name={item.ExerciseName} />}
+        renderItem={({ item }) => <ExerciseItem pressed={() => (this.exerciseViewItemClickedHandler(item))} name={item.ExerciseName} />}
       >
       </FlatList>
     )
