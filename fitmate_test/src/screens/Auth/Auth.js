@@ -5,7 +5,6 @@ import firebase from '../../Firebase'
 import AuthContext from '../../Context/AuthContext'
 
 import { Container, Content, Header, Form, Input, Item, Button, Label } from 'native-base'
-import {handleFbLogin } from '../../Context/FbAuthContext'
 
 
 class AuthScreen extends React.Component {
@@ -106,14 +105,15 @@ class AuthScreen extends React.Component {
   }
 
   logInWithFacebook = () => (
-    Auth.Facebook.login(fbLoginPermissions)
-    .then((token) => {
-      firebase.auth()
+    alert('This feature is currently not available. Try log in using other methods.')
+    // Auth.Facebook.login(fbLoginPermissions)
+    // .then((token) => {
+    //   firebase.auth()
 
-    .signInWithCredential(firebase.auth.FacebookAuthProvider.credential(
-      token))
-    })
-    .catch((err) => this.onError && this.onError(err))
+    // .signInWithCredential(firebase.auth.FacebookAuthProvider.credential(
+    //   token))
+    // })
+    // .catch((err) => this.onError && this.onError(err))
   );
 
   // async logInWithFacebook(){
@@ -188,7 +188,7 @@ class AuthScreen extends React.Component {
             full
             rounded
             primary
-            onPress={handleFbLogin}
+            onPress={this.logInWithFacebook}
           >
             <Text style={{ color: 'white' }}> Login with Facebook</Text>
           </Button>
