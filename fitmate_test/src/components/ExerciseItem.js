@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet,Alert, Button , Text, TouchableOpacity, ImageBackground} from 'react-native';
 import Backgroundimg from '../../icons/exercise.png'
+import Pushupimg from '../../icons/push-up.png'
 
 
 const ExerciseItem = (props) => {
@@ -9,12 +10,18 @@ const ExerciseItem = (props) => {
         style = {styles.container} 
         onPress = {props.pressed}
       >
-      <ImageBackground source={Backgroundimg} style={styles.imgback}>
+      <ImageBackground source={Pushupimg} style={styles.imgback}>
         <Text style = {styles.titleText}>{props.name}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
 }
+
+
+
+// const source_selector = (props) => {
+//   if (props.name === 'Pushup'
+// }
 
 
 const styles = StyleSheet.create({

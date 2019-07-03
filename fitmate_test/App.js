@@ -18,9 +18,9 @@ Navigation.registerComponent("fitmate.FriendsScreen", () => FriendsScreen);
 Navigation.registerComponent("fitmate.FriendGroupListScreen", () => FriendGroupListScreen);
 Navigation.registerComponent("fitmate.EachExerciseScreen", () => EachExerciseScreen);
 Navigation.registerComponent("fitmate.ChallengesListScreen", () => ChallengesListScreen);
-Navigation.registerComponent('fitmate.CameraScreen',()=>CameraScreen);
 Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen);
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
+Navigation.registerComponent('fitmate.CameraScreen',()=>CameraScreen);
 Navigation.registerComponent("fitmate.UploadScreen",() => UploadScreen);
 
 Navigation.startSingleScreenApp({

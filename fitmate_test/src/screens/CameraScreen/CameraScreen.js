@@ -1,9 +1,10 @@
 // 'use strict';
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator} from 'react-native';
+
+import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator } from 'react-native';
+
 import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
-
 
 
 class CameraScreen extends Component {
@@ -16,43 +17,49 @@ class CameraScreen extends Component {
     })
   }
 
-async startRecording() {
-  this.setState({ recording: true });
-  // default to mp4 for android as codec is not set
-  const { uri, codec = "mp4" } = await this.camera.recordAsync({
-    quality: 'RNCamera.Constants.VideoQuality.480p.',
-    maxDuration: 60,
-  });
+  async startRecording() {
+    this.setState({ recording: true });
+    // default to mp4 for android as codec is not set
+    const { uri, codec = "mp4" } = await this.camera.recordAsync({
+      quality: 'RNCamera.Constants.VideoQuality.480p.',
+      maxDuration: 60,
+    });
 
-  this.setState({ recording: false, processing: true});
-  const type = `video/${codec}`;
+    this.setState({ recording: false, processing: true });
+    const type = `video/${codec}`;
 
-    this.props.navigator.push({
-        screen: 'fitmate.UploadScreen',
-        title: 'Upload Video',
-        subtitle: undefined,
-        passProps: {uri: uri, type: type},
-        animated: true,
-        animationType: 'fade',
-        backButtonTitle: undefined,
-        backButonHidden: false,
-    })
-}
+    this.props.videoDetailsChanged(uri, type);
 
-stopRecording() {
-  this.camera.stopRecording();
-}
+    alert("Return to previous screen to send challenge");
+    
+
+    // this.props.navigator.push({
+    //     screen: 'fitmate.UploadScreen',
+    //     title: 'Upload Video',
+    //     subtitle: undefined,
+    //     passProps: {uri: uri, type: type},
+    //     animated: true,
+    //     animationType: 'fade',
+    //     backButtonTitle: undefined,
+    //     backButonHidden: false,
+    // })
+  }
+
+
+  stopRecording() {
+    this.camera.stopRecording();
+  }
 
   render() {
     const { recording, processing } = this.state;
 
     let button = (
-      <TouchableOpacity 
+      <TouchableOpacity
         onPress={this.startRecording.bind(this)}
         style={styles.capture}
-        >
-          <Text style={{ fontSize: 14 }}>RECORD</Text>
-        </TouchableOpacity>
+      >
+        <Text style={{ fontSize: 14 }}>RECORD</Text>
+      </TouchableOpacity>
     );
 
     if (recording) {
@@ -60,9 +67,9 @@ stopRecording() {
         <TouchableOpacity
           onPress={this.stopRecording.bind(this)}
           style={styles.capture}
-          >
-            <Text style={{ fontSize: 14 }}>STOP</Text>
-          </TouchableOpacity>
+        >
+          <Text style={{ fontSize: 14 }}>STOP</Text>
+        </TouchableOpacity>
       );
     }
 
@@ -94,13 +101,13 @@ stopRecording() {
             buttonPositive: 'Ok',
             buttonNegative: 'Cancel',
           }}
+        >
+          <View
+            style={{ flex: 0, flexDirection: "row", justifyContent: "center" }}
           >
-          <View 
-            style={{ flex: 0, flexDirection: "row", justifyContent: "center"}}
-            >
-              {button}
-            </View>
-            </RNCamera>
+            {button}
+          </View>
+        </RNCamera>
       </View>
     );
   }
@@ -129,4 +136,6 @@ const styles = StyleSheet.create({
 });
 
 
+
 export default CameraScreen
+

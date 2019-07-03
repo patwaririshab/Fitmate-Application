@@ -69,6 +69,7 @@ class AddFriendsScreen extends React.Component {
   }
 
   AddRemoveFriend = (item) => {
+    console.log(item)
     if (item.isFriend) {
       firebase.firestore().collection('allFriends').doc(this.state.userID).update({
         Friends: firebase.firestore.FieldValue.arrayRemove(item.userID)
@@ -119,7 +120,7 @@ class AddFriendsScreen extends React.Component {
       <FlatList
         style={styles.listcontainer}
         data={this.state.filtered}
-        renderItem={({ item }) => <SearchedFriend addtext="Add Friend" removetext="Remove Friend" item={this.state.users[item.key]} pressed={() => this.AddRemoveFriend(this.state.users[item.key])} />}>
+        renderItem={({ item }) => <SearchedFriend addtext="Add Friend" removetext="Remove Friend" item={this.state.users[item.key]} yesOrNo={this.state.users[item.key].isFriend} pressed={() => this.AddRemoveFriend(this.state.users[item.key])} />}>
 
       </FlatList>
     );

@@ -3,6 +3,7 @@ package com.fitmate_test;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -12,6 +13,8 @@ import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
+
 
 import com.reactnativenavigation.NavigationApplication;
 
@@ -30,6 +33,7 @@ public class MainApplication extends NavigationApplication {
   //   protected List<ReactPackage> getPackages() {
   //     return Arrays.<ReactPackage>asList(
   //         new MainReactPackage(),
+            
   //     );
   //   }
   //
@@ -54,18 +58,18 @@ public class MainApplication extends NavigationApplication {
 	public boolean isDebug() {
 		// Make sure you are using BuildConfig from your own application
 		return BuildConfig.DEBUG;
-	}
+  }
+  
 
 	protected List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
 		return Arrays.<ReactPackage>asList(
-     new AsyncStoragePackage(),
-      new RNCameraPackage(),
-      new VectorIconsPackage(),
+			new AsyncStoragePackage(),
+			new RNCameraPackage(),
+			new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
-			new RNFSPackage()
-			// eg. new VectorIconsPackage()
+      new RNFSPackage()
 		);
 	}
 

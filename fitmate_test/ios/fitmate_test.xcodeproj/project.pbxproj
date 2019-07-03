@@ -79,6 +79,8 @@
 		83EE990D12A0442DA8780C5D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC3219D7FD8E4862B92544DB /* Zocial.ttf */; };
 		AEA0170344C34A9C9BE710DE /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 57D1C5A6757D4F12AF8BD2AE /* libRNFetchBlob.a */; };
 		84FFEC8F44D74315BF24B493 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A170D67A958451F84DE54F6 /* libRNFS.a */; };
+		A4B0494E6D92463FA4731C56 /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 04890C27749241129DCD7F4B /* libRCTFBSDK.a */; };
+		7D73BF0B076A47588F594C7E /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79D70AF5B0FD42D0B2335DF3 /* Fontisto.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -432,6 +434,9 @@
 		57D1C5A6757D4F12AF8BD2AE /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		B8A7FD9DE6574A99B3385FB2 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9A170D67A958451F84DE54F6 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		196748A223C046BBB16C1F41 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBSDK.xcodeproj"; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		04890C27749241129DCD7F4B /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		79D70AF5B0FD42D0B2335DF3 /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -466,6 +471,7 @@
 				C15F5CB2FFC94B21959EF8BB /* libRNCAsyncStorage.a in Frameworks */,
 				AEA0170344C34A9C9BE710DE /* libRNFetchBlob.a in Frameworks */,
 				84FFEC8F44D74315BF24B493 /* libRNFS.a in Frameworks */,
+				A4B0494E6D92463FA4731C56 /* libRCTFBSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -662,6 +668,7 @@
 				D57533CA865E4A63BF5A9515 /* RNCAsyncStorage.xcodeproj */,
 				DB9C7BBC7D524E448693F8AE /* RNFetchBlob.xcodeproj */,
 				B8A7FD9DE6574A99B3385FB2 /* RNFS.xcodeproj */,
+				196748A223C046BBB16C1F41 /* RCTFBSDK.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -746,6 +753,7 @@
 				99A3D0C969524AAFBE28ACE7 /* rubicon-icon-font.ttf */,
 				501A42CD24664C36A89E4940 /* SimpleLineIcons.ttf */,
 				FC3219D7FD8E4862B92544DB /* Zocial.ttf */,
+				79D70AF5B0FD42D0B2335DF3 /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1230,6 +1238,7 @@
 				4A248144E08A4341BF0208A4 /* rubicon-icon-font.ttf in Resources */,
 				6E71A1E62A8F4B248467BCBD /* SimpleLineIcons.ttf in Resources */,
 				83EE990D12A0442DA8780C5D /* Zocial.ttf in Resources */,
+				7D73BF0B076A47588F594C7E /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1370,6 +1379,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1379,6 +1389,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Debug;
@@ -1406,6 +1417,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1415,6 +1427,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Release;
@@ -1443,6 +1456,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Debug;
@@ -1470,6 +1484,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Release;
@@ -1505,6 +1520,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1514,6 +1530,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Debug;
@@ -1549,6 +1566,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1558,6 +1576,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Release;
@@ -1592,6 +1611,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1601,6 +1621,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Debug;
@@ -1635,6 +1656,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1644,6 +1666,7 @@
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-fs/**",
+					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
 				);
 			};
 			name = Release;
