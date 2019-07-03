@@ -143,6 +143,7 @@ class ChallengeFriendsScreen extends React.Component {
         videoUpdated: false
       }
 
+
       firebase.firestore().collection('challenges')
         .add(newchallenge)
         .then(docRef => {
@@ -153,6 +154,7 @@ class ChallengeFriendsScreen extends React.Component {
           console.log("DOC REF ADDED", this.state.currentChallengesId);
         })
         .catch(err => { console.log("SUBMISSION ERROR", err) });
+
 
       console.log("FINSIHED WITH SEDNING DATA")
       console.log(this.state.currentChallengesId);

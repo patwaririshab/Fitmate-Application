@@ -9,6 +9,7 @@ import ChallengesListScreen from './src/screens/ChallengesList/ChallengesList.js
 import CameraScreen from './src/screens/CameraScreen/CameraScreen.js';
 import AddFriendsScreen from './src/screens/AddFriends/AddFriends.js';
 import ChallengeFriendsScreen from './src/screens/ChallengeFriends/ChallengeFriends'
+import CameraScreen from './src/screens/CameraScreen/CameraScreen.js';
 import UploadScreen from './src/screens/UploadScreen/uploadScreen'
 
 
@@ -22,6 +23,7 @@ Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen)
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
 Navigation.registerComponent('fitmate.CameraScreen',()=>CameraScreen);
 Navigation.registerComponent("fitmate.UploadScreen",() => UploadScreen);
+
 
 Navigation.startSingleScreenApp({
   screen: {

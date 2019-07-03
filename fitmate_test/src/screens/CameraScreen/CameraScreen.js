@@ -32,7 +32,6 @@ class CameraScreen extends Component {
 
     alert("Return to previous screen to send challenge");
     
-
     // this.props.navigator.push({
     //     screen: 'fitmate.UploadScreen',
     //     title: 'Upload Video',
