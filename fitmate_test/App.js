@@ -6,7 +6,6 @@ import FriendsScreen from './src/screens/Friends/Friends.js';
 import FriendGroupListScreen from './src/screens/FriendGroupList/FriendGroupList.js';
 import EachExerciseScreen from './src/screens/EachExercise/EachExercise.js';
 import ChallengesListScreen from './src/screens/ChallengesList/ChallengesList.js';
-import CameraScreen from './src/screens/CameraScreen/CameraScreen.js';
 import AddFriendsScreen from './src/screens/AddFriends/AddFriends.js';
 import ChallengeFriendsScreen from './src/screens/ChallengeFriends/ChallengeFriends'
 import CameraScreen from './src/screens/CameraScreen/CameraScreen.js';
