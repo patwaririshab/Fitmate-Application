@@ -1,16 +1,19 @@
 import React from 'react';
-import {StyleSheet,Alert, Button , Text, TouchableOpacity, ImageBackground} from 'react-native';
-import Backgroundimg from '../../icons/exercise.png'
+import { StyleSheet, Alert, Button, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import pushupimg from '../../icons/pushuplabel.jpg'
+import situpimg from '../../icons/situpslabel.jpg'
+import AuthContext from '../Context/AuthContext';
 
 
 const ExerciseItem = (props) => {
-  return(
-   <TouchableOpacity 
-        style = {styles.container} 
-        onPress = {props.pressed}
-      >
-      <ImageBackground source={Backgroundimg} style={styles.imgback}>
-        <Text style = {styles.titleText}>{props.name}</Text>
+
+  return (
+    <TouchableOpacity
+      style={styles.container}
+      onPress={props.pressed}
+    >
+      <ImageBackground source={props.img} style={styles.imgback}>
+        <Text style={styles.titleText}>{props.ExerciseName}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -19,9 +22,12 @@ const ExerciseItem = (props) => {
 
 const styles = StyleSheet.create({
   container: {
+    // marginTop: 10,
+    // borderRadius: 10,
+    // borderWidth: 1,
+    // borderColor: 'black',
     width: "100%",
     height: 150,
-    padding: 20 ,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -29,24 +35,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   titleText: {
-    fontSize: 20,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    margin: 'auto',
+    fontSize: 40,
+    color: "white",
+    backgroundColor: '#21212130',
     fontWeight: 'bold',
+    height: "100%",
+    width: "100%"
   },
-  imgback: {width: '100%', height: '100%' ,textAlign: "center"}
+  imgback: { width: '100%', borderRadius: 10, height: '100%', textAlign: "center" }
   ,
-  eachitem: {
-    backgroundColor: '#eee',
-    width:"100%",
-    height: 75,
-    padding: 5,
-    marginBottom: 10
-  },
-
-  viewitem:{
-    margin :5,
-    width:"100%",
-    textAlign: 'center'
-  }
 
 });
 

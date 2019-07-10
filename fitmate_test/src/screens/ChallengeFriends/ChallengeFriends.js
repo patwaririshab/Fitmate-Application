@@ -3,16 +3,14 @@ import { Platform, PermissionsAndroid, CameraRoll, FlatList, AppRegistry, StyleS
 
 import AuthContext from '../../Context/AuthContext'
 
-import firebase  from '../../Firebase'
-import { SearchBar , Button} from 'react-native-elements'
-import EachFriend from '../../components/Eachfriend'
+import firebase from '../../Firebase'
+import { SearchBar, Button } from 'react-native-elements'
+import EachFriend from '../../components/EachFriend'
 import SearchedFriend from '../../components/SearchedFriend'
-
-// import 'firebase/storage'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
-// import RNFetchBlob from 'rn-fetch-blob'
-// import RNFS from 'react-native-fs'
+
+const db = firebase.firestore();
 
 class ChallengeFriendsScreen extends React.Component {
   state = {
@@ -21,17 +19,15 @@ class ChallengeFriendsScreen extends React.Component {
     ],
     userID: "",
 
-    uri: "",
-    type: `video/mp4`,
-    currentVideoURL: "",
+    currentVideoURL: "testURL",
     currentChallengesId: [],
     doneUploadingVideo: false,
-    // doneUploadingChallenge: false
+    windowXMLHTTP: window.XMLHttpRequest
   }
   static contextType = AuthContext;
 
   getAllFriends = (user) => {
-    const allFriends = firebase.firestore().collection('allFriends').doc(user.uid).get().then((doc) => {
+    const allFriends = db.collection('allFriends').doc(user.uid).get().then((doc) => {
       return [...doc.data().Friends];
     })
     return allFriends
@@ -39,8 +35,11 @@ class ChallengeFriendsScreen extends React.Component {
 
   getAllUsers = () => {
 
-    return firebase.firestore().collection('users').get().then((snapshot) => {
+    console.log("INSIDE!!")
+
+    return db.collection('users').get().then((snapshot) => {
       const allUsers = snapshot.docs.map((doc, index) => {
+        console.log(doc)
         return (
           {
             key: index,
@@ -68,13 +67,24 @@ class ChallengeFriendsScreen extends React.Component {
     return allNonFriendDetails;
   }
 
+  getMyName = (user) => {
+    const userDoc = firebase.firestore().collection('users').where("userID", "==", user.uid).get().then((snapshot) => {
+      return snapshot.docs[0];
+    });
+    return userDoc
+  }
+
+
   async componentDidMount() {
 
     const user = firebase.auth().currentUser;
+    const userDoc = await this.getMyName(user);
     console.log(user.uid);
 
     const allUsers = await this.getAllUsers();
     const allFriends = await this.getAllFriends(user);
+
+    console.log(allFriends)
 
     const allFriendsData = await this.getFriendsFromUsers(allFriends, allUsers);
     const allNonFriendData = await this.getNonFriendsFromUsers(allFriends, allUsers);
@@ -82,17 +92,16 @@ class ChallengeFriendsScreen extends React.Component {
     console.log(allFriendsData)
     console.log(allUsers)
 
-    this.setState({ friends: [...allFriendsData], userID: user.uid });
+    this.setState({ userDoc: { userDoc }, friends: [...allFriendsData], userID: user.uid });
 
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    //Typical usage, don't forget to compare the props
-    if (this.state.doneUploadingVideo == true && prevState.doneUploadingVideo == false) {
-      console.log("Before");
-      this.sendAllChallenges();
-      console.log("After");
-    }
+
+  submitChallengesToBackend = () => {
+    const allFriends = db.collection('allFriends').doc(user.uid).get().then((doc) => {
+      return [...doc.data().Friends];
+    })
+    return allFriends
   }
 
   AddRemoveChallengedFriend = (item) => {
@@ -100,126 +109,53 @@ class ChallengeFriendsScreen extends React.Component {
     const cpyFriends = [...this.state.friends]
     const stat = cpyFriends[item.key].isChallenged;
     cpyFriends[item.key].isChallenged = !stat;
-    console.log(cpyFriends)
     this.setState({
       friends: [...cpyFriends],
     });
   }
 
-  captureVideoHandler = () => {
-    this.props.navigator.push({
-      screen: 'fitmate.CameraScreen',
-      title: "Record Video",
-      subtitle: undefined,
-      passProps: { uri: this.state.uri, type: this.state.type, videoDetailsChanged: this.videoDetailsChanged },
-      animated: true,
-      animationType: 'fade',
-      backButtonTitle: undefined,
-      backButtonHidden: false,
-    });
-  }
-
-  videoDetailsChanged = (uri, type) => {
-    console.log(uri, type)
-    this.setState({ uri: uri, type: type })
-  }
 
   Submission(friend, ExerciseNum, NumberE, UserID) {
 
     const exercise = parseInt(ExerciseNum, 10);
     const num = parseInt(NumberE, 10);
-    console.log("SUBMISSION!!")
-    console.log(friend)
-    console.log(this.state.currentVideoURL)
+    const newchallenge = {
+      Completed: false,
+      Exercise: exercise,
+      Number: num,
+      InitiatorID: UserID,
+      InitiatorName: this.state.userDoc.name,
+      RecipientID: friend.userId,
+      Name: friend.name,
+      DownloadURL: this.state.currentVideoURL,
+      videoUpdated: false,
+      TimeStamp: new Date(),
+      VerifiedCount: -1
+    }
+    return newchallenge;
 
-    if (friend.isChallenged) {
-      console.log("SUBMISSION TESTING !!!")
-      const newchallenge = {
-        Completed: false,
-        Exercise: exercise,
-        Number: num,
-        InitiatorID: UserID,
-        RecipientID: friend.userId,
-        Name: friend.name,
-        DownloadURL: this.state.currentVideoURL,
-        videoUpdated: false
+  }
+
+
+  SubmitBtnPressedHandler = () => { this.uploadBackend(); }
+
+
+  sendAllChallenges = () => {
+
+    var batch = db.batch();
+    this.state.friends.map(friend => {
+      if (friend.isChallenged) {
+        const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
+        const challengesRef = db.collection("challenges").doc();
+        batch.set(challengesRef, challengeVal);
       }
 
-      firebase.firestore().collection('challenges').add(newchallenge).then(docRef => {
-        console.log("DOC REF", docRef);
-        const newListofChallenges = [...this.state.currentChallengesId]
-        newListofChallenges.push(docRef.id)
-        this.setState({ currentChallengesId: [...newListofChallenges] });
-        console.log("DOC REF ADDED", this.state.currentChallengesId);
-      }).catch(err => { console.log("SUBMISSION ERROR", err) });
-
-
-
-      console.log("FINSIHED WITH SEDNING DATA")
-      console.log(this.state.currentChallengesId);
-
-
-    }
-  }
-
-
-  updateVideoIntoChallenge = async (docuID) => {
-    console.log(docuID)
-    const tempDoc = await firebase.firestore().collection('challenges').doc(docuID).get();
-    console.log("THIS IS THE DATA!!", tempDoc.data)
-    firebase.firestore().collection('challenges').doc(docuID).update({
-      ...tempDoc.data,
-      DownloadURL: this.state.uri
+    })
+    batch.commit().then((response) => {
+      console.log(response)
+    }).catch((err) => {
+      console.log(err)
     });
-  }
-
-  updateVideoURLs = async () => {
-    console.log("HERER", this.state.currentChallengesId)
-    return await Promise.all(this.state.currentChallengesId.map(item => this.updateVideoIntoChallenge(item)))
-  }
-
-
-  // async updateVideoURLs() {
-  //   console.log("HERER")
-
-  //   this.state.currentChallengesId.forEach(docuID => {
-  //     console.log(docuID)
-  //     const tempDoc = firebase.firestore().collection('challenges').doc(docuID).get();
-  //     console.log(tempDoc)
-  //     firebase.firestore().collection('challenges').doc(docuID).update({
-  //       ...tempDoc,
-  //       DownloadURL: this.state.currentVideoURL
-  //     });
-  //   })
-
-  // }
-
-  SubmitBtnPressedHandler = () => {
-
-    // this.props.navigator.push({
-    //   screen: 'fitmate.UploadScreen',
-    //   title: 'Upload Video',
-    //   subtitle: undefined,
-    //   passProps: { uri: this.state.uri, type: this.state.type },
-    //   animated: true,
-    //   animationType: 'fade',
-    //   backButtonTitle: undefined,
-    //   backButonHidden: false,
-    // });
-    // console.log(this.props.Exercise);
-    // console.log(this.props.Number);
-    // console.log(this.state.friends, "MY FRIENDS!!!")
-    // this.state.friends.forEach((friend) => this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID));
-
-
-    this.uploadBackend();
-    // console.log("DONE !!!!")
-  }
-
-
-  sendAllChallenges = async () => {
-    console.log("HERER", this.state.currentChallengesId)
-    await Promise.all(this.state.friends.map(friend => this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)))
   }
 
 
@@ -228,7 +164,7 @@ class ChallengeFriendsScreen extends React.Component {
     const fs = RNFetchBlob.fs;
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
     window.Blob = Blob;
-    this.uploader(this.state.uri, 'video/mp4', 'video1');
+    this.uploader(this.props.videoURI, 'video/mp4', 'video1');
     console.log('UploadHandler Function Worked');
   }
 
@@ -237,43 +173,89 @@ class ChallengeFriendsScreen extends React.Component {
     this.uploadHandler();
   }
 
-  uploader = (uri, mime = 'video/mp4', name) => {
-    return new Promise((resolve, reject) => {
-      let imgUri = uri; let uploadBlob = null;
-      const uploadUri = Platform.OS === 'ios' ? imgUri.replace('file://', '') : imgUri;
-      const { currentUser } = firebase.auth();
-      const imageRef = firebase.storage().ref(`/videos/${currentUser.uid}`)
+  // uploader = (uri, mime = 'video/mp4', name) => {
+  //   return new Promise((resolve, reject) => {
+  //     let imgUri = uri; let uploadBlob = null;
+  //     const uploadUri = Platform.OS === 'ios' ? imgUri.replace('file://', '') : imgUri;
+  //     const { currentUser } = firebase.auth();
+  //     const imageRef = firebase.storage().ref(`/videos/${currentUser.uid}`)
 
-      fs.readFile(uploadUri, 'base64')
-        .then(data => {
-          return Blob.build(data, { type: `${mime};BASE64` });
-        })
-        .then(blob => {
-          uploadBlob = blob;
-          console.log("Uplaod Blob")
-          return imageRef.put(blob, { contentType: mime, name: name });
-        })
-        .then(() => {
-          uploadBlob.close();
-          let currentVideoURLVal = imageRef.getDownloadURL()
+  //     fs.readFile(uploadUri, 'base64')
+  //       .then(data => {
+  //         return Blob.build(data, { type: `${mime};BASE64` });
+  //       })
+  //       .then(blob => {
+  //         uploadBlob = blob;
+  //         console.log("Uplaod Blob")
+  //         return imageRef.put(blob, { contentType: mime, name: name });
+  //       })
+  //       .then(() => {
+  //         uploadBlob.close();
+  //         let currentVideoURLVal = imageRef.getDownloadURL()
+  //         return currentVideoURLVal;
+  //       })
+  //       .then(url => {
+  //         console.log("THER URL IS ", url)
+  //         resolve(url);
+  //         this.setState({ currentVideoURL: url, doneUploadingVideo: true });
 
+  //         // this.myPromise();
+  //       }).then(() => {
+  //         this.sendAllChallenges();
+  //       })
+  //       .catch(error => {
+  //         reject(error)
+  //       })
+  //   })
+  // }
 
+  uploader = async (uri, mime = 'video/mp4', name) => {
+    let imgUri = uri; let uploadBlob = null;
+    const uploadUri = Platform.OS === 'ios' ? imgUri.replace('file://', '') : imgUri;
+    const { currentUser } = await firebase.auth();
+    const imageRef = firebase.storage().ref(`/videos/${currentUser.uid}`)
 
+    const blob = await fs.readFile(uploadUri, 'base64').then(data => {
+      return Blob.build(data, { type: `${mime};BASE64` });
+    });
 
-          return currentVideoURLVal;
-        })
-        .then(url => {
-          console.log("THER URL IS ", url)
-          resolve(url);
-          this.setState({ currentVideoURL: url, doneUploadingVideo: true });
+    const uploadTask = imageRef.put(blob, { contentType: mime, name: name });
+    uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
+      (snapshot) => {
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case firebase.storage.TaskState.PAUSED: // or 'paused'
+            console.log('Upload is paused');
+            break;
+          case firebase.storage.TaskState.RUNNING: // or 'running'
+            console.log('Upload is running');
+            break;
+        }
+      }, (error) => {
+        switch (error.code) {
+          case 'storage/unauthorized':
+            // User doesn't have permission to access the object
+            break;
 
-          // this.myPromise();
-        })
-        .catch(error => {
-          reject(error)
-        })
-    })
+          case 'storage/canceled':
+            // User canceled the upload
+            break;
+
+          case 'storage/unknown':
+            // Unknown error occurred, inspect error.serverResponse
+            break;
+        }
+      }, () => {
+        uploadTask.snapshot.ref.getDownloadURL().then(async (downloadURL) => {
+          console.log('File available at', downloadURL);
+          this.setState({ currentVideoURL: downloadURL, doneUploadingVideo: true });
+          window.XMLHttpRequest = this.state.windowXMLHTTP;
+          await this.sendAllChallenges();
+        });
+      });
   }
+
 
   render() {
 
@@ -296,13 +278,6 @@ class ChallengeFriendsScreen extends React.Component {
           // icon={{ type: 'font-awesome', name: 'search' }}
           placeholder='Type Here...'
           value={this.state.text} />
-
-        <Button
-          raised
-          icon={{ name: 'cached' }}
-          title='Capture Video'
-          onPress={this.captureVideoHandler}
-        />
 
         <Button
           raised

@@ -1,14 +1,14 @@
 import React from 'react';
-import {Text ,View , FlatList, StyleSheet} from 'react-native'
-import EachFriend from '../../components/Eachfriend'
+import { Text, View, FlatList, StyleSheet } from 'react-native'
+import EachFriend from '../../components/EachFriend'
 
 const FriendGroupList = (props) => {
-  return(
-    <View   style = {styles.outerview}>
+  return (
+    <View style={styles.outerview}>
       <FlatList
-        style = {styles.listcontainer}
-        data = {props.FriendList}
-        renderItem={({item}) => <EachFriend name = {item}/>}>
+        style={styles.listcontainer}
+        data={props.FriendList}
+        renderItem={({ item }) => <EachFriend name={item} />}>
       </FlatList>
     </View>
   );
@@ -17,11 +17,11 @@ const FriendGroupList = (props) => {
 
 const styles = StyleSheet.create({
 
-  listcontainer:{
+  listcontainer: {
     width: "100%"
   },
 
-  outerview : {
+  outerview: {
     margin: 10
   }
 

@@ -31,7 +31,6 @@ public class MainApplication extends NavigationApplication {
 	protected List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
-<<<<<<< HEAD
 
     return Arrays.<ReactPackage>asList(
      new AsyncStoragePackage(),
@@ -39,12 +38,6 @@ public class MainApplication extends NavigationApplication {
 			new RNFetchBlobPackage(),
        new RNCameraPackage(),
 			new RNFSPackage()
-=======
-		return Arrays.<ReactPackage>asList(
-     new AsyncStoragePackage(),
-      new RNCameraPackage(),
-      new VectorIconsPackage()
->>>>>>> be8fcd6affb1a39ca7aaa9ab5d8b88f54b93b453
 			// eg. new VectorIconsPackage()
 		);
 	}

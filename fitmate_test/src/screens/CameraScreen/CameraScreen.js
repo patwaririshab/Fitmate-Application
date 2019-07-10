@@ -1,10 +1,6 @@
 // 'use strict';
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator } from 'react-native';
-=======
-import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator} from 'react-native';
->>>>>>> be8fcd6affb1a39ca7aaa9ab5d8b88f54b93b453
 import { RNCamera } from 'react-native-camera';
 
 
@@ -30,18 +26,9 @@ class CameraScreen extends Component {
     this.setState({ recording: false, processing: true });
     const type = `video/${codec}`;
 
-    this.props.videoDetailsChanged(uri, type)
+    this.props.uriChanged(uri);
+    this.props.typeChanged(type);
 
-    // this.props.navigator.push({
-    //     screen: 'fitmate.UploadScreen',
-    //     title: 'Upload Video',
-    //     subtitle: undefined,
-    //     passProps: {uri: uri, type: type},
-    //     animated: true,
-    //     animationType: 'fade',
-    //     backButtonTitle: undefined,
-    //     backButonHidden: false,
-    // })
   }
 
   stopRecording() {
@@ -134,79 +121,4 @@ const styles = StyleSheet.create({
 });
 
 
-<<<<<<< HEAD
 export default CameraScreen
-=======
-export default CameraScreen
-
-// class CameraScreen extends Component {
-//   render() {
-//     return (
-//       <View style={styles.container}>
-//         <RNCamera
-//           ref={ref => {
-//             this.camera = ref;
-//           }}
-//           style={styles.preview}
-//           type={RNCamera.Constants.Type.back}
-//           flashMode={RNCamera.Constants.FlashMode.on}
-//           androidCameraPermissionOptions={{
-//             title: 'Permission to use camera',
-//             message: 'We need your permission to use your camera',
-//             buttonPositive: 'Ok',
-//             buttonNegative: 'Cancel',
-//           }}
-//           androidRecordAudioPermissionOptions={{
-//             title: 'Permission to use audio recording',
-//             message: 'We need your permission to use your audio',
-//             buttonPositive: 'Ok',
-//             buttonNegative: 'Cancel',
-//           }}
-//           onGoogleVisionBarcodesDetected={({ barcodes }) => {
-//             console.log(barcodes);
-//           }}
-//         />
-//         <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-//           <TouchableOpacity onPress={this.takePicture.bind(this)} style={styles.capture}>
-//             <Text style={{ fontSize: 14 }}> SNAP </Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     );
-//   }
-
-//   takePicture = async function() {
-//     if (this.camera) {
-//       const options = { quality: 0.5, base64: true };
-//       const data = await this.camera.takePictureAsync(options);
-//       console.log(data.uri);
-//     }
-//   };
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     flexDirection: 'column',
-//     backgroundColor: 'black',
-//   },
-//   preview: {
-//     flex: 1,
-//     justifyContent: 'flex-end',
-//     alignItems: 'center',
-//   },
-//   capture: {
-//     flex: 0,
-//     backgroundColor: '#fff',
-//     borderRadius: 5,
-//     padding: 15,
-//     paddingHorizontal: 20,
-//     alignSelf: 'center',
-//     margin: 20,
-//   },
-// });
-
-// export default CameraScreen
-
-//AppRegistry.registerComponent('BadInstagramCloneApp', () => App);
->>>>>>> be8fcd6affb1a39ca7aaa9ab5d8b88f54b93b453
