@@ -6,6 +6,7 @@ import com.facebook.react.ReactApplication;
 import org.reactnative.camera.RNCameraPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnfs.RNFSPackage;
+
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -38,6 +39,7 @@ public class MainApplication extends NavigationApplication {
 			new RNFetchBlobPackage(),
        new RNCameraPackage(),
 			new RNFSPackage()
+
 			// eg. new VectorIconsPackage()
 		);
 	}
