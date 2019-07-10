@@ -20,6 +20,12 @@ const ExerciseItem = (props) => {
 }
 
 
+
+// const source_selector = (props) => {
+//   if (props.name === 'Pushup'
+// }
+
+
 const styles = StyleSheet.create({
   container: {
     // marginTop: 10,

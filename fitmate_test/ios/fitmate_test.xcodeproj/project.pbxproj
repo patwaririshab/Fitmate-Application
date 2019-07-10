@@ -80,7 +80,6 @@
 		86DFF99EFE82451AB337E38E /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2040D8907DC344B0937F82C8 /* libRNFetchBlob.a */; };
 		FEDB834B6CC249208550440F /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8397E3229E4E65B53150E1 /* libRNCamera.a */; };
 		7A6A0B8B0209497BAEF54704 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0C818C7D124AAC925C7837 /* libRNFS.a */; };
-
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -737,6 +736,7 @@
 				2F9A7E7E7F3F4AEAB3A406ED /* Octicons.ttf */,
 				A97403C673FD4E66B72D0C99 /* SimpleLineIcons.ttf */,
 				2FE4C2B616E54C00B620C85A /* Zocial.ttf */,
+
 				C4E7D173E2A14E9CAB016482 /* AntDesign.ttf */,
 				103D2F76C9A646CFABD873C7 /* Entypo.ttf */,
 				450CD5A5787E462DA3CA1FDB /* EvilIcons.ttf */,
@@ -755,7 +755,6 @@
 				FCF439E0790044489010E33F /* rubicon-icon-font.ttf */,
 				F7C5A1ADEE1E4E818B389135 /* SimpleLineIcons.ttf */,
 				5A5833CF2EA94FAAB9E94F9D /* Zocial.ttf */,
-
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1222,6 +1221,7 @@
 				5E59CB3ED9984BE298CEFDBD /* Octicons.ttf in Resources */,
 				BDFD2D43AA3D43E7B81A40B3 /* SimpleLineIcons.ttf in Resources */,
 				92AF3C11B1DF4240ACF07AB6 /* Zocial.ttf in Resources */,
+
 				7BED451C48CB4664B527F976 /* AntDesign.ttf in Resources */,
 				2CBD6D628DD34BECA9AE637E /* Entypo.ttf in Resources */,
 				6605106759644EECBA7C04D5 /* EvilIcons.ttf in Resources */,
@@ -1382,7 +1382,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1390,10 +1389,10 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Debug;
@@ -1422,7 +1421,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1430,10 +1428,10 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Release;
@@ -1460,10 +1458,10 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Debug;
@@ -1489,10 +1487,10 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Release;
@@ -1529,7 +1527,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1540,7 +1537,6 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Debug;
@@ -1577,7 +1573,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1624,7 +1619,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1632,10 +1626,10 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Debug;
@@ -1671,7 +1665,6 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1682,7 +1675,6 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-
 				);
 			};
 			name = Release;
