@@ -1,14 +1,41 @@
 import React from 'react'
-import { StyleSheet, View, Text, FlatList } from 'react-native'
+import { TouchableHighlight, Modal, StyleSheet, Text, FlatList } from 'react-native'
+import { Container, Header, View, Button, Icon, Fab } from 'native-base';
 import firebase from '../../Firebase'
 import EachChallenge from '../../components/EachChallenge.js'
+import ExerciseItem from '../../components/ExerciseItem'
+import Exercises from '../Exercise/Exercise'
+
+import pushupimg from '../../../icons/pushups.jpg'
+import situpimg from '../../../icons/situpslabel.jpg'
+
+import squatsimg from '../../../icons/squatslabel.jpg'
+
 
 class ChallengesList extends React.Component {
 
   state = {
     Completed: [],
-    Incomplete: []
+    Incomplete: [],
+    modalVisible: false,
+    active: true,
+
+
   }
+
+  getImage = (exercise) => {
+    switch (exercise) {
+      case 1:
+        return pushupimg;
+      case 2:
+        return situpimg;
+      case 3:
+        return squatsimg
+      default:
+        return pushupimg
+    }
+  }
+
 
   getIncompleteChallenges = (user) => {
     const allIncompleteChallenges = firebase.firestore().collection('challenges').where("RecipientID", "==", user.uid).where("Completed", "==", false).get().then((snapshot) => {
@@ -17,8 +44,14 @@ class ChallengesList extends React.Component {
           key: index.toString(),
           Exercise: doc.data().Exercise,
           InitiatorID: doc.data().InitiatorID,
-          InitiatorName: doc.data().Name,
-          Number: doc.data().Number
+          InitiatorName: doc.data().InitiatorName,
+          Name: doc.data().Name,
+          Number: doc.data().Number,
+          TimeStamp: (doc.data().TimeStamp),
+          VerifiedCount: doc.data().TimeStamp,
+          RecipientID: doc.data().RecipientID,
+          DownloadURL: doc.data().DownloadURL,
+          videoUpdated: doc.data().videoUpdated,
         });
       }));
 
@@ -35,14 +68,36 @@ class ChallengesList extends React.Component {
           key: index.toString(),
           Exercise: doc.data().Exercise,
           InitiatorID: doc.data().InitiatorID,
-          InitiatorName: doc.data().Name,
-          Number: doc.data().Number
+          InitiatorName: doc.data().InitiatorName,
+          Name: doc.data().Name,
+          Number: doc.data().Number,
+          TimeStamp: doc.data().TimeStamp,
+          VerifiedCount: doc.data().TimeStamp,
+          RecipientID: doc.data().RecipientID,
+          DownloadURL: doc.data().DownloadURL,
+          videoUpdated: doc.data().videoUpdated,
         });
       }));
       return completeChallenges
 
     });
     return allCompleteChallenges
+  }
+
+  loadViewChallengeScreen = (challenge) => {
+    props.navigator.push({
+      // screen: 'fitmate.ChallengeFriendsScreen',
+      // title: "Challenge Friends",
+      subtitle: undefined,
+      passProps: {
+        ...challenge
+      },
+      animated: true,
+      animationType: 'fade',
+      backButtonTitle: undefined,
+      backButtonHidden: false,
+    });
+
   }
 
   async componentDidMount() {
@@ -52,20 +107,80 @@ class ChallengesList extends React.Component {
     const allIncompleteChallenges = await this.getIncompleteChallenges(user);
     this.setState({ Completed: [...allCompleteChallenges], Incomplete: [...allIncompleteChallenges] });
   }
+  setModalVisibility = (visible) => {
+    this.setState({ modalVisible: visible });
+  }
 
   render() {
     const ChallengeDisplay = (
       <FlatList
         style={styles.listcontainer}
         data={this.state.Incomplete}
-        renderItem={({ item }) => <EachChallenge pressed={() => { }} Number={item.Number} Exercise={item.Exercise} Initiator={item.InitiatorName} />}>
+        numColumns={2}
+        renderItem={({ item }) => <EachChallenge pressed={() => this.loadViewChallengeScreen(item)} {...item} img={this.getImage(item.Exercise)} />}>
       </FlatList>
     );
 
+    const exercisesModal = (
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={this.state.modalVisible}
+        onRequestClose={() => {
+          Alert.alert('Modal has been closed.');
+        }}>
+
+        <TouchableHighlight onPress={() => { this.setModalVisibility(false) }}>
+
+
+          <View style={{
+            backgroundColor: '#21212180',
+            height: "100%",
+            width: "100%",
+            padding: 0
+          }}>
+
+
+            <View style={{
+              marginTop: "auto",
+              marginBottom: "auto",
+              marginRight: 30,
+              marginLeft: 30,
+              backgroundColor: 'white',
+              // borderRadius: 10,
+              borderWidth: 2,
+              borderColor: 'black',
+              padding: 0
+            }}>
+              <View>
+                <Exercises closeModal={() => { this.setModalVisibility(false) }} navigator={this.props.navigator} />
+              </View>
+            </View>
+          </View>
+        </TouchableHighlight>
+      </Modal>
+
+    );
+
+
     return (
-      <View style={styles.overallcontainer}>
+      <Container>
         {ChallengeDisplay}
-      </View>
+        {exercisesModal}
+        <View style={{ flex: 1 }}>
+          <Fab
+            active={this.state.active}
+            direction="up"
+            containerStyle={{}}
+            style={{ backgroundColor: '#5067FF' }}
+            position="bottomRight"
+            onPress={() => this.setModalVisibility(!this.state.modalVisible)}>
+            <Icon name="add" />
+
+
+          </Fab>
+        </View>
+      </Container>
     );
   }
 

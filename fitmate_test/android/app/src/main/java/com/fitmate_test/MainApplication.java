@@ -38,7 +38,9 @@ public class MainApplication extends NavigationApplication {
 			new RNCameraPackage(),
 			new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
-      new RNFSPackage()
+       new RNCameraPackage(),
+			new RNFSPackage()
+
 
 		);
 	}

@@ -1,8 +1,6 @@
 // 'use strict';
 import React, { Component } from 'react';
-
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator } from 'react-native';
-
 import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
 
@@ -27,21 +25,9 @@ class CameraScreen extends Component {
 
     this.setState({ recording: false, processing: true });
     const type = `video/${codec}`;
+    this.props.uriChanged(uri);
+    this.props.typeChanged(type);
 
-    this.props.videoDetailsChanged(uri, type);
-
-    alert("Return to previous screen to send challenge");
-    
-    // this.props.navigator.push({
-    //     screen: 'fitmate.UploadScreen',
-    //     title: 'Upload Video',
-    //     subtitle: undefined,
-    //     passProps: {uri: uri, type: type},
-    //     animated: true,
-    //     animationType: 'fade',
-    //     backButtonTitle: undefined,
-    //     backButonHidden: false,
-    // })
   }
 
 
@@ -135,6 +121,4 @@ const styles = StyleSheet.create({
 });
 
 
-
 export default CameraScreen
-
