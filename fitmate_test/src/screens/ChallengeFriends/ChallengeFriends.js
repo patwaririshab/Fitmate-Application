@@ -286,8 +286,6 @@ class ChallengeFriendsScreen extends React.Component {
           title='Submit Challenge'
           onPress={this.SubmitBtnPressedHandler}
         />
-
-        <Text>{this.state.searchtext}</Text>
         {friendDisplay}
       </View>
     );
