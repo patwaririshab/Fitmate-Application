@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-
+import settingsicon from '../../../icons/setting.png';
 const startTabs = () => {
 
   Navigation.startTabBasedApp({
@@ -7,24 +7,21 @@ const startTabs = () => {
       {
         screen: "fitmate.ChallengesListScreen",
         label: "Challenges",
-        title: "Challenges",
+        title: 'Challenges',
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id: 'buttonOne',
+              icon: settingsicon
+            }
+          ]
+        },
         headerTitleSyle: {
           textAlign: 'center',
           flex: 1
         },
         icon: require('../../../icons/exercise-icon.png'),
       },
-      // {
-      //   screen:"fitmate.ExerciseScreen",
-      //   label: "Start Challenge",
-      //   title: "Start Challenge",
-      //   headerTitleSyle: {
-      //     textAlign: 'center',
-      //     flex: 1
-      //   },
-      //   icon: require('../../../icons/exercise-icon.png'),
-      // },
-
       {
         screen: "fitmate.FriendsScreen",
         label: "Manage friends",
@@ -34,6 +31,14 @@ const startTabs = () => {
           flex: 1
         },
         icon: require('../../../icons/friends-icon.png'),
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id: 'buttonOne',
+              icon: settingsicon
+            }
+          ]
+        },
       },
       {
         screen: "fitmate.AddFriendsScreen",
@@ -44,6 +49,14 @@ const startTabs = () => {
           flex: 1
         },
         icon: require('../../../icons/friends-icon.png'),
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id: 'buttonOne',
+              icon: settingsicon
+            }
+          ]
+        },
       }
     ]
   });

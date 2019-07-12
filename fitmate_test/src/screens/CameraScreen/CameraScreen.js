@@ -4,7 +4,6 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, Activity
 import { RNCamera } from 'react-native-camera';
 
 
-
 class CameraScreen extends Component {
   constructor(props) {
     super(props);
@@ -25,11 +24,12 @@ class CameraScreen extends Component {
 
     this.setState({ recording: false, processing: true });
     const type = `video/${codec}`;
-
     this.props.uriChanged(uri);
     this.props.typeChanged(type);
+    alert("Please return to the previous screen to submit challenge");
 
   }
+
 
   stopRecording() {
     this.camera.stopRecording();

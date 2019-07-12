@@ -9,8 +9,8 @@ import EachFriend from '../../components/EachFriend'
 import SearchedFriend from '../../components/SearchedFriend'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
-
 const db = firebase.firestore();
+
 
 class ChallengeFriendsScreen extends React.Component {
   state = {
@@ -36,7 +36,6 @@ class ChallengeFriendsScreen extends React.Component {
   getAllUsers = () => {
 
     console.log("INSIDE!!")
-
     return db.collection('users').get().then((snapshot) => {
       const allUsers = snapshot.docs.map((doc, index) => {
         console.log(doc)
@@ -131,6 +130,7 @@ class ChallengeFriendsScreen extends React.Component {
       videoUpdated: false,
       TimeStamp: new Date(),
       VerifiedCount: -1
+
     }
     return newchallenge;
 
@@ -172,6 +172,7 @@ class ChallengeFriendsScreen extends React.Component {
   uploadBackend = () => {
     this.uploadHandler();
   }
+
 
   // uploader = (uri, mime = 'video/mp4', name) => {
   //   return new Promise((resolve, reject) => {
@@ -254,6 +255,7 @@ class ChallengeFriendsScreen extends React.Component {
           await this.sendAllChallenges();
         });
       });
+
   }
 
 

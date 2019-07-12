@@ -3,7 +3,7 @@ import { View, Text, FlatList, StyleSheet } from 'react-native';
 import AuthContext from '../../Context/AuthContext'
 import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
-import EachFriend from '../../components/EachFriend'
+//import EachFriend from '../../components/EachFriend'
 
 import SearchedFriend from '../../components/SearchedFriend'
 
@@ -95,10 +95,9 @@ class AddFriendsScreen extends React.Component {
   }
 
   searchBtnPressedHandler = () => {
-
     const searchtext = this.state.text;
-    if (this.state.text === "") {
-
+    if (searchtext === "") {
+      
     } else {
       const usersCpy = this.state.users.filter((friend) => {
         return friend.name.toLowerCase().includes(searchtext.toLowerCase());
@@ -129,20 +128,16 @@ class AddFriendsScreen extends React.Component {
     return (
       <View style={styles.overallcontainer}>
         <SearchBar
-          onChangeText={(e) => { this.setState({ text: e }) }}
+          onChangeText={ 
+            (e) => { this.setState({ text: e });
+                    this.searchBtnPressedHandler();
+          }
+          }
           onClearText={() => { }}
           noIcon
-          // icon={{ type: 'font-awesome', name: 'search' }}
+          //icon={{ type: 'font-awesome', name: 'search' }}
           placeholder='Type Here...'
           value={this.state.text} />
-
-        <Button
-          raised
-          icon={{ name: 'cached' }}
-          title='Search'
-          onPress={this.searchBtnPressedHandler}
-        />
-
         <Text>{this.state.searchtext}</Text>
         {friendDisplay}
       </View>

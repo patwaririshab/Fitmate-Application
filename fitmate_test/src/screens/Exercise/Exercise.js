@@ -34,18 +34,18 @@ class ExerciseScreen extends React.Component {
       },
     ]
   }
-  // challengeFriendsHandler = (item) => {
-  //   this.props.navigator.push({
-  //     screen: 'fitmate.ChallengeFriendsScreen',
-  //     title: "Challenge Friends",
-  //     subtitle: undefined,
-  //     passProps: { ...item },
-  //     animated: true,
-  //     animationType: 'fade',
-  //     backButtonTitle: undefined,
-  //     backButtonHidden: false,
-  //   });
-  // }
+  challengeFriendsHandler = (item) => {
+    this.props.navigator.push({
+      screen: 'fitmate.ChallengeFriendsScreen',
+      title: "Challenge Friends",
+      subtitle: undefined,
+      passProps: { ...item },
+      animated: true,
+      animationType: 'fade',
+      backButtonTitle: undefined,
+      backButtonHidden: false,
+    });
+  }
 
   exerciseViewItemClickedHandler = (item) => {
     this.props.navigator.push({

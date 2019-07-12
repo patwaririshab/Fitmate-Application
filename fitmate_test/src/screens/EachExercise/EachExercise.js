@@ -55,7 +55,6 @@ const EachExercise = (props) => {
             animationType: 'fade',
             backButtonTitle: undefined,
             backButtonHidden: false,
-
           });
         }}
       >
