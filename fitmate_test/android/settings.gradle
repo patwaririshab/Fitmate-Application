@@ -1,10 +1,6 @@
 rootProject.name = 'fitmate_test'
-<<<<<<< HEAD
 include ':react-native-fbsdk'
 project(':react-native-fbsdk').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fbsdk/android')
-=======
->>>>>>> 70b9cc7a55a9677db41f6567f01c318efc0afee2
-
 include ':react-native-fs'
 project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
 include ':react-native-camera'
