@@ -85,9 +85,9 @@ class ChallengesList extends React.Component {
   }
 
   loadViewChallengeScreen = (challenge) => {
-    props.navigator.push({
-      // screen: 'fitmate.ChallengeFriendsScreen',
-      // title: "Challenge Friends",
+    this.props.navigator.push({
+      screen: 'fitmate.ViewChallengesScreen',
+      title: "Challenge Friends",
       subtitle: undefined,
       passProps: {
         ...challenge

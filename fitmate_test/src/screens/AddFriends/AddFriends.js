@@ -5,7 +5,7 @@ import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
 //import EachFriend from '../../components/EachFriend'
 
-import SearchedFriend from '../../components/SearchedFriend'
+import SearchedFriend from '../../components/Contestants'
 
 
 class AddFriendsScreen extends React.Component {

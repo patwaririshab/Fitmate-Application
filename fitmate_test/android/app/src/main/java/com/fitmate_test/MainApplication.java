@@ -3,6 +3,8 @@ package com.fitmate_test;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
+import com.brentvatne.react.ReactVideoPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnfs.RNFSPackage;
@@ -38,7 +40,9 @@ public class MainApplication extends NavigationApplication {
       new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
        new RNCameraPackage(),
-			new RNFSPackage()
+			new RNFSPackage(),
+			new ReactVideoPackage(),
+			new RNUUIDGeneratorPackage()
 
 			// eg. new VectorIconsPackage()
 		);
