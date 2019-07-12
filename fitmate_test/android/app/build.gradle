@@ -140,7 +140,10 @@ android {
 }
 
 dependencies {
+<<<<<<< HEAD
     implementation project(':react-native-fbsdk')
+=======
+>>>>>>> 70b9cc7a55a9677db41f6567f01c318efc0afee2
 
     implementation project(':react-native-fetch-blob')
     implementation project(':react-native-fs')

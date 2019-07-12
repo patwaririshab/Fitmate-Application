@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, ActivityIndicator } from 'react-native';
 import { RNCamera } from 'react-native-camera';
-
+import axios from 'react-native-axios'
 
 class CameraScreen extends Component {
   constructor(props) {
