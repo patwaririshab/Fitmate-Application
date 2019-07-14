@@ -7,12 +7,9 @@ import firebase from '../../Firebase'
 import Contestants from '../../components/Contestants'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
-<<<<<<< HEAD
 
 import UUIDGenerator from 'react-native-uuid-generator';
 
-=======
->>>>>>> origin/master
 const db = firebase.firestore();
 
 
@@ -74,7 +71,6 @@ class ChallengeFriendsScreen extends React.Component {
   getAllUsers = () => {
 
     console.log("INSIDE!!")
-
     return db.collection('users').get().then((snapshot) => {
       const allUsers = snapshot.docs.map((doc, index) => {
         console.log(doc)
@@ -169,11 +165,37 @@ class ChallengeFriendsScreen extends React.Component {
       DownloadURL: this.state.currentVideoURL,
       videoUpdated: false,
       TimeStamp: new Date(),
-      VerifiedCount: -1
+      VerifiedCount: -1,
+      ChallengeID: this.state.challengeID,
 
     }
     return newchallenge;
 
+  }
+
+  getReceivedChallengeDoc = (contenders, ExerciseNum, NumberE, UserID) => {
+    const exercise = parseInt(ExerciseNum, 10);
+    const num = parseInt(NumberE, 10);
+    const contenderCpy = contenders.map(item => {
+      return {
+        name: item.name,
+        key: item.key,
+        userId: item.userId,
+        done: false
+      }
+    });
+    const newDoc = {
+      Exercise: exercise,
+      Number: num,
+      TimeStamp: new Date(),
+      ChallengeID: this.state.challengeID,
+      DownloadURL: this.state.currentVideoURL,
+      InitiatorID: UserID,
+      InitiatorName: this.state.userDoc.name,
+      Contenders: contenderCpy
+    }
+
+    return newDoc
   }
 
 
@@ -183,14 +205,23 @@ class ChallengeFriendsScreen extends React.Component {
   sendAllChallenges = () => {
 
     var batch = db.batch();
-    this.state.friends.map(friend => {
-      if (friend.isChallenged) {
-        const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
-        const challengesRef = db.collection("challenges").doc();
-        batch.set(challengesRef, challengeVal);
-      }
+    const contenders = this.state.friends.filter((friend) => friend.isChallenged);
+    console.log(contenders)
+    contenders.map(friend => {
+
+      const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
+      console.log("CHELLENGE", challengeVal)
+      const challengesRef = db.collection("challenges").doc();
+      batch.set(challengesRef, challengeVal);
+
 
     })
+    const receivedChallengesRef = db.collection("receivedChallenges").doc();
+    const chalDoc = this.getReceivedChallengeDoc(contenders, this.props.Exercise, this.props.Number, this.state.userID);
+    console.log("ChalDoc", chalDoc)
+    batch.set(receivedChallengesRef, chalDoc);
+
+
     batch.commit().then((response) => {
       console.log(response)
     }).catch((err) => {
@@ -208,15 +239,6 @@ class ChallengeFriendsScreen extends React.Component {
     console.log('UploadHandler Function Worked');
   }
 
-<<<<<<< HEAD
-=======
-
-  uploadBackend = () => {
-    this.uploadHandler();
-  }
-
-
->>>>>>> origin/master
   // uploader = (uri, mime = 'video/mp4', name) => {
   //   return new Promise((resolve, reject) => {
   //     let imgUri = uri; let uploadBlob = null;
@@ -259,6 +281,7 @@ class ChallengeFriendsScreen extends React.Component {
     const { currentUser } = await firebase.auth();
 
     const uuidVideo = await UUIDGenerator.getRandomUUID()
+    this.setState({ challengeID: uuidVideo })
     console.log("UUID", uuidVideo)
 
     const imageRef = firebase.storage().ref(`/videos/${uuidVideo}`)

@@ -3,13 +3,9 @@ package com.fitmate_test;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-<<<<<<< HEAD
 import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
 import com.brentvatne.react.ReactVideoPackage;
 import org.reactnative.camera.RNCameraPackage;
-=======
-import com.rnfs.RNFSPackage;
->>>>>>> origin/master
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.rnfs.RNFSPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
@@ -44,8 +40,7 @@ public class MainApplication extends NavigationApplication {
 			new RNCameraPackage(),
 			new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
-       new RNCameraPackage(),
-			new RNFSPackage(),
+       		new RNFSPackage(),
 			new ReactVideoPackage(),
 			new RNUUIDGeneratorPackage()
 

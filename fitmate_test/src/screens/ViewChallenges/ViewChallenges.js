@@ -94,6 +94,7 @@ class ViewChallengesScreen extends Component {
 
         />
         <Button
+          onPress={this.props.setDone}
           title="Complete this Challenge"
         >
         </Button>

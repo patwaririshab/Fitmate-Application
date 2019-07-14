@@ -4,7 +4,6 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, Activity
 import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
 
-
 class CameraScreen extends Component {
   constructor(props) {
     super(props);
@@ -27,6 +26,7 @@ class CameraScreen extends Component {
     const type = `video/${codec}`;
     this.props.uriChanged(uri);
     this.props.typeChanged(type);
+    alert("Please return to the previous screen to submit challenge");
 
   }
 

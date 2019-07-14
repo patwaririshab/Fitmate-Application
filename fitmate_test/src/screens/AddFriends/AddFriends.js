@@ -7,8 +7,39 @@ import { SearchBar, Button } from 'react-native-elements'
 
 import SearchedFriend from '../../components/Contestants'
 
+import profileicon from '../../../icons/profile.png';
+import refreshicon from '../../../icons/refresh.png';
+
+
 
 class AddFriendsScreen extends React.Component {
+
+
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        id: 'profileBtn',
+        icon: profileicon
+      },
+      {
+        id: 'refreshBtn',
+        icon: refreshicon
+      }
+    ]
+  };
+
+
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'refreshBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+      if (event.id == 'profileBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+    }
+  }
+
   state = {
     text: "",
     users: [
@@ -95,9 +126,8 @@ class AddFriendsScreen extends React.Component {
   }
 
   searchBtnPressedHandler = () => {
-
     const searchtext = this.state.text;
-    if (this.state.text === "") {
+    if (searchtext === "") {
 
     } else {
       const usersCpy = this.state.users.filter((friend) => {
@@ -129,20 +159,17 @@ class AddFriendsScreen extends React.Component {
     return (
       <View style={styles.overallcontainer}>
         <SearchBar
-          onChangeText={(e) => { this.setState({ text: e }) }}
+          onChangeText={
+            (e) => {
+              this.setState({ text: e });
+              this.searchBtnPressedHandler();
+            }
+          }
           onClearText={() => { }}
           noIcon
-          // icon={{ type: 'font-awesome', name: 'search' }}
+          //icon={{ type: 'font-awesome', name: 'search' }}
           placeholder='Type Here...'
           value={this.state.text} />
-
-        <Button
-          raised
-          icon={{ name: 'cached' }}
-          title='Search'
-          onPress={this.searchBtnPressedHandler}
-        />
-
         <Text>{this.state.searchtext}</Text>
         {friendDisplay}
       </View>

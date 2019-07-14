@@ -141,13 +141,9 @@ android {
 }
 
 dependencies {
-<<<<<<< HEAD
     implementation project(':react-native-uuid-generator')
     implementation project(':react-native-video')
     implementation project(':react-native-camera')
-=======
-
->>>>>>> origin/master
     implementation project(':react-native-fetch-blob')
     implementation project(':react-native-fs')
     implementation project(':@react-native-community_async-storage')

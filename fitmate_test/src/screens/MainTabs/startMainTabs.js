@@ -1,5 +1,7 @@
 import { Navigation } from 'react-native-navigation';
-
+import settingsicon from '../../../icons/setting.png';
+import profileicon from '../../../icons/profile.png';
+import refreshicon from '../../../icons/refresh.png';
 const startTabs = () => {
 
   Navigation.startTabBasedApp({
@@ -7,24 +9,36 @@ const startTabs = () => {
       {
         screen: "fitmate.ChallengesListScreen",
         label: "Challenges",
-        title: "Challenges",
+        title: 'Challenges',
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //     {
+        //       id: 'refreshBtn',
+        //       icon: refreshicon
+        //     }
+        //   ]
+        // },
         headerTitleSyle: {
           textAlign: 'center',
           flex: 1
         },
         icon: require('../../../icons/exercise-icon.png'),
       },
-      // {
-      //   screen:"fitmate.ExerciseScreen",
-      //   label: "Start Challenge",
-      //   title: "Start Challenge",
-      //   headerTitleSyle: {
-      //     textAlign: 'center',
-      //     flex: 1
-      //   },
-      //   icon: require('../../../icons/exercise-icon.png'),
-      // },
+      {
+        screen: "fitmate.SentChallengesScreen",
+        label: "View Sent Challenges",
+        title: "View Sent Challenges",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+        icon: require('../../../icons/exercise-icon.png'),
 
+      },
       {
         screen: "fitmate.FriendsScreen",
         label: "Manage friends",
@@ -33,7 +47,15 @@ const startTabs = () => {
           textAlign: 'center',
           flex: 1
         },
-        icon: require('../../../icons/friends-icon.png'),
+        icon: require('../../../icons/friends.png'),
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //   ]
+        // },
       },
       {
         screen: "fitmate.AddFriendsScreen",
@@ -43,7 +65,15 @@ const startTabs = () => {
           textAlign: 'center',
           flex: 1
         },
-        icon: require('../../../icons/friends-icon.png'),
+        icon: require('../../../icons/addperson.png'),
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //   ]
+        // },
       }
     ]
   });
