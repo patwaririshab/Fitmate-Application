@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { Alert, Platform, StyleSheet, Text, View } from 'react-native';
 import startTabs from '../MainTabs/startMainTabs'
 import firebase from '../../Firebase'
 import AuthContext from '../../Context/AuthContext'
@@ -21,13 +21,14 @@ class AuthScreen extends React.Component {
 
   }
 
-  async componentDidMount() {
-    await firebase.auth().onAuthStateChanged((user) => {
-      if (user != null) {
-        startTabs();
-      }
-    })
-  }
+  // async componentDidMount() {
+  //   await firebase.auth().onAuthStateChanged((user) => {
+  //     if (user != null) {
+  //       startTabs();
+  //     }
+  //   })
+  // }
+
   async signUpUser() {
     console.log("Signing up");
 
@@ -65,31 +66,70 @@ class AuthScreen extends React.Component {
   logInUser = () => {
 
     console.log("Logging in");
-
-    try {
-      firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((user) => {
-        console.log(user)
-        startTabs();
-      })
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+    .then((user) => {
+                Alert.alert("Successfully Logged in", 'Press OK to Continue',[{
+                title: "OK",
+                text: "OK",
+                onPress: () => {
+                console.log(user)
+                startTabs(); 
+                }},
+              ],
+              {cancelable: false},
+              );
+    })
+    .catch((error) => {
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      var email = error.email;
+      var credential = error.credential;
+      if (errorCode === 'auth/account-exists-with-different-credential') {
+        alert('Email already associated with another account.');
+      } 
+      else if (errorCode === 'auth/invalid-credential') {
+        alert('Please recheck your email and password.')
+      }
+      else if (errorCode === 'auth/user-not-found'){
+        alert('User Not Found. Please recheck your username.')
+      }
+      else if (errorCode === 'auth/wrong-password') {
+        alert('Please recheck your password.')
+      }
+      else {
+        console.log(error);
+        alert('An unknown error occured, please try again later.')
+      }
     }
-    catch (error) {
-      console.log(error.toString())
-    }
+    )
   }
 
+  logInWithFacebook = () => (
+    alert('This feature is currently not available. Try log in using other methods.')
+    // Auth.Facebook.login(fbLoginPermissions)
+    // .then((token) => {
+    //   firebase.auth()
+
+    // .signInWithCredential(firebase.auth.FacebookAuthProvider.credential(
+    //   token))
+    // })
+    // .catch((err) => this.onError && this.onError(err))
+  );
 
   // async logInWithFacebook(){
-  //   const {type, token} = await Expo.Facebook.logInWithReadPermissionsAsync('2371990063013333', {  permissions:['public_profile']  })
-  //
+  //   const {type, token} = await Facebook.logInWithReadPermissionsAsync('2371990063013333', {  permissions:['public_profile']  })
+  
   //   if (type == 'success') {
-  //
+  
   //     const credential = firebase.auth.FacebookAuthProvider.credential(token)
-  //
+  
   //     firebase.auth().signInWithCredential(credential).catch((error) => {
   //       console.log(error)
   //     })
   //   }
   // }
+
+
 
   render() {
     return (
@@ -148,11 +188,10 @@ class AuthScreen extends React.Component {
             full
             rounded
             primary
-            onPress={() => this.logInWithFacebook()}
+            onPress={this.logInWithFacebook}
           >
             <Text style={{ color: 'white' }}> Login with Facebook</Text>
           </Button>
-
         </Form>
       </Container>
     );

@@ -5,7 +5,6 @@ import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
 
 
-
 class CameraScreen extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +25,6 @@ class CameraScreen extends Component {
 
     this.setState({ recording: false, processing: true });
     const type = `video/${codec}`;
-
     this.props.uriChanged(uri);
     this.props.typeChanged(type);
 

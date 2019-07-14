@@ -7,10 +7,14 @@ import firebase from '../../Firebase'
 import Contestants from '../../components/Contestants'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
+<<<<<<< HEAD
 
 import UUIDGenerator from 'react-native-uuid-generator';
 
+=======
+>>>>>>> origin/master
 const db = firebase.firestore();
+
 
 class ChallengeFriendsScreen extends React.Component {
 
@@ -166,6 +170,7 @@ class ChallengeFriendsScreen extends React.Component {
       videoUpdated: false,
       TimeStamp: new Date(),
       VerifiedCount: -1
+
     }
     return newchallenge;
 
@@ -203,6 +208,15 @@ class ChallengeFriendsScreen extends React.Component {
     console.log('UploadHandler Function Worked');
   }
 
+<<<<<<< HEAD
+=======
+
+  uploadBackend = () => {
+    this.uploadHandler();
+  }
+
+
+>>>>>>> origin/master
   // uploader = (uri, mime = 'video/mp4', name) => {
   //   return new Promise((resolve, reject) => {
   //     let imgUri = uri; let uploadBlob = null;
@@ -288,6 +302,7 @@ class ChallengeFriendsScreen extends React.Component {
           await this.sendAllChallenges();
         });
       });
+
   }
 
 
