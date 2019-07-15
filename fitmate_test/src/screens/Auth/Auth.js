@@ -25,13 +25,13 @@ class AuthScreen extends Component {
 
   }
 
-  // async componentDidMount() {
-  //   await firebase.auth().onAuthStateChanged((user) => {
-  //     if (user != null) {
-  //       startTabs();
-  //     }
-  //   })
-  // }
+  async componentDidMount() {
+    await firebase.auth().onAuthStateChanged((user) => {
+      if (user != null) {
+        startTabs();
+      }
+    })
+  }
 
   async signUpUser() {
     console.log("Signing up");

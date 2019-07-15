@@ -41,7 +41,8 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    // backgroundColor: '#00000070',
+     backgroundColor: '#F5FCFF70',
   },
   textBG: {
     backgroundColor: '#11111130',
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%"
   },
-  imageBack: { width: '100%', height: '100%', textAlign: "center", textAlignVertical: "center" }
+  imageBack: { width: '100%', height: '100%', textAlign: "center", textAlignVertical: "center",}
 
 });
 

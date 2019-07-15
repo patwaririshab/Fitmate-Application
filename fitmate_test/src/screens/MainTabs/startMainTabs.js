@@ -1,5 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import settingsicon from '../../../icons/setting.png';
+import settingsicon from '../../../icons/profile.png';
 const startTabs = () => {
 
   Navigation.startTabBasedApp({
@@ -11,19 +11,20 @@ const startTabs = () => {
         navigatorButtons: {
           rightButtons: [
             {
-              id: 'buttonOne',
-              icon: settingsicon
+              id:"sideDrawerToggle",
+              icon: settingsicon,
+              title: 'Menu'
             }
           ]
         },
         headerTitleSyle: {
           textAlign: 'center',
-          flex: 1
+           flex: 1
         },
         icon: require('../../../icons/exercise-icon.png'),
       },
       {
-        screen: "fitmate.FriendsScreen",
+        screen: "fitmate.AddFriendsScreen",
         label: "Manage friends",
         title: "Manage friends",
         headerTitleSyle: {
@@ -34,31 +35,39 @@ const startTabs = () => {
         navigatorButtons: {
           rightButtons: [
             {
-              id: 'buttonOne',
-              icon: settingsicon
+              id:"sideDrawerToggle",
+              icon: settingsicon,
+              title: 'Menu'
             }
           ]
         },
       },
-      {
-        screen: "fitmate.AddFriendsScreen",
-        label: "Add friends",
-        title: "Add friends",
-        headerTitleSyle: {
-          textAlign: 'center',
-          flex: 1
-        },
-        icon: require('../../../icons/friends-icon.png'),
-        navigatorButtons: {
-          rightButtons: [
-            {
-              id: 'buttonOne',
-              icon: settingsicon
-            }
-          ]
-        },
-      }
-    ]
+      // {
+      //   screen: "fitmate.AddFriendsScreen",
+      //   label: "Add friends",
+      //   title: "Add friends",
+      //   headerTitleSyle: {
+      //     textAlign: 'center',
+      //     flex: 1,
+
+      //   },
+      //   icon: require('../../../icons/friends-icon.png'),
+      //   navigatorButtons: {
+      //     rightButtons: [
+      //       {
+      //         id:"sideDrawerToggle",
+      //         icon: settingsicon,
+      //         title: 'Menu'
+      //       }
+      //     ]
+      //   },
+      // }
+    ],
+  drawer: {
+    right: {
+      screen: 'fitmate.SideMenu'
+    }
+  }
   });
 
 }

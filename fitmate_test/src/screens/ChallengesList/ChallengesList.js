@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableHighlight, Modal, StyleSheet, Text, FlatList } from 'react-native'
+import { TouchableHighlight, Modal, StyleSheet, Text, FlatList, ImageBackground } from 'react-native'
 import { Container, Header, View, Button, Icon, Fab } from 'native-base';
 import firebase from '../../Firebase'
 import EachChallenge from '../../components/EachChallenge.js'
@@ -8,11 +8,27 @@ import Exercises from '../Exercise/Exercise'
 
 import pushupimg from '../../../icons/pushups.jpg'
 import situpimg from '../../../icons/situpslabel.jpg'
-
 import squatsimg from '../../../icons/squatslabel.jpg'
+import backgrndimg from '../../../icons/background-image-green.png'
 
 
 class ChallengesList extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
+
+  onNavigatorEvent = event => {
+    if(event.type === "NavBarButtonPress") {
+      if(event.id === "sideDrawerToggle") {
+        this.props.navigator.toggleDrawer({
+          side: 'right'     
+        });
+      }
+    }
+  }
+
 
   state = {
     Completed: [],
@@ -146,7 +162,7 @@ class ChallengesList extends React.Component {
               marginBottom: "auto",
               marginRight: 30,
               marginLeft: 30,
-              backgroundColor: 'white',
+              backgroundColor: '#white',
               // borderRadius: 10,
               borderWidth: 2,
               borderColor: 'black',
@@ -164,7 +180,9 @@ class ChallengesList extends React.Component {
 
 
     return (
-      <Container>
+      <Container
+        style = {styles.overallcontainer}
+      >
         {ChallengeDisplay}
         {exercisesModal}
         <View style={{ flex: 1 }}>
@@ -172,12 +190,10 @@ class ChallengesList extends React.Component {
             active={this.state.active}
             direction="up"
             containerStyle={{}}
-            style={{ backgroundColor: '#5067FF' }}
+            style={{ backgroundColor: 'green' }}
             position="bottomRight"
             onPress={() => this.setModalVisibility(!this.state.modalVisible)}>
             <Icon name="add" />
-
-
           </Fab>
         </View>
       </Container>
@@ -188,11 +204,16 @@ class ChallengesList extends React.Component {
 
 const styles = StyleSheet.create({
   listcontainer: {
-    width: "100%"
+    width: "100%",
   },
   overallcontainer: {
     paddingBottom: 16
-  }
+  },
+  backgroundImage: {
+    flex: 1,
+    padding: 10,
+    justifyContent:'center',
+  },
 });
 
 export default ChallengesList;
