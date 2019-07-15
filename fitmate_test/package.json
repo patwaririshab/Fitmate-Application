@@ -24,6 +24,7 @@
     "react-native-fs": "^2.13.3",
     "react-native-media-controls": "^1.1.1",
     "react-native-navigation": "^1.1.493",
+    "react-native-progress": "^3.6.0",
     "react-native-root-toast": "^3.1.2",
     "react-native-uuid-generator": "^5.0.0",
     "react-native-vector-icons": "^6.4.2",

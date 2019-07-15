@@ -10,6 +10,8 @@ import fs from 'react-native-fs'
 
 import UUIDGenerator from 'react-native-uuid-generator';
 
+import * as Progress from 'react-native-progress';
+
 const db = firebase.firestore();
 
 
@@ -53,7 +55,8 @@ class ChallengeFriendsScreen extends React.Component {
     friends: [
     ],
     userID: "",
-
+    progress: 0,
+    isUploading: false,
     currentVideoURL: "testURL",
     currentChallengesId: [],
     doneUploadingVideo: false,
@@ -174,6 +177,8 @@ class ChallengeFriendsScreen extends React.Component {
   }
 
   getReceivedChallengeDoc = (contenders, ExerciseNum, NumberE, UserID) => {
+
+    console.log("EXERCISE MUMBER", NumberE)
     const exercise = parseInt(ExerciseNum, 10);
     const num = parseInt(NumberE, 10);
     const contenderCpy = contenders.map(item => {
@@ -231,6 +236,7 @@ class ChallengeFriendsScreen extends React.Component {
 
 
   uploadBackend = () => {
+    this.setState({ isUploading: true })
     const Blob = RNFetchBlob.polyfill.Blob;
     const fs = RNFetchBlob.fs;
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
@@ -293,7 +299,9 @@ class ChallengeFriendsScreen extends React.Component {
     const uploadTask = imageRef.put(blob, { contentType: mime, name: name });
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes);
+
+        this.setState({ progress: progress });
         console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -323,6 +331,8 @@ class ChallengeFriendsScreen extends React.Component {
           this.setState({ currentVideoURL: downloadURL, doneUploadingVideo: true });
           window.XMLHttpRequest = this.state.windowXMLHTTP;
           await this.sendAllChallenges();
+          this.setState({ isUploading: false });
+          this.props.navigator.pop()
         });
       });
 
@@ -343,7 +353,11 @@ class ChallengeFriendsScreen extends React.Component {
 
     return (
       <View style={styles.overallcontainer}>
-        {friendDisplay}
+        {this.state.isUploading ?
+          <View style={styles.container}><Progress.Circle showsText={true} progress={this.state.progress} size={60} /></View>
+          :
+          friendDisplay}
+
       </View>
     );
   }
@@ -352,12 +366,10 @@ class ChallengeFriendsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+
   innercontainer: {
     width: "100%",
     flexDirection: 'row',
