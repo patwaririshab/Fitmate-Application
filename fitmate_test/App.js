@@ -21,7 +21,6 @@ Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen)
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
 Navigation.registerComponent('fitmate.CameraScreen',()=> CameraScreen);
 Navigation.registerComponent("fitmate.UploadScreen",() => UploadScreen);
-Navigation.registerComponent("fitmate.SharePlace",() => SharePlace);
 Navigation.registerComponent("fitmate.SideMenu",() => SideMenuScreen)
 
 

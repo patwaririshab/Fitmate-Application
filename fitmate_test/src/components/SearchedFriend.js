@@ -4,35 +4,11 @@ import Profile1 from '../../icons/profilepic.jpg'
 import Profile2 from '../../icons/profilepic2.jpg'
 import IsFriendIcon from '../../icons/isfriend.jpg'
 import AddFriendIcon from '../../icons/addfriend.png'
-import { Button } from 'native-base'
-import { ListItem } from 'react-native-elements';
+import { ListItem } from 'react-native-elements'; 
 
 
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
-
-//   const Addremovebtn = props.yesOrNo ? (
-//     <Button style={{ flex: 1 }}
-//       full
-//       warning
-//       onPress={props.pressed}
-//       borderRadius={30}
-//       margin = {10}
-//     >
-//       <Text style={{ color: 'white' }}> {props.removetext}</Text>
-//     </Button>
-//   ) : (
-//       <Button style={{ flex: 1 }}
-//         full
-//         success
-//         onPress={props.pressed}
-//         borderRadius={30}
-//         margin={10}
-//       >
-//         <Text style={{ color: 'white' }}>  {props.addtext}</Text>
-//       </Button>
-//     );
-
 
 //const AddRemoveText = props.yesOrNo ? 'Friend': ''
 // const AddRemoveIcon = props.yesOrNo ? (source = {IsFriendIcon}) : (source = {AddFriendIcon})
@@ -46,22 +22,6 @@ const SearchedFriend = (props) => {
         onPress = {props.pressed}
     >
     </ListItem>
-
-
-
-
-    // <View style={styles.outerContainer}>
-    //   <View style={styles.container}>
-    //     <Image
-    //       style={styles.profilePicture}
-    //       source={picture}
-    //     />
-    //     <View style={styles.nameContainer}>
-    //       <Text style={styles.textStyle}>{props.item.name}</Text>
-    //     </View>
-    //   </View>
-    // </View>
-
   );
 }
 
