@@ -4,21 +4,59 @@ import { Platform, PermissionsAndroid, CameraRoll, FlatList, AppRegistry, StyleS
 import AuthContext from '../../Context/AuthContext'
 
 import firebase from '../../Firebase'
-import { SearchBar, Button } from 'react-native-elements'
-import EachFriend from '../../components/EachFriend'
-import SearchedFriend from '../../components/SearchedFriend'
+import Contestants from '../../components/Contestants'
 import RNFetchBlob from 'react-native-fetch-blob'
 import fs from 'react-native-fs'
+
+import UUIDGenerator from 'react-native-uuid-generator';
+
+import * as Progress from 'react-native-progress';
+
 const db = firebase.firestore();
 
 
 class ChallengeFriendsScreen extends React.Component {
+
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        title: 'Submit',
+        id: 'submit',
+        disableIconTint: true, // optional, by default the image colors are overridden and tinted to navBarButtonColor, set to true to keep the original image colors
+        showAsAction: 'ifRoom', // optional, Android only. Control how the button is displayed in the Toolbar. Accepted valued: 'ifRoom' (default) - Show this item as a button in an Action Bar if the system decides there is room for it. 'always' - Always show this item as a button in an Action Bar. 'withText' - When this item is in the action bar, always show it with a text label even if it also has an icon specified. 'never' - Never show this item as a button in an Action Bar.
+        buttonFontSize: 14, // Set font size for the button (can also be used in setButtons function to set different button style programatically)
+        buttonFontWeight: '600', // Set font weight for the button (can also be used in setButtons function to set different button style programatically)
+      },
+      // {
+      //   icon: require('../../../icons/phoneC-icon.png'), // for icon button, provide the local image asset name
+      //   id: 'add' // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+      // }
+    ]
+  };
+
+  constructor(props) {
+    super(props);
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'submit') {
+        this.SubmitBtnPressedHandler();
+      }
+    }
+  }
+
+
+
   state = {
     text: "",
     friends: [
     ],
     userID: "",
-
+    progress: 0,
+    isUploading: false,
     currentVideoURL: "testURL",
     currentChallengesId: [],
     doneUploadingVideo: false,
@@ -68,7 +106,7 @@ class ChallengeFriendsScreen extends React.Component {
 
   getMyName = (user) => {
     const userDoc = firebase.firestore().collection('users').where("userID", "==", user.uid).get().then((snapshot) => {
-      return snapshot.docs[0];
+      return snapshot.docs[0].data();
     });
     return userDoc
   }
@@ -79,6 +117,7 @@ class ChallengeFriendsScreen extends React.Component {
     const user = firebase.auth().currentUser;
     const userDoc = await this.getMyName(user);
     console.log(user.uid);
+    console.log("USER DOC", userDoc)
 
     const allUsers = await this.getAllUsers();
     const allFriends = await this.getAllFriends(user);
@@ -91,7 +130,7 @@ class ChallengeFriendsScreen extends React.Component {
     console.log(allFriendsData)
     console.log(allUsers)
 
-    this.setState({ userDoc: { userDoc }, friends: [...allFriendsData], userID: user.uid });
+    this.setState({ userDoc: { ...userDoc }, friends: [...allFriendsData], userID: user.uid });
 
   }
 
@@ -129,11 +168,39 @@ class ChallengeFriendsScreen extends React.Component {
       DownloadURL: this.state.currentVideoURL,
       videoUpdated: false,
       TimeStamp: new Date(),
-      VerifiedCount: -1
+      VerifiedCount: -1,
+      ChallengeID: this.state.challengeID,
 
     }
     return newchallenge;
 
+  }
+
+  getReceivedChallengeDoc = (contenders, ExerciseNum, NumberE, UserID) => {
+
+    console.log("EXERCISE MUMBER", NumberE)
+    const exercise = parseInt(ExerciseNum, 10);
+    const num = parseInt(NumberE, 10);
+    const contenderCpy = contenders.map(item => {
+      return {
+        name: item.name,
+        key: item.key,
+        userId: item.userId,
+        done: false
+      }
+    });
+    const newDoc = {
+      Exercise: exercise,
+      Number: num,
+      TimeStamp: new Date(),
+      ChallengeID: this.state.challengeID,
+      DownloadURL: this.state.currentVideoURL,
+      InitiatorID: UserID,
+      InitiatorName: this.state.userDoc.name,
+      Contenders: contenderCpy
+    }
+
+    return newDoc
   }
 
 
@@ -143,14 +210,23 @@ class ChallengeFriendsScreen extends React.Component {
   sendAllChallenges = () => {
 
     var batch = db.batch();
-    this.state.friends.map(friend => {
-      if (friend.isChallenged) {
-        const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
-        const challengesRef = db.collection("challenges").doc();
-        batch.set(challengesRef, challengeVal);
-      }
+    const contenders = this.state.friends.filter((friend) => friend.isChallenged);
+    console.log(contenders)
+    contenders.map(friend => {
+
+      const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
+      console.log("CHELLENGE", challengeVal)
+      const challengesRef = db.collection("challenges").doc();
+      batch.set(challengesRef, challengeVal);
+
 
     })
+    const receivedChallengesRef = db.collection("receivedChallenges").doc();
+    const chalDoc = this.getReceivedChallengeDoc(contenders, this.props.Exercise, this.props.Number, this.state.userID);
+    console.log("ChalDoc", chalDoc)
+    batch.set(receivedChallengesRef, chalDoc);
+
+
     batch.commit().then((response) => {
       console.log(response)
     }).catch((err) => {
@@ -159,7 +235,8 @@ class ChallengeFriendsScreen extends React.Component {
   }
 
 
-  uploadHandler = () => {
+  uploadBackend = () => {
+    this.setState({ isUploading: true })
     const Blob = RNFetchBlob.polyfill.Blob;
     const fs = RNFetchBlob.fs;
     window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
@@ -167,12 +244,6 @@ class ChallengeFriendsScreen extends React.Component {
     this.uploader(this.props.videoURI, 'video/mp4', 'video1');
     console.log('UploadHandler Function Worked');
   }
-
-
-  uploadBackend = () => {
-    this.uploadHandler();
-  }
-
 
   // uploader = (uri, mime = 'video/mp4', name) => {
   //   return new Promise((resolve, reject) => {
@@ -214,7 +285,12 @@ class ChallengeFriendsScreen extends React.Component {
     let imgUri = uri; let uploadBlob = null;
     const uploadUri = Platform.OS === 'ios' ? imgUri.replace('file://', '') : imgUri;
     const { currentUser } = await firebase.auth();
-    const imageRef = firebase.storage().ref(`/videos/${currentUser.uid}`)
+
+    const uuidVideo = await UUIDGenerator.getRandomUUID()
+    this.setState({ challengeID: uuidVideo })
+    console.log("UUID", uuidVideo)
+
+    const imageRef = firebase.storage().ref(`/videos/${uuidVideo}`)
 
     const blob = await fs.readFile(uploadUri, 'base64').then(data => {
       return Blob.build(data, { type: `${mime};BASE64` });
@@ -223,7 +299,9 @@ class ChallengeFriendsScreen extends React.Component {
     const uploadTask = imageRef.put(blob, { contentType: mime, name: name });
     uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED,
       (snapshot) => {
-        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        var progress = (snapshot.bytesTransferred / snapshot.totalBytes);
+
+        this.setState({ progress: progress });
         console.log('Upload is ' + progress + '% done');
         switch (snapshot.state) {
           case firebase.storage.TaskState.PAUSED: // or 'paused'
@@ -253,6 +331,8 @@ class ChallengeFriendsScreen extends React.Component {
           this.setState({ currentVideoURL: downloadURL, doneUploadingVideo: true });
           window.XMLHttpRequest = this.state.windowXMLHTTP;
           await this.sendAllChallenges();
+          this.setState({ isUploading: false });
+          this.props.navigator.pop()
         });
       });
 
@@ -265,7 +345,7 @@ class ChallengeFriendsScreen extends React.Component {
       <FlatList
         style={styles.listcontainer}
         data={this.state.friends}
-        renderItem={({ item }) => <SearchedFriend addtext="Challenge Friend" removetext="Dun Challenge Remove" item={item} yesOrNo={item.isChallenged} pressed={() => this.AddRemoveChallengedFriend(item)} />}>
+        renderItem={({ item }) => <Contestants addtext="Challenge Friend" removetext="Dun Challenge Remove" item={item} yesOrNo={item.isChallenged} pressed={() => this.AddRemoveChallengedFriend(item)} />}>
 
       </FlatList>
     );
@@ -273,22 +353,11 @@ class ChallengeFriendsScreen extends React.Component {
 
     return (
       <View style={styles.overallcontainer}>
-        <SearchBar
-          onChangeText={(e) => { this.setState({ text: e }) }}
-          onClearText={() => { }}
-          noIcon
-          // icon={{ type: 'font-awesome', name: 'search' }}
-          placeholder='Type Here...'
-          value={this.state.text} />
+        {this.state.isUploading ?
+          <View style={styles.container}><Progress.Circle showsText={true} progress={this.state.progress} size={60} /></View>
+          :
+          friendDisplay}
 
-        <Button
-          raised
-          icon={{ name: 'flame' }}
-          success
-          title='Submit Challenge'
-          onPress={this.SubmitBtnPressedHandler}
-        />
-        {friendDisplay}
       </View>
     );
   }
@@ -297,12 +366,10 @@ class ChallengeFriendsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
+
   innercontainer: {
     width: "100%",
     flexDirection: 'row',

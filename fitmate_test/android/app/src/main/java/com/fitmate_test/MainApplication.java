@@ -5,9 +5,11 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.rnfs.RNFSPackage;
+import io.github.traviskn.rnuuidgenerator.RNUUIDGeneratorPackage;
+import com.brentvatne.react.ReactVideoPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -38,7 +40,9 @@ public class MainApplication extends NavigationApplication {
 			new RNCameraPackage(),
 			new VectorIconsPackage(),
 			new RNFetchBlobPackage(),
-			new RNFSPackage()
+       		new RNFSPackage(),
+			new ReactVideoPackage(),
+			new RNUUIDGeneratorPackage()
 
 
 		);

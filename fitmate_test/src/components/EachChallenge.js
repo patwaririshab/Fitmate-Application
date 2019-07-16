@@ -10,7 +10,7 @@ const EachChallenge = (props) => {
   } else if (props.Exercise === 2) {
     exerciseName = "Sit Ups"
   } else if (props.Exercise === 3) {
-    exerciseName = "Planks"
+    exerciseName = "Squats"
   }
   console.log(props.TimeStamp)
   const verified = (props.videoUpdated) ? "Verified" : "Unverified";

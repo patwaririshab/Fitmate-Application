@@ -22,14 +22,16 @@ class ExerciseScreen extends React.Component {
         key: "2",
         ExerciseNum: 2,
         ExerciseName: "Sit Ups",
-        Description: ["Lay Prone on the ground with arms supporting your body", "Keep your body straight while raising and lowering your body with your arms", "This exercise works the chest shoulders, triceps and back and legs"],
+        Description: ["Lie down andbend your knees with your feet flat on the floor. Cross your arms in front of your chest",
+          , "Then life your head and shoulders up till your arms touch your thighs", "This exercise works the rectus abdominis muscle and obliques"],
         img: situpimg
       },
       {
         key: "3",
         ExerciseNum: 3,
         ExerciseName: "Squats",
-        Description: ["Lay Prone on the ground with arms supporting your body", "Keep your body straight while raising and lowering your body with your arms", "This exercise works the chest shoulders, triceps and back and legs"],
+        Description: ["Stand with your feet shoulder width apart and your arms stretched forward, then lower your body until your thigs are parallel to the floor",
+          "Return to the start position and repeat", "This exercise works the thighs, hips , buttocks , quads , hamstrings and lower body"],
         img: squatsimg
       },
     ]

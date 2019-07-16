@@ -7,10 +7,41 @@ import { SearchBar, Button } from 'react-native-elements'
 import SearchedFriend from '../../components/SearchedFriend'
 import Profile1 from '../../../icons/profilepic.jpg'
 import Profile2 from '../../../icons/profilepic2.jpg'
+// import SearchedFriend from '../../components/Contestants'
+import profileicon from '../../../icons/profile.png';
+import refreshicon from '../../../icons/refresh.png';
+
 
 const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
 class AddFriendsScreen extends React.Component {
+
+
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        id: 'profileBtn',
+        icon: profileicon
+      },
+      {
+        id: 'refreshBtn',
+        icon: refreshicon
+      }
+    ]
+  };
+
+
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'refreshBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+      if (event.id == 'profileBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+    }
+  }
+
   state = {
     text: "",
     users: [

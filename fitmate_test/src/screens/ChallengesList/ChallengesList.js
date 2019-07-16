@@ -3,7 +3,6 @@ import { TouchableHighlight, Modal, StyleSheet, Text, FlatList, ImageBackground 
 import { Container, Header, View, Button, Icon, Fab } from 'native-base';
 import firebase from '../../Firebase'
 import EachChallenge from '../../components/EachChallenge.js'
-import ExerciseItem from '../../components/ExerciseItem'
 import Exercises from '../Exercise/Exercise'
 
 import pushupimg from '../../../icons/pushups.jpg'
@@ -11,20 +10,51 @@ import situpimg from '../../../icons/situpslabel.jpg'
 import squatsimg from '../../../icons/squatslabel.jpg'
 import backgrndimg from '../../../icons/background-image-green.png'
 
+import profileicon from '../../../icons/profile.png';
+import refreshicon from '../../../icons/refresh.png';
+
 
 class ChallengesList extends React.Component {
 
+  // constructor(props) {
+  //   super(props);
+  //   this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  // }
+
+  // onNavigatorEvent = event => {
+  //   if(event.type === "NavBarButtonPress") {
+  //     if(event.id === "sideDrawerToggle") {
+  //       this.props.navigator.toggleDrawer({
+  //         side: 'right'     
+  //       });
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        id: 'profileBtn',
+        icon: profileicon
+      },
+      {
+        id: 'refreshBtn',
+        icon: refreshicon
+      }
+    ]
+  };
+
+
   constructor(props) {
     super(props);
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
-  onNavigatorEvent = event => {
-    if(event.type === "NavBarButtonPress") {
-      if(event.id === "sideDrawerToggle") {
-        this.props.navigator.toggleDrawer({
-          side: 'right'     
-        });
+
+  onNavigatorEvent(event) {
+    if (event.type == 'NavBarButtonPress') {
+      if (event.id == 'refreshBtn') {
+        this.update();
+      }
+      if (event.id == 'profileBtn') {
+        // this.SubmitBtnPressedHandler();
       }
     }
   }
@@ -57,6 +87,8 @@ class ChallengesList extends React.Component {
     const allIncompleteChallenges = firebase.firestore().collection('challenges').where("RecipientID", "==", user.uid).where("Completed", "==", false).get().then((snapshot) => {
       const incompleteChallenges = (snapshot.docs.map((doc, index) => {
         return ({
+          docID: doc.id,
+          ChallengeID: doc.data().ChallengeID,
           key: index.toString(),
           Exercise: doc.data().Exercise,
           InitiatorID: doc.data().InitiatorID,
@@ -81,6 +113,8 @@ class ChallengesList extends React.Component {
     const allCompleteChallenges = firebase.firestore().collection('challenges').where("RecipientID", "==", user.uid).where("Completed", "==", true).get().then((snapshot) => {
       const completeChallenges = (snapshot.docs.map((doc, index) => {
         return ({
+          docID: doc.id,
+          ChallengeID: doc.data().ChallengeID,
           key: index.toString(),
           Exercise: doc.data().Exercise,
           InitiatorID: doc.data().InitiatorID,
@@ -100,13 +134,50 @@ class ChallengesList extends React.Component {
     return allCompleteChallenges
   }
 
+  setChallengeDone = async (challenge) => {
+    await firebase.firestore().collection('challenges').doc(challenge.docID).update({
+      Completed: true
+    }).then(() => {
+      console.log("Doc successfully Updated!")
+    });
+
+    const Obj = await firebase.firestore().collection('receivedChallenges').where("ChallengeID", "==", challenge.ChallengeID).get().then((snapshot) => {
+      return { id: snapshot.docs[0].id, contenders: snapshot.docs[0].data().Contenders }
+    });
+
+    console.log(Obj)
+
+    const updatedArrOfChallengeState = await Obj.contenders.map((item) => {
+      if (item.userId === challenge.RecipientID) {
+        return ({
+          ...item,
+          done: true
+        })
+      } else {
+        return ({
+          ...item
+        })
+      }
+
+    });
+
+    await firebase.firestore().collection('receivedChallenges').doc(Obj.id).update({
+      Contenders: updatedArrOfChallengeState
+    }).then(() => {
+      console.log("Received Doc successfully Updated!")
+    });
+
+
+  }
+
   loadViewChallengeScreen = (challenge) => {
-    props.navigator.push({
-      // screen: 'fitmate.ChallengeFriendsScreen',
-      // title: "Challenge Friends",
+    this.props.navigator.push({
+      screen: 'fitmate.ViewChallengesScreen',
+      title: "Challenge Friends",
       subtitle: undefined,
       passProps: {
-        ...challenge
+        ...challenge,
+        setDone: () => this.setChallengeDone(challenge)
       },
       animated: true,
       animationType: 'fade',
@@ -116,13 +187,20 @@ class ChallengesList extends React.Component {
 
   }
 
-  async componentDidMount() {
-    console.log("Challenges  Compponent did moutn");
+  update = async () => {
+    console.log("Updating!")
     const user = firebase.auth().currentUser;
     const allCompleteChallenges = await this.getCompleteChallenges(user);
     const allIncompleteChallenges = await this.getIncompleteChallenges(user);
     this.setState({ Completed: [...allCompleteChallenges], Incomplete: [...allIncompleteChallenges] });
   }
+
+  componentDidMount() {
+    console.log("Challenges  Compponent did moutn");
+    this.update();
+  }
+
+
   setModalVisibility = (visible) => {
     this.setState({ modalVisible: visible });
   }
@@ -199,6 +277,8 @@ class ChallengesList extends React.Component {
       </Container>
     );
   }
+
+
 
 }
 

@@ -9,9 +9,9 @@ const EachExercise = (props) => {
   const [type, setType] = useState(`video/mp4`);
   const [number, setnum] = useState("30");
 
-  const description = props.Description.map((item) => {
+  const description = props.Description.map((item, index) => {
     return (
-      <Text style={styles.description}>{item}</Text>
+      <Text key={index} style={styles.description}>{item}</Text>
     );
   });
 
@@ -65,33 +65,33 @@ const EachExercise = (props) => {
         full
         success
         onPress={() => {
-          // if (uri === "") {
-          //   const toast = Toast.show('You must add a video!', {
-          //     duration: Toast.durations.SHORT,
-          //     position: Toast.positions.BOTTOM,
-          //     shadow: true,
-          //     animation: true,
-          //     hideOnPress: true,
-          //     delay: 0,
-          //     backgroundColor: "red"
-          //   });
-          // } else {
-          props.navigator.push({
-            screen: 'fitmate.ChallengeFriendsScreen',
-            title: "Challenge Friends",
-            subtitle: undefined,
-            passProps: {
-              Exercise: props.ExerciseNum,
-              Number: props.selected,
-              videoURI: uri,
-              videoType: type
-            },
-            animated: true,
-            animationType: 'fade',
-            backButtonTitle: undefined,
-            backButtonHidden: false,
-          });
-          // }
+          if (uri === "") {
+            const toast = Toast.show('You must add a video!', {
+              duration: Toast.durations.SHORT,
+              position: Toast.positions.BOTTOM,
+              shadow: true,
+              animation: true,
+              hideOnPress: true,
+              delay: 0,
+              backgroundColor: "red"
+            });
+          } else {
+            props.navigator.push({
+              screen: 'fitmate.ChallengeFriendsScreen',
+              title: "Challenge Friends",
+              subtitle: undefined,
+              passProps: {
+                Exercise: props.ExerciseNum,
+                Number: props.selected,
+                videoURI: uri,
+                videoType: type
+              },
+              animated: true,
+              animationType: 'fade',
+              backButtonTitle: undefined,
+              backButtonHidden: false,
+            });
+          }
 
         }}
       >

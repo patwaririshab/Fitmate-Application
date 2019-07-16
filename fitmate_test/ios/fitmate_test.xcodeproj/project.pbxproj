@@ -80,8 +80,11 @@
 		86DFF99EFE82451AB337E38E /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2040D8907DC344B0937F82C8 /* libRNFetchBlob.a */; };
 		FEDB834B6CC249208550440F /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F8397E3229E4E65B53150E1 /* libRNCamera.a */; };
 		7A6A0B8B0209497BAEF54704 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B0C818C7D124AAC925C7837 /* libRNFS.a */; };
-		C1BCA68ADD7E40D7AE7B9154 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 975C1F708C124FDB9F2AE32D /* Fontisto.ttf */; };
-		7839F08A80034622BC7B0FBE /* libRCTFBSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8F4DE798634C91A3ADF0C6 /* libRCTFBSDK.a */; };
+<<<<<<< HEAD
+		030166879BF247EB912871FC /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0520C649648642CEA1D9B1EE /* libRCTVideo.a */; };
+		6D10BE95BB774AC28D76B559 /* libRNUUIDGenerator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF3F6CDA32074731A53D77CF /* libRNUUIDGenerator.a */; };
+=======
+>>>>>>> origin/master
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -437,9 +440,10 @@
 		4F8397E3229E4E65B53150E1 /* libRNCamera.a */ = {isa = PBXFileReference; name = "libRNCamera.a"; path = "libRNCamera.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		9AE99C498BEA4D58A2B593C8 /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		9B0C818C7D124AAC925C7837 /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		975C1F708C124FDB9F2AE32D /* Fontisto.ttf */ = {isa = PBXFileReference; name = "Fontisto.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8D3EF763976A492AB90E6852 /* RCTFBSDK.xcodeproj */ = {isa = PBXFileReference; name = "RCTFBSDK.xcodeproj"; path = "../node_modules/react-native-fbsdk/ios/RCTFBSDK.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		DD8F4DE798634C91A3ADF0C6 /* libRCTFBSDK.a */ = {isa = PBXFileReference; name = "libRCTFBSDK.a"; path = "libRCTFBSDK.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		49CFE9BB5BFF4DB0AEF68943 /* RCTVideo.xcodeproj */ = {isa = PBXFileReference; name = "RCTVideo.xcodeproj"; path = "../node_modules/react-native-video/ios/RCTVideo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		0520C649648642CEA1D9B1EE /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		92D975A8072E442A8929FAA6 /* RNUUIDGenerator.xcodeproj */ = {isa = PBXFileReference; name = "RNUUIDGenerator.xcodeproj"; path = "../node_modules/react-native-uuid-generator/ios/RNUUIDGenerator.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AF3F6CDA32074731A53D77CF /* libRNUUIDGenerator.a */ = {isa = PBXFileReference; name = "libRNUUIDGenerator.a"; path = "libRNUUIDGenerator.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -475,7 +479,8 @@
 				86DFF99EFE82451AB337E38E /* libRNFetchBlob.a in Frameworks */,
 				FEDB834B6CC249208550440F /* libRNCamera.a in Frameworks */,
 				7A6A0B8B0209497BAEF54704 /* libRNFS.a in Frameworks */,
-				7839F08A80034622BC7B0FBE /* libRCTFBSDK.a in Frameworks */,
+				030166879BF247EB912871FC /* libRCTVideo.a in Frameworks */,
+				6D10BE95BB774AC28D76B559 /* libRNUUIDGenerator.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,7 +678,8 @@
 				0E2E4D858B524E23A034426F /* RNFetchBlob.xcodeproj */,
 				4598C099C1264D23A79F80CB /* RNCamera.xcodeproj */,
 				9AE99C498BEA4D58A2B593C8 /* RNFS.xcodeproj */,
-				8D3EF763976A492AB90E6852 /* RCTFBSDK.xcodeproj */,
+				49CFE9BB5BFF4DB0AEF68943 /* RCTVideo.xcodeproj */,
+				92D975A8072E442A8929FAA6 /* RNUUIDGenerator.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -740,6 +746,7 @@
 				2F9A7E7E7F3F4AEAB3A406ED /* Octicons.ttf */,
 				A97403C673FD4E66B72D0C99 /* SimpleLineIcons.ttf */,
 				2FE4C2B616E54C00B620C85A /* Zocial.ttf */,
+
 				C4E7D173E2A14E9CAB016482 /* AntDesign.ttf */,
 				103D2F76C9A646CFABD873C7 /* Entypo.ttf */,
 				450CD5A5787E462DA3CA1FDB /* EvilIcons.ttf */,
@@ -758,7 +765,6 @@
 				FCF439E0790044489010E33F /* rubicon-icon-font.ttf */,
 				F7C5A1ADEE1E4E818B389135 /* SimpleLineIcons.ttf */,
 				5A5833CF2EA94FAAB9E94F9D /* Zocial.ttf */,
-				975C1F708C124FDB9F2AE32D /* Fontisto.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1225,6 +1231,7 @@
 				5E59CB3ED9984BE298CEFDBD /* Octicons.ttf in Resources */,
 				BDFD2D43AA3D43E7B81A40B3 /* SimpleLineIcons.ttf in Resources */,
 				92AF3C11B1DF4240ACF07AB6 /* Zocial.ttf in Resources */,
+
 				7BED451C48CB4664B527F976 /* AntDesign.ttf in Resources */,
 				2CBD6D628DD34BECA9AE637E /* Entypo.ttf in Resources */,
 				6605106759644EECBA7C04D5 /* EvilIcons.ttf in Resources */,
@@ -1243,7 +1250,6 @@
 				8F68E30527204A2D847889A7 /* rubicon-icon-font.ttf in Resources */,
 				A15F1F81227B4FD98F68FF04 /* SimpleLineIcons.ttf in Resources */,
 				9729A5DE285249378B44A0B2 /* Zocial.ttf in Resources */,
-				C1BCA68ADD7E40D7AE7B9154 /* Fontisto.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1385,7 +1391,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1393,10 +1403,15 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Debug;
@@ -1425,7 +1440,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1433,10 +1452,15 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Release;
@@ -1463,10 +1487,15 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Debug;
@@ -1492,10 +1521,15 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Release;
@@ -1532,7 +1566,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1543,7 +1581,11 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Debug;
@@ -1580,7 +1622,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1591,7 +1637,8 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
 				);
 			};
 			name = Release;
@@ -1627,7 +1674,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1635,10 +1686,15 @@
 					"$(SRCROOT)/../node_modules/react-native-camera/ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-vector-icons\RNVectorIconsManager",
 					"$(SRCROOT)\..\node_modules\@react-native-community\async-storage\ios",
+
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Debug;
@@ -1674,7 +1730,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+<<<<<<< HEAD
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+=======
+>>>>>>> origin/master
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1685,7 +1745,11 @@
 					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-camera\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
-					"$(SRCROOT)/../node_modules/react-native-fbsdk/ios/RCTFBSDK/**",
+<<<<<<< HEAD
+					"$(SRCROOT)\..\node_modules\react-native-video\ios/**",
+					"$(SRCROOT)\..\node_modules\react-native-uuid-generator\ios",
+=======
+>>>>>>> origin/master
 				);
 			};
 			name = Release;

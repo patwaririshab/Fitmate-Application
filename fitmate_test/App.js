@@ -10,6 +10,9 @@ import ChallengeFriendsScreen from './src/screens/ChallengeFriends/ChallengeFrie
 import UploadScreen from './src/screens/UploadScreen/uploadScreen'
 import CameraScreen from './src/screens/CameraScreen/CameraScreen'
 import SideMenuScreen from './src/screens/SideMenu/SideMenu'
+import ViewChallengesScreen from './src/screens/ViewChallenges/ViewChallenges'
+import SentChallengesScreen from './src/screens/SentChallengesScreen/SentChallengesScreen'
+import ViewContendersStateScreen from './src/screens/ViewContendersStateScreen/ViewContendersStateScreen'
 
 Navigation.registerComponent("fitmate.AuthScreen", () => AuthScreen);
 Navigation.registerComponent("fitmate.ExerciseScreen", () => ExerciseScreen);
@@ -19,10 +22,14 @@ Navigation.registerComponent("fitmate.EachExerciseScreen", () => EachExerciseScr
 Navigation.registerComponent("fitmate.ChallengesListScreen", () => ChallengesListScreen);
 Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen);
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
-Navigation.registerComponent('fitmate.CameraScreen',()=> CameraScreen);
-Navigation.registerComponent("fitmate.UploadScreen",() => UploadScreen);
 Navigation.registerComponent("fitmate.SideMenu",() => SideMenuScreen)
+Navigation.registerComponent('fitmate.CameraScreen', () => CameraScreen);
+Navigation.registerComponent("fitmate.UploadScreen", () => UploadScreen);
+Navigation.registerComponent("fitmate.ViewChallengesScreen", () => ViewChallengesScreen);
 
+Navigation.registerComponent("fitmate.SentChallengesScreen", () => SentChallengesScreen);
+
+Navigation.registerComponent("fitmate.ViewContendersStateScreen", () => ViewContendersStateScreen);
 
 Navigation.startSingleScreenApp({
   screen: {
