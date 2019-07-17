@@ -14,24 +14,17 @@ const startTabs = () => {
         navigatorButtons: {
           rightButtons: [
             {
-              id:"sideDrawerToggle",
-              icon: settingsicon,
-              title: 'Menu'
+              id: 'profileBtn',
+              icon: profileicon,
+            
+            },
+            {
+              id: 'refreshBtn',
+              icon: refreshicon,
+              
             }
           ]
         },
-        // navigatorButtons: {
-        //   rightButtons: [
-        //     {
-        //       id: 'profileBtn',
-        //       icon: profileicon
-        //     },
-        //     {
-        //       id: 'refreshBtn',
-        //       icon: refreshicon
-        //     }
-        //   ]
-        // },
         headerTitleSyle: {
           textAlign: 'center',
            flex: 1
@@ -47,7 +40,20 @@ const startTabs = () => {
           flex: 1
         },
         icon: require('../../../icons/exercise-icon.png'),
-
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id: 'profileBtn',
+              icon: profileicon,
+            
+            },
+            {
+              id: 'refreshBtn',
+              icon: refreshicon,
+              
+            }
+          ]
+        },
       },
       {
         screen: "fitmate.AddFriendsScreen",
@@ -61,68 +67,19 @@ const startTabs = () => {
         navigatorButtons: {
           rightButtons: [
             {
-              id:"sideDrawerToggle",
-              icon: settingsicon,
+              id:"profileBtn",
+              icon: profileicon,
               title: 'Menu'
             }
           ]
         },
       },
-      // {
-      //   screen: "fitmate.AddFriendsScreen",
-      //   label: "Add friends",
-      //   title: "Add friends",
-      //   headerTitleSyle: {
-      //     textAlign: 'center',
-      //     flex: 1,
-
-      //   },
-      //   icon: require('../../../icons/friends-icon.png'),
-      //   navigatorButtons: {
-      //     rightButtons: [
-      //       {
-      //         id:"sideDrawerToggle",
-      //         icon: settingsicon,
-      //         title: 'Menu'
-      //       }
-      //     ]
-      //   },
-      // }
     ],
   drawer: {
     right: {
       screen: 'fitmate.SideMenu'
     }
   }
-    //     icon: require('../../../icons/friends.png'),
-    //     // navigatorButtons: {
-    //     //   rightButtons: [
-    //     //     {
-    //     //       id: 'profileBtn',
-    //     //       icon: profileicon
-    //     //     },
-    //     //   ]
-    //     // },
-    //   },
-    //   {
-    //     screen: "fitmate.AddFriendsScreen",
-    //     label: "Add friends",
-    //     title: "Add friends",
-    //     headerTitleSyle: {
-    //       textAlign: 'center',
-    //       flex: 1
-    //     },
-    //     icon: require('../../../icons/addperson.png'),
-    //     // navigatorButtons: {
-    //     //   rightButtons: [
-    //     //     {
-    //     //       id: 'profileBtn',
-    //     //       icon: profileicon
-    //     //     },
-    //     //   ]
-    //     // },
-    //   }
-    // ]
   });
 
 }

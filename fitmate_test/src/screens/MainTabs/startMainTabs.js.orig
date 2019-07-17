@@ -1,0 +1,142 @@
+import { Navigation } from 'react-native-navigation';
+<<<<<<< HEAD
+import settingsicon from '../../../icons/profile.png';
+=======
+import settingsicon from '../../../icons/setting.png';
+import profileicon from '../../../icons/profile.png';
+import refreshicon from '../../../icons/refresh.png';
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+const startTabs = () => {
+
+  Navigation.startTabBasedApp({
+    tabs: [
+      {
+        screen: "fitmate.ChallengesListScreen",
+        label: "Challenges",
+        title: 'Challenges',
+<<<<<<< HEAD
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id:"sideDrawerToggle",
+              icon: settingsicon,
+              title: 'Menu'
+            }
+          ]
+        },
+=======
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //     {
+        //       id: 'refreshBtn',
+        //       icon: refreshicon
+        //     }
+        //   ]
+        // },
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+        headerTitleSyle: {
+          textAlign: 'center',
+           flex: 1
+        },
+        icon: require('../../../icons/exercise-icon.png'),
+      },
+<<<<<<< HEAD
+=======
+      {
+        screen: "fitmate.SentChallengesScreen",
+        label: "View Sent Challenges",
+        title: "View Sent Challenges",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+        icon: require('../../../icons/exercise-icon.png'),
+
+      },
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+      {
+        screen: "fitmate.AddFriendsScreen",
+        label: "Manage friends",
+        title: "Manage friends",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+<<<<<<< HEAD
+        icon: require('../../../icons/friends-icon.png'),
+        navigatorButtons: {
+          rightButtons: [
+            {
+              id:"sideDrawerToggle",
+              icon: settingsicon,
+              title: 'Menu'
+            }
+          ]
+        },
+      },
+      // {
+      //   screen: "fitmate.AddFriendsScreen",
+      //   label: "Add friends",
+      //   title: "Add friends",
+      //   headerTitleSyle: {
+      //     textAlign: 'center',
+      //     flex: 1,
+
+      //   },
+      //   icon: require('../../../icons/friends-icon.png'),
+      //   navigatorButtons: {
+      //     rightButtons: [
+      //       {
+      //         id:"sideDrawerToggle",
+      //         icon: settingsicon,
+      //         title: 'Menu'
+      //       }
+      //     ]
+      //   },
+      // }
+    ],
+  drawer: {
+    right: {
+      screen: 'fitmate.SideMenu'
+    }
+  }
+=======
+        icon: require('../../../icons/friends.png'),
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //   ]
+        // },
+      },
+      {
+        screen: "fitmate.AddFriendsScreen",
+        label: "Add friends",
+        title: "Add friends",
+        headerTitleSyle: {
+          textAlign: 'center',
+          flex: 1
+        },
+        icon: require('../../../icons/addperson.png'),
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'profileBtn',
+        //       icon: profileicon
+        //     },
+        //   ]
+        // },
+      }
+    ]
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+  });
+
+}
+
+export default startTabs;

@@ -4,13 +4,17 @@ import AuthContext from '../../Context/AuthContext'
 import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
 
+<<<<<<< HEAD
 import SearchedFriend from '../../components/SearchedFriend'
 import Profile1 from '../../../icons/profilepic.jpg'
 import Profile2 from '../../../icons/profilepic2.jpg'
-// import SearchedFriend from '../../components/Contestants'
+=======
+import SearchedFriend from '../../components/Contestants'
+
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
 
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
 
 const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
@@ -31,16 +35,16 @@ class AddFriendsScreen extends React.Component {
   };
 
 
-  // onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
-  //   if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-  //     if (event.id == 'refreshBtn') {
-  //       // this.SubmitBtnPressedHandler();
-  //     }
-  //     if (event.id == 'profileBtn') {
-  //       // this.SubmitBtnPressedHandler();
-  //     }
-  //   }
-  // }
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'refreshBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+      if (event.id == 'profileBtn') {
+        // this.SubmitBtnPressedHandler();
+      }
+    }
+  }
 
   state = {
     text: "",
@@ -62,7 +66,7 @@ class AddFriendsScreen extends React.Component {
 
   onNavigatorEvent = event => {
     if(event.type === "NavBarButtonPress") {
-      if(event.id === "profileBtn") {
+      if(event.id === "sideDrawerToggle") {
         this.props.navigator.toggleDrawer({
           side: 'right'     
         });
@@ -139,7 +143,11 @@ class AddFriendsScreen extends React.Component {
   searchBtnPressedHandler = () => {
     const searchtext = this.state.text;
     if (searchtext === "") {
+<<<<<<< HEAD
       this.setState({filtered: []}) 
+=======
+
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
     } else {
       const usersCpy = this.state.users.filter((friend) => {
         return friend.name.toLowerCase().includes(searchtext.toLowerCase());
@@ -170,6 +178,7 @@ class AddFriendsScreen extends React.Component {
     return (
       <View style={styles.overallcontainer}>
         <SearchBar
+<<<<<<< HEAD
           inputContainerStyle={{ borderRadius: 20}}
           onChangeText={ 
             (e) => { this.setState({ text: e });
@@ -179,6 +188,17 @@ class AddFriendsScreen extends React.Component {
           onClearText={() => { }}
           noIcon
           icon={{ type: 'font-awesome', name: 'search' }}
+=======
+          onChangeText={
+            (e) => {
+              this.setState({ text: e });
+              this.searchBtnPressedHandler();
+            }
+          }
+          onClearText={() => { }}
+          noIcon
+          //icon={{ type: 'font-awesome', name: 'search' }}
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
           placeholder='Type Here...'
           value={this.state.text} />
         <Text>{this.state.searchtext}</Text>

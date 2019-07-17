@@ -44,8 +44,10 @@ class ChallengesList extends React.Component {
                 this.update();
             }
             if (event.id == 'profileBtn') {
-                // this.SubmitBtnPressedHandler();
-            }
+                this.props.navigator.toggleDrawer({
+                  side: 'right'
+                })
+              }
         }
     }
 

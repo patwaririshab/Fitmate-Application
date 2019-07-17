@@ -144,9 +144,16 @@ class ChallengeFriendsScreen extends React.Component {
 
   AddRemoveChallengedFriend = (item) => {
     console.log(item)
-    const cpyFriends = [...this.state.friends]
-    const stat = cpyFriends[item.key].isChallenged;
-    cpyFriends[item.key].isChallenged = !stat;
+    const cpyFriends = this.state.friends.map(friendData => {
+      if (friendData.userId === item.userId) {
+        const tempFriendData = { ...friendData };
+        tempFriendData.isChallenged = !item.isChallenged
+        return tempFriendData
+      } else {
+        return friendData
+      }
+    })
+
     this.setState({
       friends: [...cpyFriends],
     });

@@ -1,0 +1,50 @@
+{
+  "name": "fitmate_test",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@react-native-community/async-storage": "^1.4.2",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "expo-facebook": "^5.0.1",
+    "firebase": "6.0.2",
+    "native-base": "^2.12.1",
+    "react": "16.8.3",
+    "react-native": "0.59.8",
+    "react-native-axios": "^0.17.1",
+    "react-native-camera": "git+https://git@github.com/react-native-community/react-native-camera.git",
+    "react-native-easy-toast": "^1.2.0",
+    "react-native-elements": "^1.1.0",
+    "react-native-fbsdk": "^0.10.1",
+    "react-native-fetch-blob": "^0.10.8",
+    "react-native-fs": "^2.13.3",
+    "react-native-media-controls": "^1.1.1",
+    "react-native-navigation": "^1.1.493",
+    "react-native-progress": "^3.6.0",
+    "react-native-root-toast": "^3.1.2",
+<<<<<<< HEAD
+    "react-native-vector-icons": "^6.6.0"
+=======
+    "react-native-uuid-generator": "^5.0.0",
+    "react-native-vector-icons": "^6.4.2",
+    "react-native-video": "^4.4.3"
+>>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.4",
+    "@babel/runtime": "7.4.4",
+    "babel-jest": "24.8.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "jest": "24.8.0",
+    "metro-react-native-babel-preset": "0.54.1",
+    "prettier": "1.18.2",
+    "react-test-renderer": "^16.8.3"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
