@@ -12,12 +12,16 @@ import squatsimg from '../../../icons/squatslabel.jpg'
 
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
-
+import trophyIcon from '../../../icons/trophy.png'
 
 class ChallengesList extends React.Component {
 
   static navigatorButtons = {
     rightButtons: [
+      {
+        id: 'leaderBoardBtn',
+        icon: trophyIcon
+      },
       {
         id: 'profileBtn',
         icon: profileicon
@@ -43,7 +47,14 @@ class ChallengesList extends React.Component {
         this.update();
       }
       if (event.id == 'profileBtn') {
-        // this.SubmitBtnPressedHandler();
+        this.props.navigator.toggleDrawer({
+          side: 'right'
+        });
+
+      }
+      if (event.id == 'leaderBoardBtn') {
+        this.openLeaderBoard();
+
       }
     }
   }
@@ -53,8 +64,24 @@ class ChallengesList extends React.Component {
     Incomplete: [],
     modalVisible: false,
     active: true,
+    CurrentUser: {}
 
 
+  }
+
+  openLeaderBoard = () => {
+    this.props.navigator.push({
+      screen: 'fitmate.LeaderBoard',
+      title: "LeaderBoard",
+      subtitle: undefined,
+      passProps: {
+        userID: this.state.CurrentUser.uid
+      },
+      animated: true,
+      animationType: 'fade',
+      backButtonTitle: undefined,
+      backButtonHidden: false,
+    });
   }
 
   getImage = (exercise) => {
@@ -122,6 +149,33 @@ class ChallengesList extends React.Component {
     return allCompleteChallenges
   }
 
+
+  updateScore = async () => {
+
+    let score = 0
+
+    await firebase.firestore().collection('leaderboard').doc(this.state.CurrentUser.uid).get().then((doc) => {
+      if (doc.exists) {
+
+        score = doc.data().Score
+
+      }
+    });
+
+    console.log(score)
+
+    const finalscore = score + 20
+
+    const leaderBoardRef = await firebase.firestore().collection("leaderboard").doc(this.state.CurrentUser.uid).set({
+      Score: finalscore
+    }, { merge: true }).then(() => {
+      console.log("Scores Updated")
+    }).catch(err => {
+      console.log(err);
+    });
+
+  }
+
   setChallengeDone = async (challenge) => {
     await firebase.firestore().collection('challenges').doc(challenge.docID).update({
       Completed: true
@@ -155,6 +209,8 @@ class ChallengesList extends React.Component {
       console.log("Received Doc successfully Updated!")
     });
 
+    await this.updateScore();
+
 
   }
 
@@ -180,7 +236,7 @@ class ChallengesList extends React.Component {
     const user = firebase.auth().currentUser;
     const allCompleteChallenges = await this.getCompleteChallenges(user);
     const allIncompleteChallenges = await this.getIncompleteChallenges(user);
-    this.setState({ Completed: [...allCompleteChallenges], Incomplete: [...allIncompleteChallenges] });
+    this.setState({ CurrentUser: user, Completed: [...allCompleteChallenges], Incomplete: [...allIncompleteChallenges] });
   }
 
   componentDidMount() {

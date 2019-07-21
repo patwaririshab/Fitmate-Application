@@ -79,7 +79,7 @@ class ChallengeFriendsScreen extends React.Component {
         console.log(doc)
         return (
           {
-            key: index,
+            key: doc.data().userID,
             name: doc.data().name,
             userId: doc.data().userID,
             isChallenged: false
@@ -144,9 +144,17 @@ class ChallengeFriendsScreen extends React.Component {
 
   AddRemoveChallengedFriend = (item) => {
     console.log(item)
-    const cpyFriends = [...this.state.friends]
-    const stat = cpyFriends[item.key].isChallenged;
-    cpyFriends[item.key].isChallenged = !stat;
+    const cpyFriends = this.state.friends.map(friendData => {
+      if (friendData.userId === item.userId) {
+        const tempFriendData = { ...friendData };
+        tempFriendData.isChallenged = !item.isChallenged
+        return tempFriendData
+      } else {
+        return friendData
+      }
+    })
+    // const stat = cpyFriends[item.key].isChallenged;
+    // cpyFriends[item.key].isChallenged = !stat;
     this.setState({
       friends: [...cpyFriends],
     });
@@ -211,7 +219,12 @@ class ChallengeFriendsScreen extends React.Component {
 
     var batch = db.batch();
     const contenders = this.state.friends.filter((friend) => friend.isChallenged);
+
+
     console.log(contenders)
+
+    const numberOfContenders = contenders.length;
+
     contenders.map(friend => {
 
       const challengeVal = this.Submission(friend, this.props.Exercise, this.props.Number, this.state.userID)
@@ -232,6 +245,38 @@ class ChallengeFriendsScreen extends React.Component {
     }).catch((err) => {
       console.log(err)
     });
+
+    this.updateScore(numberOfContenders)
+
+
+
+  }
+
+  updateScore = async (numberOfContenders) => {
+
+    let score = 0
+
+    await firebase.firestore().collection('leaderboard').doc(this.state.userID).get().then((doc) => {
+      if (doc.exists) {
+
+        score = doc.data().Score
+
+      }
+    });
+
+    console.log(score)
+
+    const finalscore = score + numberOfContenders
+
+
+    const leaderBoardRef = await db.collection("leaderboard").doc(this.state.userID).set({
+      Score: finalscore
+    }, { merge: true }).then(() => {
+      console.log("Scores Updated")
+    }).catch(err => {
+      console.log(err);
+    });
+
   }
 
 

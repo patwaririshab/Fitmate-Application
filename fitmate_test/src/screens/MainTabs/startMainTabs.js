@@ -39,24 +39,24 @@ const startTabs = () => {
         icon: require('../../../icons/exercise-icon.png'),
 
       },
-      {
-        screen: "fitmate.FriendsScreen",
-        label: "Manage friends",
-        title: "Manage friends",
-        headerTitleSyle: {
-          textAlign: 'center',
-          flex: 1
-        },
-        icon: require('../../../icons/friends.png'),
-        // navigatorButtons: {
-        //   rightButtons: [
-        //     {
-        //       id: 'profileBtn',
-        //       icon: profileicon
-        //     },
-        //   ]
-        // },
-      },
+      // {
+      //   screen: "fitmate.FriendsScreen",
+      //   label: "Manage friends",
+      //   title: "Manage friends",
+      //   headerTitleSyle: {
+      //     textAlign: 'center',
+      //     flex: 1
+      //   },
+      //   icon: require('../../../icons/friends.png'),
+      //   // navigatorButtons: {
+      //   //   rightButtons: [
+      //   //     {
+      //   //       id: 'profileBtn',
+      //   //       icon: profileicon
+      //   //     },
+      //   //   ]
+      //   // },
+      // },
       {
         screen: "fitmate.AddFriendsScreen",
         label: "Add friends",
@@ -66,16 +66,16 @@ const startTabs = () => {
           flex: 1
         },
         icon: require('../../../icons/addperson.png'),
-        // navigatorButtons: {
-        //   rightButtons: [
-        //     {
-        //       id: 'profileBtn',
-        //       icon: profileicon
-        //     },
-        //   ]
-        // },
+
       }
-    ]
+    ],
+
+    drawer: {
+      right: {
+        screen: 'fitmate.SideMenu'
+      }
+    }
+
   });
 
 }

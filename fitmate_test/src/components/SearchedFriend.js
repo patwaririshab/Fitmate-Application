@@ -1,90 +1,71 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Profile1 from '../../icons/profilepic.jpg'
 import Profile2 from '../../icons/profilepic2.jpg'
-import { Button } from 'native-base'
-import { Icon } from 'react-native-elements'
+import IsFriendIcon from '../../icons/friends.png'
+import AddFriendIcon from '../../icons/addperson.png'
+import { ListItem } from 'react-native-elements';
 
 
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
-  const Addremovebtn = props.yesOrNo ? (
-    <TouchableHighlight style={styles.iconBtn} onPress={props.pressed}>
-      <Icon
-        reverse
-        name='md-happy'
-        type='ionicon'
-        color='green'
-      />
-    </TouchableHighlight>
-
-  ) : (
-      <TouchableHighlight style={styles.iconBtn} onPress={props.pressed}>
-        <Icon
-          reverse
-          name='md-sad'
-          type='ionicon'
-          color='red'
-        />
-      </TouchableHighlight>
-    );
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.profilePicture}
-        source={picture}
-      />
-      <View style={styles.nameContainer}>
-        <Text style={styles.textStyle}>{props.item.name}</Text>
-      </View>
-      {Addremovebtn}
-
-    </View>
-
-
-
-
-
+    <ListItem
+      roundAvatar
+      title={props.item.name}
+      leftAvatar={{ source: picture }}
+      rightAvatar={props.yesOrNo ? { source: IsFriendIcon } : { source: AddFriendIcon }}
+      // rightTitle = {AddRemoveText}
+      onPress={props.pressed}
+    >
+    </ListItem>
   );
 }
 
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: '#212121',
-    borderBottomWidth: 1,
-    // borderWidth: 1,
-    padding: 10,
-    height: 80,
+    borderRadius: 5,
+    marginBottom: 10,
+    padding: 20,
+    height: 100,
     width: "100%",
+    flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
   },
   textStyle: {
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    color: 'black'
   },
   profilePicture: {
     height: 50,
     width: 50,
-    borderRadius: 100,
+    borderRadius: 100
   },
   nameContainer: {
-    // flexGrow: 2,
-    // flexDirection: 'column',
-    // justifyContent: 'space-between',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'flex-end',
-    backgroundColor: '#F5FCFF',
   },
-  iconBtn: {
-    width: 'auto'
+  outerContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    borderWidth: 2,
+    borderColor: '#000000',
+    borderRadius: 30
   },
-
-
+  AddFriendbutton: {
+    flex: 1,
+  }
 
 });
 
 export default SearchedFriend;
+

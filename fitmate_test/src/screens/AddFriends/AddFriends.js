@@ -5,10 +5,13 @@ import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
 //import EachFriend from '../../components/EachFriend'
 
-import SearchedFriend from '../../components/Contestants'
+import SearchedFriend from '../../components/SearchedFriend'
 
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
+
+
+import imagePath from '../../../icons/squatslabel.jpg'
 
 
 
@@ -35,7 +38,9 @@ class AddFriendsScreen extends React.Component {
         // this.SubmitBtnPressedHandler();
       }
       if (event.id == 'profileBtn') {
-        // this.SubmitBtnPressedHandler();
+        this.props.navigator.toggleDrawer({
+          side: 'right'
+        });
       }
     }
   }
