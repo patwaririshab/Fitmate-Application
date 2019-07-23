@@ -9,6 +9,13 @@ import { Icon } from 'react-native-elements'
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
+
+  const words = props.item.name.split(" ");
+
+  const initials = words.map(word => word[0])
+
+  const Disp = initials.join("");
+
   const Addremovebtn = props.yesOrNo ? (
     <TouchableHighlight style={styles.iconBtn} onPress={props.pressed}>
       <Icon
@@ -31,10 +38,22 @@ const SearchedFriend = (props) => {
     );
   return (
     <View style={styles.container}>
-      <Image
-        style={styles.profilePicture}
-        source={picture}
-      />
+      <View
+        style={{
+          borderRadius: 100,
+          height: 50,
+          width: 50,
+          borderWidth: 3,
+          borderColor: "white",
+          backgroundColor: "#0D47A1",
+          textAlign: "center",
+          textAlignVertical: "center"
+        }}
+      >
+        <Text
+          style={{ width: 50, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "white", margin: "auto" }}
+        >{Disp}</Text>
+      </View>
       <View style={styles.nameContainer}>
         <Text style={styles.textStyle}>{props.item.name}</Text>
       </View>

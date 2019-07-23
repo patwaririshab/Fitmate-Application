@@ -173,7 +173,9 @@ class ChallengesList extends React.Component {
 
         return (
             <Container>
-                {ChallengeDisplay}
+                {this.state.Challenges.length === 0 ? <Text style={{ width: "100%", height: "100%", textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "black" }}>You have not sent any Challenges!!</Text> : ChallengeDisplay}
+
+
             </Container>
         );
     }

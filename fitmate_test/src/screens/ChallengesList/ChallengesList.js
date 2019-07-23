@@ -303,7 +303,7 @@ class ChallengesList extends React.Component {
 
     return (
       <Container>
-        {ChallengeDisplay}
+        {this.state.Incomplete.length === 0 ? <Text style={{ width: "100%", height: "100%", textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "black" }}>You Do not have pending Challenges!!</Text> : ChallengeDisplay}
         {exercisesModal}
         <View style={{ flex: 1 }}>
           <Fab
