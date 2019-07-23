@@ -34,7 +34,6 @@ public class MainApplication extends NavigationApplication {
 	protected List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
-
 		return Arrays.<ReactPackage>asList(
 			new AsyncStoragePackage(),
 			new RNCameraPackage(),
@@ -43,7 +42,6 @@ public class MainApplication extends NavigationApplication {
        		new RNFSPackage(),
 			new ReactVideoPackage(),
 			new RNUUIDGeneratorPackage()
-
 
 		);
 	}
