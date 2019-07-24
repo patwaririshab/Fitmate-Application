@@ -1,8 +1,6 @@
 import React from 'react';
 import { StyleSheet, Alert, Button, Text, TouchableOpacity, ImageBackground } from 'react-native';
-import pushupimg from '../../icons/pushuplabel.jpg'
-import situpimg from '../../icons/situpslabel.jpg'
-import AuthContext from '../Context/AuthContext';
+
 
 
 const ExerciseItem = (props) => {

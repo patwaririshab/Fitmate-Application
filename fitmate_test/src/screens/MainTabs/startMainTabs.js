@@ -39,6 +39,7 @@ const startTabs = () => {
           textAlign: 'center',
           flex: 1
         },
+
         icon: require('../../../icons/exercise-icon.png'),
         navigatorButtons: {
           rightButtons: [

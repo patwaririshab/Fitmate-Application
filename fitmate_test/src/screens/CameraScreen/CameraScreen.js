@@ -4,6 +4,8 @@ import { AppRegistry, StyleSheet, Text, TouchableOpacity, View, Button, Activity
 import { RNCamera } from 'react-native-camera';
 import axios from 'react-native-axios'
 
+import Toast from 'react-native-root-toast';
+
 class CameraScreen extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,19 @@ class CameraScreen extends Component {
     const type = `video/${codec}`;
     this.props.uriChanged(uri);
     this.props.typeChanged(type);
-    alert("Please return to the previous screen to submit challenge");
+
+    this.props.navigator.pop();
+
+    const toast = Toast.show('Video Added!', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 1,
+      backgroundColor: "green"
+    });
+
 
   }
 
@@ -41,7 +55,7 @@ class CameraScreen extends Component {
     let button = (
       <TouchableOpacity
         onPress={this.startRecording.bind(this)}
-        style={styles.capture}
+        style={{ ...styles.capture, backgroundColor: 'green' }}
       >
         <Text style={{ fontSize: 14 }}>RECORD</Text>
       </TouchableOpacity>
@@ -51,7 +65,7 @@ class CameraScreen extends Component {
       button = (
         <TouchableOpacity
           onPress={this.stopRecording.bind(this)}
-          style={styles.capture}
+          style={{ ...styles.capture, backgroundColor: 'red' }}
         >
           <Text style={{ fontSize: 14 }}>STOP</Text>
         </TouchableOpacity>
@@ -111,7 +125,8 @@ const styles = StyleSheet.create({
   },
   capture: {
     flex: 0,
-    backgroundColor: '#fff',
+
+    color: "white",
     borderRadius: 5,
     padding: 15,
     paddingHorizontal: 20,

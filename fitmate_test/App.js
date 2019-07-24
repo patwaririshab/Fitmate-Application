@@ -13,6 +13,9 @@ import SideMenuScreen from './src/screens/SideMenu/SideMenu'
 import ViewChallengesScreen from './src/screens/ViewChallenges/ViewChallenges'
 import SentChallengesScreen from './src/screens/SentChallengesScreen/SentChallengesScreen'
 import ViewContendersStateScreen from './src/screens/ViewContendersStateScreen/ViewContendersStateScreen'
+import SideMenuScreen from './src/screens/SideMenu/SideMenu'
+import LeaderBoardScreen from './src/screens/LeaderBoardScreen/LeaderBoardScreen'
+
 
 Navigation.registerComponent("fitmate.AuthScreen", () => AuthScreen);
 Navigation.registerComponent("fitmate.ExerciseScreen", () => ExerciseScreen);
@@ -30,6 +33,9 @@ Navigation.registerComponent("fitmate.ViewChallengesScreen", () => ViewChallenge
 Navigation.registerComponent("fitmate.SentChallengesScreen", () => SentChallengesScreen);
 
 Navigation.registerComponent("fitmate.ViewContendersStateScreen", () => ViewContendersStateScreen);
+Navigation.registerComponent("fitmate.SideMenu", () => SideMenuScreen)
+
+Navigation.registerComponent("fitmate.LeaderBoard", () => LeaderBoardScreen)
 
 Navigation.startSingleScreenApp({
   screen: {

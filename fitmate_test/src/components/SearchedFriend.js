@@ -1,65 +1,26 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import Profile1 from '../../icons/profilepic.jpg'
 import Profile2 from '../../icons/profilepic2.jpg'
-import IsFriendIcon from '../../icons/isfriend.jpg'
-import AddFriendIcon from '../../icons/addfriend.png'
-import { ListItem } from 'react-native-elements'; 
-// import { Button } from 'native-base'
-// import { Icon } from 'react-native-elements'
+import IsFriendIcon from '../../icons/friends.png'
+import AddFriendIcon from '../../icons/addperson.png'
+import { ListItem } from 'react-native-elements';
+
 
 
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
-//const AddRemoveText = props.yesOrNo ? 'Friend': ''
-// const AddRemoveIcon = props.yesOrNo ? (source = {IsFriendIcon}) : (source = {AddFriendIcon})
   return (
     <ListItem
-        roundAvatar
-        title = {props.item.name}
-        leftAvatar = {{source: picture}}
-        rightAvatar = {props.yesOrNo? {source: IsFriendIcon} :{source: AddFriendIcon}}
-        // rightTitle = {AddRemoveText}
-        onPress = {props.pressed}
+      roundAvatar
+      title={props.item.name}
+      leftAvatar={{ source: picture }}
+      rightAvatar={props.yesOrNo ? { source: IsFriendIcon } : { source: AddFriendIcon }}
+      // rightTitle = {AddRemoveText}
+      onPress={props.pressed}
     >
     </ListItem>
-  // const Addremovebtn = props.yesOrNo ? (
-  //   <TouchableHighlight style={styles.iconBtn} onPress={props.pressed}>
-  //     <Icon
-  //       reverse
-  //       name='md-happy'
-  //       type='ionicon'
-  //       color='green'
-  //     />
-  //   </TouchableHighlight>
-
-  // ) : (
-  //     <TouchableHighlight style={styles.iconBtn} onPress={props.pressed}>
-  //       <Icon
-  //         reverse
-  //         name='md-sad'
-  //         type='ionicon'
-  //         color='red'
-  //       />
-  //     </TouchableHighlight>
-  //   );
-  // return (
-  //   <View style={styles.container}>
-  //     <Image
-  //       style={styles.profilePicture}
-  //       source={picture}
-  //     />
-  //     <View style={styles.nameContainer}>
-  //       <Text style={styles.textStyle}>{props.item.name}</Text>
-  //     </View>
-  //     {Addremovebtn}
-
-  //   </View>
-
-
-
-
 
   );
 }
@@ -67,12 +28,12 @@ const SearchedFriend = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    borderBottomColor: '#212121',
-    borderBottomWidth: 1,
-    // borderWidth: 1,
-    padding: 10,
-    height: 80,
+    borderRadius: 5,
+    marginBottom: 10,
+    padding: 20,
+    height: 100,
     width: "100%",
+    flex: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -85,12 +46,12 @@ const styles = StyleSheet.create({
   profilePicture: {
     height: 50,
     width: 50,
-    borderRadius: 100,
+    borderRadius: 100
   },
   nameContainer: {
-    // flexGrow: 2,
-    // flexDirection: 'column',
-    // justifyContent: 'space-between',
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
   outerContainer: {
@@ -100,12 +61,12 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     borderWidth: 2,
     borderColor: '#000000',
-    borderRadius:30
-  // iconBtn: {
-  //   width: 'auto'
+    borderRadius: 30
+
   },
-
-
+  AddFriendbutton: {
+    flex: 1,
+  }
 
 });
 

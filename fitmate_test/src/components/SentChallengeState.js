@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableHighlight } from 'react-native';
-import Profile1 from '../../icons/profilepic.jpg'
-import Profile2 from '../../icons/profilepic2.jpg'
-import { Button } from 'native-base'
+
 import { Icon } from 'react-native-elements'
 
 

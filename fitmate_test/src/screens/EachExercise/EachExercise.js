@@ -3,6 +3,8 @@ import { Text, View, StyleSheet, Image } from 'react-native'
 import { Item, Picker, Button } from 'native-base';
 import Toast from 'react-native-root-toast';
 
+import ButtonPair from '../../components/EachChallengeButtonPair'
+
 const EachExercise = (props) => {
 
   const [uri, setUri] = useState("");
@@ -42,24 +44,8 @@ const EachExercise = (props) => {
       </Item>
       {description}
 
-      <Button style={{ height: 50 }}
-        full
-        success
-        onPress={() => {
-          props.navigator.push({
-            screen: 'fitmate.CameraScreen',
-            title: "Record Video",
-            subtitle: undefined,
-            passProps: { uri: uri, type: type, uriChanged: setUri, typeChanged: setType },
-            animated: true,
-            animationType: 'fade',
-            backButtonTitle: undefined,
-            backButtonHidden: false,
-          });
-        }}
-      >
-        <Text style={{ color: 'white' }}>  Add Video </Text>
-      </Button>
+      <ButtonPair uri={uri} type={type} setUri={setUri} setType={setType} navigator={props.navigator} />
+
 
       <Button style={{ height: 50 }}
         full
@@ -82,7 +68,7 @@ const EachExercise = (props) => {
               subtitle: undefined,
               passProps: {
                 Exercise: props.ExerciseNum,
-                Number: props.selected,
+                Number: number,
                 videoURI: uri,
                 videoType: type
               },

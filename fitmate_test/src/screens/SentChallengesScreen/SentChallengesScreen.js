@@ -3,8 +3,6 @@ import { TouchableHighlight, Modal, StyleSheet, Text, FlatList } from 'react-nat
 import { Container, Header, View, Button, Icon, Fab } from 'native-base';
 import firebase from '../../Firebase'
 import EachChallenge from '../../components/EachChallenge.js'
-import ExerciseItem from '../../components/ExerciseItem'
-import Exercises from '../Exercise/Exercise'
 
 import pushupimg from '../../../icons/pushups.jpg'
 import situpimg from '../../../icons/situpslabel.jpg'
@@ -45,6 +43,7 @@ class ChallengesList extends React.Component {
             }
             if (event.id == 'profileBtn') {
                 this.props.navigator.toggleDrawer({
+
                   side: 'right'
                 })
               }
@@ -173,7 +172,9 @@ class ChallengesList extends React.Component {
 
         return (
             <Container>
-                {ChallengeDisplay}
+                {this.state.Challenges.length === 0 ? <Text style={{ width: "100%", height: "100%", textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "black" }}>You have not sent any Challenges!!</Text> : ChallengeDisplay}
+
+
             </Container>
         );
     }

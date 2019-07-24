@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import {View,Text,Dimensions,StyleSheet, Image} from 'react-native';
-import {Button} from 'react-native-elements'
+import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
+import { Button } from 'react-native-elements'
 import Profile1 from '../../../icons/profilepic.jpg'
 import Profile2 from '../../../icons/profilepic2.jpg'
 import firebase from '../../Firebase'
 
 
 const picture = Math.random() > 0.5 ? Profile1 : Profile2;
-
 
 
 class SideMenu extends Component{
@@ -46,6 +45,7 @@ class SideMenu extends Component{
 
 
 const styles = StyleSheet.create({
+
     container:{
         paddingTop:22,
         backgroundColor:"#00000095",

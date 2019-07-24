@@ -45,7 +45,6 @@ class AuthScreen extends Component {
         console.log(response);
       });
 
-
       const user = firebase.auth().currentUser;
 
       const account = {
@@ -59,6 +58,12 @@ class AuthScreen extends Component {
         Friends: []
       }
       await firebase.firestore().collection('allFriends').doc(user.uid).set(newFriends);
+      const leaderBoardScores = {
+        UserID: user.uid,
+        Name: this.state.name,
+        Score: 0
+      }
+      await firebase.firestore().collection('leaderboard').doc(user.uid).set(leaderBoardScores);
 
     }
     catch (error) {

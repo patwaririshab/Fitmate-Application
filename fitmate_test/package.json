@@ -28,7 +28,8 @@
     "react-native-root-toast": "^3.1.2",
     "react-native-uuid-generator": "^5.0.0",
     "react-native-vector-icons": "^6.4.2",
-    "react-native-video": "^4.4.3"
+    "react-native-video": "^4.4.3",
+    "tflite-react-native": "0.0.5"
   },
   "devDependencies": {
     "@babel/core": "7.4.4",

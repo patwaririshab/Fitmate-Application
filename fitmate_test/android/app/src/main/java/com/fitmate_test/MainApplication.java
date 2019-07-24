@@ -16,7 +16,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-
 import com.reactnativenavigation.NavigationApplication;
 
 import java.util.Arrays;
