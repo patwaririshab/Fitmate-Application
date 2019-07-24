@@ -3,8 +3,6 @@ import { TouchableHighlight, Modal, StyleSheet, Text, FlatList } from 'react-nat
 import { Container, Header, View, Button, Icon, Fab } from 'native-base';
 import firebase from '../../Firebase'
 import EachChallenge from '../../components/EachChallenge.js'
-import ExerciseItem from '../../components/ExerciseItem'
-import Exercises from '../Exercise/Exercise'
 
 import pushupimg from '../../../icons/pushups.jpg'
 import situpimg from '../../../icons/situpslabel.jpg'

@@ -1,12 +1,11 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, View , TextInput , Button , TouchableOpacity , ImageBackground} from 'react-native';
-import Backgroundimg from '../../icons/exercise.png'
+import { Platform, StyleSheet, Text, View, TextInput, Button, TouchableOpacity, ImageBackground } from 'react-native';
 
 const FriendGroup = (props) => {
-  return(
-    <TouchableOpacity style = {styles.container} onPress = {props.pressed}>
-      <ImageBackground source={Backgroundimg} style={styles.imageBack}>
-       <Text style = {styles.titleText}>{props.groupname}</Text>
+  return (
+    <TouchableOpacity style={styles.container} onPress={props.pressed}>
+      <ImageBackground style={styles.imageBack}>
+        <Text style={styles.titleText}>{props.groupname}</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     height: 150,
-    padding: 20 ,
+    padding: 20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
@@ -29,19 +28,19 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  imageBack: {width: '100%', height: '100%' ,textAlign: "center"}
+  imageBack: { width: '100%', height: '100%', textAlign: "center" }
   ,
   eachItem: {
     backgroundColor: '#eee',
-    width:"100%",
+    width: "100%",
     height: 75,
     padding: 5,
     marginBottom: 10
   },
 
-  viewItem:{
-    margin :5,
-    width:"100%",
+  viewItem: {
+    margin: 5,
+    width: "100%",
     textAlign: 'center'
   }
 

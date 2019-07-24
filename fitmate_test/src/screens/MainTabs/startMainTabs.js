@@ -1,7 +1,5 @@
 import { Navigation } from 'react-native-navigation';
-import settingsicon from '../../../icons/setting.png';
-import profileicon from '../../../icons/profile.png';
-import refreshicon from '../../../icons/refresh.png';
+
 const startTabs = () => {
 
   Navigation.startTabBasedApp({
@@ -36,7 +34,7 @@ const startTabs = () => {
           textAlign: 'center',
           flex: 1
         },
-        icon: require('../../../icons/exercise-icon.png'),
+        icon: require('../../../icons/fitness.png'),
 
       },
       // {

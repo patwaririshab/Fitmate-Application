@@ -12,6 +12,9 @@ import UUIDGenerator from 'react-native-uuid-generator';
 
 import * as Progress from 'react-native-progress';
 
+
+import Toast from 'react-native-root-toast';
+
 const db = firebase.firestore();
 
 
@@ -377,7 +380,16 @@ class ChallengeFriendsScreen extends React.Component {
           window.XMLHttpRequest = this.state.windowXMLHTTP;
           await this.sendAllChallenges();
           this.setState({ isUploading: false });
-          this.props.navigator.pop()
+          this.props.navigator.pop();
+          const toast = Toast.show('Challenges Sent!!', {
+            duration: Toast.durations.SHORT,
+            position: Toast.positions.BOTTOM,
+            shadow: true,
+            animation: true,
+            hideOnPress: true,
+            delay: 1,
+            backgroundColor: "green"
+          });
         });
       });
 

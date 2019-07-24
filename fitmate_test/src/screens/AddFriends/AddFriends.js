@@ -11,8 +11,6 @@ import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
 
 
-import imagePath from '../../../icons/squatslabel.jpg'
-
 
 
 class AddFriendsScreen extends React.Component {

@@ -51,7 +51,7 @@ const SearchedFriend = (props) => {
         }}
       >
         <Text
-          style={{ width: 50, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "white", margin: "auto" }}
+          style={{ width: 50, height: 50, textAlign: "center", textAlignVertical: "center", fontSize: 20, fontStyle: "bold", color: "white", margin: "auto" }}
         >{Disp}</Text>
       </View>
       <View style={styles.nameContainer}>
