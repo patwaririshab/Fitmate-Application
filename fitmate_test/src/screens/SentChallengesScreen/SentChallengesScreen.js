@@ -43,9 +43,10 @@ class ChallengesList extends React.Component {
             }
             if (event.id == 'profileBtn') {
                 this.props.navigator.toggleDrawer({
-                    side: 'right'
-                });
-            }
+
+                  side: 'right'
+                })
+              }
         }
     }
 

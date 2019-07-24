@@ -156,8 +156,6 @@ class ChallengeFriendsScreen extends React.Component {
         return friendData
       }
     })
-    // const stat = cpyFriends[item.key].isChallenged;
-    // cpyFriends[item.key].isChallenged = !stat;
     this.setState({
       friends: [...cpyFriends],
     });

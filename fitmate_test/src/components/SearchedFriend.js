@@ -7,6 +7,7 @@ import AddFriendIcon from '../../icons/addperson.png'
 import { ListItem } from 'react-native-elements';
 
 
+
 const SearchedFriend = (props) => {
   const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
@@ -20,6 +21,7 @@ const SearchedFriend = (props) => {
       onPress={props.pressed}
     >
     </ListItem>
+
   );
 }
 
@@ -60,6 +62,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#000000',
     borderRadius: 30
+
   },
   AddFriendbutton: {
     flex: 1,

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, FlatList, StyleSheet } from 'react-native'
-import EachFriend from '../../components/EachFriend'
+import EachFriend from '../../components/EachFriend.js'
 
 const FriendGroupList = (props) => {
   return (

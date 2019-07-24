@@ -9,66 +9,35 @@ import firebase from '../../Firebase'
 const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
 
+class SideMenu extends Component{
+    render(){
+        const userName = firebase.auth().currentUser.userID
+        const userEmail = firebase.auth().currentUser.email
+        return(
 
-class SideMenu extends Component {
-
-    state = {
-        name: "",
-        userID: "",
-        email: ""
-    }
-
-    async componentDidMount() {
-
-        const user = firebase.auth().currentUser;
-
-        const userDoc = await firebase.firestore().collection('users').where("userID", "==", user.uid).get().then((snapshot) => {
-            return snapshot.docs[0].data();
-        });
-
-        console.log("USERDOC", userDoc)
-
-        this.setState({ name: userDoc.name, email: userDoc.email, userID: userDoc.userID })
-
-
-    }
-
-    render() {
-
-        const words = this.state.name.split(" ");
-
-        const initials = words.map(word => word[0])
-
-        const Disp = initials.join("");
-
-        return (
-
-            <View
-                style={[styles.container]
-                }>
                 <View
-                    style={styles.ImageStyle}
-                >
-                    <Text
-                        style={{ width: 80, height: 80, textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "white", margin: "auto" }}
-                    >{Disp}</Text>
+                    style={[styles.container]
+                }>
+                    <Image
+                        style = {styles.ImageStyle}
+                        source = {picture}
+                    />
+                    <Text style= {styles.TextStyle}>
+                        {userName}
+                    </Text>
+                    <Text style= {styles.TextStyle}>
+                        {userEmail}
+                    </Text>
+                    <Button 
+                        containerStyle={{ marginTop: 100, marginHorizontal: 30 }}
+                        buttonStyle={{ backgroundColor: 'grey', borderRadius: 30, padding: 10}}
+                        titleStyle={{color: 'white'}}
+                        title = "Logout"
+                        type = 'solid'
+                        raised
+                     >
+          </Button>
                 </View>
-                <Text style={styles.TextStyle}>
-                    {this.state.name}
-                </Text>
-                <Text style={styles.TextStyle}>
-                    {this.state.email}
-                </Text>
-                <Button
-                    containerStyle={{ marginTop: 100, marginHorizontal: 30 }}
-                    buttonStyle={{ backgroundColor: 'grey', borderRadius: 30, padding: 10 }}
-                    titleStyle={{ color: 'white' }}
-                    title="Logout"
-                    type='solid'
-                    raised
-                >
-                </Button>
-            </View>
         )
     }
 }
@@ -76,26 +45,19 @@ class SideMenu extends Component {
 
 
 const styles = StyleSheet.create({
-    container: {
-        paddingTop: 22,
-        backgroundColor: "#00000095",
+
+    container:{
+        paddingTop:22,
+        backgroundColor:"#00000095",
         width: Dimensions.get("window").width * 0.4,
         height: Dimensions.get("window").height,
         alignItems: 'center',
         justifyContent: 'center'
-
     },
     ImageStyle: {
         borderRadius: 100,
         height: 80,
         width: 80,
-        marginLeft: "auto",
-        marginRight: "auto",
-        borderWidth: 3,
-        borderColor: "white",
-        backgroundColor: "#0D47A1",
-        textAlign: "center",
-        textAlignVertical: "center"
     },
     TextStyle: {
         color: 'white',

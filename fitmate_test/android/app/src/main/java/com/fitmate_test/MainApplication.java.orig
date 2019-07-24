@@ -10,11 +10,13 @@ import com.brentvatne.react.ReactVideoPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
+
 
 import com.reactnativenavigation.NavigationApplication;
 
@@ -33,6 +35,7 @@ public class MainApplication extends NavigationApplication {
 	protected List<ReactPackage> getPackages() {
 		// Add additional packages you require here
 		// No need to add RnnPackage and MainReactPackage
+
 		return Arrays.<ReactPackage>asList(
 			new AsyncStoragePackage(),
 			new RNCameraPackage(),
@@ -41,6 +44,7 @@ public class MainApplication extends NavigationApplication {
        		new RNFSPackage(),
 			new ReactVideoPackage(),
 			new RNUUIDGeneratorPackage()
+
 
 		);
 	}
