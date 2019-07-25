@@ -7,10 +7,13 @@ class LeaderBoardScreen extends React.Component {
     state = {
         AllScores: [],
         MyScore: {},
+        AllScores: [],
+        AllFriendsScores: [],
 
     }
 
     getAllScores = () => {
+
 
         return firebase.firestore().collection('leaderboard').get().then((snapshot) => {
             const AllScores = snapshot.docs.map((doc, index) => {
@@ -43,6 +46,13 @@ class LeaderBoardScreen extends React.Component {
         })
     }
 
+    getAllFriends = (user) => {
+        const allFriends = firebase.firestore().collection('allFriends').doc(user.uid).get().then((doc) => {
+            return [...doc.data().Friends];
+        })
+        return allFriends
+    }
+
     scoreSorter = (a, b) => {
         if (a.score == b.score) {
             return a.name < b.name;
@@ -53,15 +63,31 @@ class LeaderBoardScreen extends React.Component {
 
     async componentDidMount() {
 
+        const user = firebase.auth().currentUser;
+        console.log(user.uid);
+        const MyFriends = await this.getAllFriends(user);
+
         const AllScores = await this.getAllScores();
+
+        console.log("LEADER BOARD")
+
+        console.log(MyFriends)
+        console.log(AllScores)
+
+        const AllFriendsScores = AllScores.filter((item) => {
+            return MyFriends.includes(item.userID)
+        });
+        console.log(AllFriendsScores)
 
         const MyScore = await this.getMyScore();
 
-        AllScores.sort(this.scoreSorter);
+        AllFriendsScores.sort(this.scoreSorter);
 
         this.setState({
             AllScores: [...AllScores],
+            AllFriendsScores: [...AllFriendsScores],
             MyScore: { ...MyScore },
+            MyFriends: [...MyFriends]
 
         })
 
@@ -70,7 +96,7 @@ class LeaderBoardScreen extends React.Component {
     render() {
 
 
-        const topTenScores = this.state.AllScores.slice(0, 10);
+        const topTenScores = this.state.AllFriendsScores.slice(0, 10);
 
         const LeaderBoardDisplay = (
             <FlatList

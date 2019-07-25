@@ -80,7 +80,7 @@ class ChallengesList extends React.Component {
                     InitiatorName: doc.data().InitiatorName,
                     Number: doc.data().Number,
                     TimeStamp: doc.data().TimeStamp,
-                    VerifiedCount: doc.data().TimeStamp,
+                    VerifiedCount: doc.data().VerifiedCount,
                     Contenders: doc.data().Contenders,
                     DownloadURL: doc.data().DownloadURL,
                     videoUpdated: doc.data().videoUpdated,

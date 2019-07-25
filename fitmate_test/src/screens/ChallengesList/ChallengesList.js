@@ -111,7 +111,7 @@ class ChallengesList extends React.Component {
           Name: doc.data().Name,
           Number: doc.data().Number,
           TimeStamp: (doc.data().TimeStamp),
-          VerifiedCount: doc.data().TimeStamp,
+          VerifiedCount: doc.data().VerifiedCount,
           RecipientID: doc.data().RecipientID,
           DownloadURL: doc.data().DownloadURL,
           videoUpdated: doc.data().videoUpdated,
@@ -150,7 +150,7 @@ class ChallengesList extends React.Component {
   }
 
 
-  updateScore = async () => {
+  updateScore = async (number) => {
 
     let score = 0
 
@@ -164,7 +164,7 @@ class ChallengesList extends React.Component {
 
     console.log(score)
 
-    const finalscore = score + 20
+    const finalscore = score + number
 
     const leaderBoardRef = await firebase.firestore().collection("leaderboard").doc(this.state.CurrentUser.uid).set({
       Score: finalscore
@@ -209,7 +209,7 @@ class ChallengesList extends React.Component {
       console.log("Received Doc successfully Updated!")
     });
 
-    await this.updateScore();
+    await this.updateScore(challenge.Number);
 
 
   }

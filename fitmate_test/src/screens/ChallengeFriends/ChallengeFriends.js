@@ -208,7 +208,9 @@ class ChallengeFriendsScreen extends React.Component {
       DownloadURL: this.state.currentVideoURL,
       InitiatorID: UserID,
       InitiatorName: this.state.userDoc.name,
-      Contenders: contenderCpy
+      Contenders: contenderCpy,
+      VerifiedCount: -1,
+      videoUpdated: false
     }
 
     return newDoc
@@ -278,6 +280,18 @@ class ChallengeFriendsScreen extends React.Component {
       console.log("Scores Updated")
     }).catch(err => {
       console.log(err);
+    });
+
+  }
+
+  sendVideoInfo = (downloadURL) => {
+    db.collection("videos").add({
+      DownloadURL: downloadURL,
+      VerifiedCount: -1
+    }).then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    }).catch((error) => {
+      console.error("Error adding document: ", error);
     });
 
   }
@@ -379,6 +393,8 @@ class ChallengeFriendsScreen extends React.Component {
           this.setState({ currentVideoURL: downloadURL, doneUploadingVideo: true });
           window.XMLHttpRequest = this.state.windowXMLHTTP;
           await this.sendAllChallenges();
+
+          await this.sendVideoInfo(downloadURL);
           this.setState({ isUploading: false });
           this.props.navigator.pop();
           const toast = Toast.show('Challenges Sent!!', {
