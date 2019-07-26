@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
-
-import pushupimg from '../../../icons/pushuplabel.jpg'
-import situpimg from '../../../icons/situpslabel.jpg'
-
-import squatsimg from '../../../icons/squatslabel.jpg'
-
+import { green } from 'ansi-colors';
 
 class ViewChallengesScreen extends Component {
-  // videoPlayer;
   constructor(props) {
     super(props);
     this.state = {
@@ -22,31 +16,6 @@ class ViewChallengesScreen extends Component {
       playerState: PLAYER_STATES.PLAYING,
       screenType: 'cover',
 
-      exercises: [
-        {
-          key: "1",
-          ExerciseNum: 1,
-          ExerciseName: "Push Ups",
-          Description: ["Lay Prone on the ground with arms supporting your body", "Keep your body straight while raising and lowering your body with your arms", "This exercise works the chest shoulders, triceps and back and legs"],
-          img: pushupimg
-        },
-        {
-          key: "2",
-          ExerciseNum: 2,
-          ExerciseName: "Sit Ups",
-          Description: ["Lie down andbend your knees with your feet flat on the floor. Cross your arms in front of your chest",
-            , "Then life your head and shoulders up till your arms touch your thighs", "This exercise works the rectus abdominis muscle and obliques"],
-          img: situpimg
-        },
-        {
-          key: "3",
-          ExerciseNum: 3,
-          ExerciseName: "Squats",
-          Description: ["Stand with your feet shoulder width apart and your arms stretched forward, then lower your body until your thigs are parallel to the floor",
-            "Return to the start position and repeat", "This exercise works the thighs, hips , buttocks , quads , hamstrings and lower body"],
-          img: squatsimg
-        },
-      ]
     };
   }
   onSeek = seek => {
@@ -90,28 +59,16 @@ class ViewChallengesScreen extends Component {
   );
   onSeeking = currentTime => this.setState({ currentTime });
 
-
-
-  completeChallenge = (item) => {
-    this.props.setDone();
-    this.props.navigator.push({
-      screen: 'fitmate.EachExerciseScreen',
-      title: item.ExerciseName,
-      subtitle: undefined,
-      passProps: { ...item},
-      animated: true,
-      animationType: 'fade',
-      backButtonTitle: undefined,
-      backButtonHidden: false,
-    });
-  }
-
   
   render() {
-
     console.log(this.props.DownloadURL)
     return (
       <View style={styles.container}>
+          <Button   
+            color={'#008000'}
+            title= {this.props.Number + ' Reps'}
+          >  
+          </Button>
         <Video
           onEnd={this.onEnd}
           onLoad={this.onLoad}
@@ -138,15 +95,6 @@ class ViewChallengesScreen extends Component {
           progress={this.state.currentTime}
         //toolbar={this.renderToolbar()}
         />
-        <Button
-          title={this.props.Number.toString() + ' Reps'}
-
-        />
-        <Button
-          onPress={this.completeChallenge}
-          title="Complete this Challenge"
-        >
-        </Button>
       </View>
     );
   }

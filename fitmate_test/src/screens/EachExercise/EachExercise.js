@@ -44,7 +44,7 @@ const EachExercise = (props) => {
       </Item>
       {description}
 
-      <ButtonPair uri={uri} type={type} setUri={setUri} setType={setType} navigator={props.navigator} />
+      <ButtonPair uri={uri} type={type} setUri={setUri} setType={setType} navigator={props.navigator} number={number}/>
 
 
       <Button style={{ height: 50 }}

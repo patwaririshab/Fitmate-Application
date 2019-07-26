@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { Item, Picker, Button } from 'native-base';
+import Toast from 'react-native-root-toast';
 
 
 const ButtonPair = (props) => {
@@ -35,7 +36,33 @@ const ButtonPair = (props) => {
             success
             disabled={disableBtn}
             onPress={() => {
-                //TODO Add view Video Screen
+                if (props.uri === "") {
+                  const toast = Toast.show('You must add a video!', {
+                    duration: Toast.durations.SHORT,
+                    position: Toast.positions.BOTTOM,
+                    shadow: true,
+                    animation: true,
+                    hideOnPress: true,
+                    delay: 0,
+                    backgroundColor: "red"
+                  });
+                } else {
+                  props.navigator.push({
+                    screen: 'fitmate.WatchVideoScreen',
+                    title: "Watch Video",
+                    subtitle: undefined,
+                    passProps: {
+                      Exercise: props.ExerciseNum,
+                      Number: props.number,
+                      DownloadURL:props.uri,
+
+                    },
+                    animated: true,
+                    animationType: 'fade',
+                    backButtonTitle: undefined,
+                    backButtonHidden: false,
+                  });  
+                }
             }}
         >
             <Text style={{ color: 'white' }}> Watch Video </Text>
