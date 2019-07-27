@@ -2,6 +2,8 @@ import React from 'react'
 import UserScore from '../../components/userScore'
 import firebase from '../../Firebase'
 import { View, FlatList, StyleSheet } from 'react-native'
+
+import * as Progress from 'react-native-progress';
 class LeaderBoardScreen extends React.Component {
 
     state = {
@@ -9,8 +11,12 @@ class LeaderBoardScreen extends React.Component {
         MyScore: {},
         AllScores: [],
         AllFriendsScores: [],
-
+        loading: true
     }
+
+    static navigatorStyle = {
+        tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+    };
 
     getAllScores = () => {
 
@@ -28,6 +34,8 @@ class LeaderBoardScreen extends React.Component {
                 );
             });
             return AllScores;
+        }).catch((err) => {
+            console.log(err)
         });
     }
 
@@ -43,13 +51,17 @@ class LeaderBoardScreen extends React.Component {
             } else {
                 return null;
             }
-        })
+        }).catch((err) => {
+            console.log(err)
+        });
     }
 
     getAllFriends = (user) => {
         const allFriends = firebase.firestore().collection('allFriends').doc(user.uid).get().then((doc) => {
             return [...doc.data().Friends];
-        })
+        }).catch((err) => {
+            console.log(err)
+        });
         return allFriends
     }
 
@@ -61,8 +73,7 @@ class LeaderBoardScreen extends React.Component {
         }
     }
 
-    async componentDidMount() {
-
+    update = async () => {
         const user = firebase.auth().currentUser;
         console.log(user.uid);
         const MyFriends = await this.getAllFriends(user);
@@ -87,9 +98,16 @@ class LeaderBoardScreen extends React.Component {
             AllScores: [...AllScores],
             AllFriendsScores: [...AllFriendsScores],
             MyScore: { ...MyScore },
-            MyFriends: [...MyFriends]
-
+            MyFriends: [...MyFriends],
+            loading: false
         })
+
+    }
+
+    componentDidMount() {
+
+        this.update();
+
 
     }
 
@@ -121,7 +139,12 @@ class LeaderBoardScreen extends React.Component {
 
         return (
             <View style={styles.container}>
-                {LeaderBoardDisplay}
+                {this.state.loading ?
+                    <View style={styles.spinnercontainer}><Progress.CircleSnail color={'#F44336'} size={100} /></View>
+                    : LeaderBoardDisplay
+
+                }
+
             </View>
         );
 
@@ -140,6 +163,14 @@ const styles = StyleSheet.create({
         textAlign: "center"
 
 
+    },
+    spinnercontainer: {
+        padding: 20,
+        alignItems: 'center',
+        backgroundColor: '#01579B',
+        width: "100%",
+        height: "50%",
+        textAlignVertical: "center"
     },
 
 

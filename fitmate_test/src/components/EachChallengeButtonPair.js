@@ -35,7 +35,21 @@ const ButtonPair = (props) => {
             success
             disabled={disableBtn}
             onPress={() => {
-                //TODO Add view Video Screen
+                props.navigator.push({
+                    screen: 'fitmate.WatchVideoScreen',
+                    title: "Watch Video",
+                    subtitle: undefined,
+                    passProps: {
+                        Exercise: props.ExerciseNum,
+                        Number: props.number,
+                        DownloadURL: props.uri,
+
+                    },
+                    animated: true,
+                    animationType: 'fade',
+                    backButtonTitle: undefined,
+                    backButtonHidden: false,
+                });
             }}
         >
             <Text style={{ color: 'white' }}> Watch Video </Text>

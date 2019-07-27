@@ -5,86 +5,114 @@ import Toast from 'react-native-root-toast';
 
 import ButtonPair from '../../components/EachChallengeButtonPair'
 
-const EachExercise = (props) => {
+class EachExercise extends React.Component {
 
-  const [uri, setUri] = useState("");
-  const [type, setType] = useState(`video/mp4`);
-  const [number, setnum] = useState("30");
 
-  const description = props.Description.map((item, index) => {
+  state = {
+    uri: "",
+    type: "video/mp4",
+    number: 30
+  }
+
+  setUri = (uri) => {
+    this.setState({ uri: uri })
+  }
+
+  setType = (type) => {
+    this.setState({ type: type })
+  }
+
+
+  setNum = (num) => {
+    this.setState({ number: num })
+  }
+
+
+  static navigatorStyle = {
+    tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+  };
+
+  render() {
+
+
+    const description = this.props.Description.map((item, index) => {
+      return (
+        <Text key={index} style={styles.description}>{item}</Text>
+      );
+    });
+
     return (
-      <Text key={index} style={styles.description}>{item}</Text>
-    );
-  });
+      <View style={styles.outerview}>
+        <Image
+          style={styles.imageHeading}
+          source={this.props.img}
+        />
+        <Text style={styles.descriptionIter}>Select Number of Iterations to be completed:</Text>
+        <Item picker>
+          <Picker
+            mode="dropdown"
 
-  return (
-    <View style={styles.outerview}>
-      <Image
-        style={styles.imageHeading}
-        source={props.img}
-      />
-      <Text style={styles.descriptionIter}>Select Number of Iterations to be completed:</Text>
-      <Item picker>
-        <Picker
-          mode="dropdown"
+            style={{ width: undefined }}
+            placeholder="Select your SIM"
+            placeholderStyle={{ color: "#bfc6ea" }}
+            placeholderIconColor="#007aff"
+            selectedValue={this.state.number}
+            onValueChange={this.setNum}
+          >
+            <Picker.Item label="20" value="20" />
+            <Picker.Item label="30" value="30" />
+            <Picker.Item label="40" value="40" />
+            <Picker.Item label="50" value="50" />
+            <Picker.Item label="60" value="60" />
+          </Picker>
+        </Item>
+        {description}
 
-          style={{ width: undefined }}
-          placeholder="Select your SIM"
-          placeholderStyle={{ color: "#bfc6ea" }}
-          placeholderIconColor="#007aff"
-          selectedValue={number}
-          onValueChange={setnum}
+        <ButtonPair uri={this.state.uri} type={this.state.type} setUri={this.setUri} setType={this.setType} navigator={this.props.navigator} />
+
+
+        <Button style={{ height: 50 }}
+          full
+          success
+          onPress={() => {
+            if (this.state.uri === "") {
+              const toast = Toast.show('You must add a video!', {
+                duration: Toast.durations.SHORT,
+                position: Toast.positions.BOTTOM,
+                shadow: true,
+                animation: true,
+                hideOnPress: true,
+                delay: 0,
+                backgroundColor: "red"
+              });
+            } else {
+              this.props.navigator.push({
+                screen: 'fitmate.ChallengeFriendsScreen',
+                title: "Challenge Friends",
+                subtitle: undefined,
+                passProps: {
+                  Exercise: this.props.ExerciseNum,
+                  Number: this.state.number,
+                  videoURI: this.state.uri,
+                  videoType: this.state.type
+                },
+                animated: true,
+                animationType: 'fade',
+                backButtonTitle: undefined,
+                backButtonHidden: false,
+              });
+            }
+
+          }}
         >
-          <Picker.Item label="20" value="20" />
-          <Picker.Item label="30" value="30" />
-          <Picker.Item label="40" value="40" />
-          <Picker.Item label="50" value="50" />
-          <Picker.Item label="60" value="60" />
-        </Picker>
-      </Item>
-      {description}
+          <Text style={{ color: 'white' }}>  Submit Challenge </Text>
+        </Button>
+      </View>
+    );
 
-      <ButtonPair uri={uri} type={type} setUri={setUri} setType={setType} navigator={props.navigator} />
+  }
 
 
-      <Button style={{ height: 50 }}
-        full
-        success
-        onPress={() => {
-          if (uri === "") {
-            const toast = Toast.show('You must add a video!', {
-              duration: Toast.durations.SHORT,
-              position: Toast.positions.BOTTOM,
-              shadow: true,
-              animation: true,
-              hideOnPress: true,
-              delay: 0,
-              backgroundColor: "red"
-            });
-          } else {
-            props.navigator.push({
-              screen: 'fitmate.ChallengeFriendsScreen',
-              title: "Challenge Friends",
-              subtitle: undefined,
-              passProps: {
-                Exercise: props.ExerciseNum,
-                Number: number,
-                videoURI: uri,
-                videoType: type
-              },
-              animated: true,
-              animationType: 'fade',
-              backButtonTitle: undefined,
-              backButtonHidden: false,
-            });
-          }
-
-        }}
-      >
-        <Text style={{ color: 'white' }}>  Submit Challenge </Text>
-      </Button>
-    </View>
-  );
 }
 
 const styles = StyleSheet.create({

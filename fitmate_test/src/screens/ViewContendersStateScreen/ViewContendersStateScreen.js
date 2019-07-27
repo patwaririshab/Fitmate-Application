@@ -1,27 +1,59 @@
 import React from 'react';
-import { Platform, PermissionsAndroid, CameraRoll, FlatList, AppRegistry, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Platform, PermissionsAndroid, CameraRoll, Button, FlatList, AppRegistry, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 
 import SentChallengeState from '../../components/SentChallengeState'
 
 
-const ChallengeFriendsScreen = (props) => {
+class ChallengeFriendsScreen extends React.Component {
+
+    static navigatorStyle = {
+        tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+    };
 
 
-    const friendDisplay = (
-        <FlatList
-            style={styles.listcontainer}
-            data={props.Contenders}
-            renderItem={({ item }) => <SentChallengeState item={item} />}>
+    render() {
+        const navButton = (
+            <Button success
+                style={styles.buttonStyle}
+                onPress={() => {
+                    this.props.navigator.push({
+                        screen: 'fitmate.WatchVideoScreen',
+                        title: "Watch Video",
+                        subtitle: undefined,
+                        passProps: {
+                            Exercise: this.props.ExerciseNum,
+                            Number: this.props.Number,
+                            DownloadURL: this.props.DownloadURL,
 
-        </FlatList>
-    );
+                        },
+                        animated: true,
+                        animationType: 'fade',
+                        backButtonTitle: undefined,
+                        backButtonHidden: false,
+                    });
+                }}
+                title={'Watch Video'}>
+
+            </Button>
+        )
+
+        const friendDisplay = (
+            <FlatList
+                style={styles.listcontainer}
+                data={this.props.Contenders}
+                renderItem={({ item }) => <SentChallengeState item={item} />}>
+
+            </FlatList>
+        );
+        return (
+            <View style={styles.overallcontainer}>
+                {friendDisplay}
+                {navButton}
+            </View>
+        );
+    }
 
 
-    return (
-        <View style={styles.overallcontainer}>
-            {friendDisplay}
-        </View>
-    );
 
 }
 
@@ -30,7 +62,14 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     overallcontainer: {
-        paddingBottom: 16
+        paddingBottom: 0
+    },
+    buttonStyle: {
+        flex: 1,
+        margin: 0,
+
+
+
     }
 });
 

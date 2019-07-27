@@ -11,6 +11,7 @@ import squatsimg from '../../../icons/squatslabel.jpg'
 
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
+import trophyIcon from '../../../icons/trophy.png'
 
 
 class ChallengesList extends React.Component {
@@ -18,16 +19,34 @@ class ChallengesList extends React.Component {
     static navigatorButtons = {
         rightButtons: [
             {
+                id: 'leaderBoardBtn',
+                icon: trophyIcon
+            }, {
                 id: 'profileBtn',
                 icon: profileicon
             },
             {
                 id: 'refreshBtn',
                 icon: refreshicon
-            }
+            },
         ]
     };
 
+
+    openLeaderBoard = () => {
+        this.props.navigator.push({
+            screen: 'fitmate.LeaderBoard',
+            title: "LeaderBoard",
+            subtitle: undefined,
+            passProps: {
+                userID: this.state.CurrentUser.uid
+            },
+            animated: true,
+            animationType: 'fade',
+            backButtonTitle: undefined,
+            backButtonHidden: false,
+        });
+    }
 
     constructor(props) {
         super(props);
@@ -46,11 +65,16 @@ class ChallengesList extends React.Component {
                     side: 'right'
                 });
             }
+            if (event.id == 'leaderBoardBtn') {
+                this.openLeaderBoard();
+
+            }
         }
     }
 
     state = {
-        Challenges: []
+        Challenges: [],
+        CurrentUser: {}
     }
 
 
@@ -148,7 +172,7 @@ class ChallengesList extends React.Component {
         console.log("Updating!")
         const user = firebase.auth().currentUser;
         const allSentChallenges = await this.getSentChallenges(user);
-        this.setState({ Challenges: [...allSentChallenges] });
+        this.setState({ CurrentUser: user, Challenges: [...allSentChallenges] });
     }
 
     componentDidMount() {

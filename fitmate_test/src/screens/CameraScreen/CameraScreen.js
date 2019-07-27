@@ -37,12 +37,20 @@ class CameraScreen extends Component {
       shadow: true,
       animation: true,
       hideOnPress: true,
-      delay: 1,
+      delay: 0,
       backgroundColor: "green"
     });
 
 
   }
+
+
+  static navigatorStyle = {
+    drawUnderNavBar: true,
+    navBarTransparent: true,
+    navBarTextColor: '#FFFFFF',
+    tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+  };
 
 
   stopRecording() {

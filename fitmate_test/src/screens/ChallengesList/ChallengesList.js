@@ -14,6 +14,9 @@ import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
 import trophyIcon from '../../../icons/trophy.png'
 
+import * as Progress from 'react-native-progress';
+
+
 class ChallengesList extends React.Component {
 
   static navigatorButtons = {
@@ -32,6 +35,9 @@ class ChallengesList extends React.Component {
       }
     ]
   };
+
+
+
 
 
   constructor(props) {
@@ -240,6 +246,7 @@ class ChallengesList extends React.Component {
   }
 
   componentDidMount() {
+
     console.log("Challenges  Compponent did moutn");
     this.update();
   }
@@ -303,6 +310,7 @@ class ChallengesList extends React.Component {
 
     return (
       <Container>
+
         {this.state.Incomplete.length === 0 ? <Text style={{ width: "100%", height: "100%", textAlign: "center", textAlignVertical: "center", fontSize: 30, fontStyle: "bold", color: "black" }}>You Do not have pending Challenges!!</Text> : ChallengeDisplay}
         {exercisesModal}
         <View style={{ flex: 1 }}>

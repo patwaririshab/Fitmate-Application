@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import Video from 'react-native-video';
 import MediaControls, { PLAYER_STATES } from 'react-native-media-controls';
-
+import Toast from 'react-native-root-toast';
 
 class ViewChallengesScreen extends Component {
   // videoPlayer;
@@ -18,6 +18,11 @@ class ViewChallengesScreen extends Component {
       screenType: 'cover'
     };
   }
+
+
+  static navigatorStyle = {
+    tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+  };
   onSeek = seek => {
     this.videoPlayer.seek(seek);
   };
@@ -60,6 +65,21 @@ class ViewChallengesScreen extends Component {
   onSeeking = currentTime => this.setState({ currentTime });
 
 
+  completeChallenge = () => {
+    this.props.setDone();
+    const toast = Toast.show('Challenge Completion Recorded!', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 1,
+      backgroundColor: "green"
+    });
+  }
+
+
+
 
   render() {
     console.log(this.props.DownloadURL)
@@ -96,7 +116,7 @@ class ViewChallengesScreen extends Component {
 
         />
         <Button
-          onPress={this.props.setDone}
+          onPress={this.completeChallenge}
           title="Complete this Challenge"
         >
         </Button>

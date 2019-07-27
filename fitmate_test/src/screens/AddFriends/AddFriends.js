@@ -10,6 +10,7 @@ import SearchedFriend from '../../components/SearchedFriend'
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
 
+import trophyIcon from '../../../icons/trophy.png'
 
 
 
@@ -19,6 +20,9 @@ class AddFriendsScreen extends React.Component {
   static navigatorButtons = {
     rightButtons: [
       {
+        id: 'leaderBoardBtn',
+        icon: trophyIcon
+      }, {
         id: 'profileBtn',
         icon: profileicon
       },
@@ -28,6 +32,28 @@ class AddFriendsScreen extends React.Component {
       }
     ]
   };
+
+
+  openLeaderBoard = () => {
+    this.props.navigator.push({
+      screen: 'fitmate.LeaderBoard',
+      title: "LeaderBoard",
+      subtitle: undefined,
+      passProps: {
+        userID: this.state.userID
+      },
+      animated: true,
+      animationType: 'fade',
+      backButtonTitle: undefined,
+      backButtonHidden: false,
+    });
+  }
+
+  constructor(props) {
+    super(props);
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
 
 
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
@@ -40,6 +66,11 @@ class AddFriendsScreen extends React.Component {
           side: 'right'
         });
       }
+      if (event.id == 'leaderBoardBtn') {
+        this.openLeaderBoard();
+
+      }
+
     }
   }
 

@@ -5,9 +5,7 @@ import Profile1 from '../../../icons/profilepic.jpg'
 import Profile2 from '../../../icons/profilepic2.jpg'
 import firebase from '../../Firebase'
 
-
-const picture = Math.random() > 0.5 ? Profile1 : Profile2;
-
+import { Navigation } from 'react-native-navigation'
 
 
 class SideMenu extends Component {
@@ -66,6 +64,22 @@ class SideMenu extends Component {
                     title="Logout"
                     type='solid'
                     raised
+                    onPress={() => {
+                        firebase.auth().signOut()
+                            .then(() => {
+                                Navigation.startSingleScreenApp({
+                                    screen: {
+                                        screen: "fitmate.AuthScreen",
+                                        navigatorStyle: {
+                                            navBarHidden: true,
+                                        }
+                                    }
+                                })
+                            })
+                            .catch((error) => {
+                                console.log(error)
+                            });
+                    }}
                 >
                 </Button>
             </View>
