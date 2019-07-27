@@ -7,6 +7,7 @@ import pushupimg from '../../../icons/pushuplabel.jpg'
 import situpimg from '../../../icons/situpslabel.jpg'
 
 import squatsimg from '../../../icons/squatslabel.jpg'
+import Toast from 'react-native-root-toast';
 
 
 class ViewChallengesScreen extends Component {
@@ -92,23 +93,21 @@ class ViewChallengesScreen extends Component {
 
 
 
-  completeChallenge = (item) => {
+  completeChallenge = () => {
     this.props.setDone();
-    this.props.navigator.push({
-      screen: 'fitmate.EachExerciseScreen',
-      title: item.ExerciseName,
-      subtitle: undefined,
-      passProps: { ...item},
-      animated: true,
-      animationType: 'fade',
-      backButtonTitle: undefined,
-      backButtonHidden: false,
+    const toast = Toast.show('Challenge Completion Recorded!', {
+      duration: Toast.durations.SHORT,
+      position: Toast.positions.BOTTOM,
+      shadow: true,
+      animation: true,
+      hideOnPress: true,
+      delay: 1,
+      backgroundColor: "green"
     });
   }
 
   
   render() {
-
     console.log(this.props.DownloadURL)
     return (
       <View style={styles.container}>

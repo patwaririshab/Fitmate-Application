@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, Dimensions, StyleSheet, Image } from 'react-native';
+import { View, Text, Dimensions, StyleSheet, Image, Alert } from 'react-native';
 import { Button } from 'react-native-elements'
 import Profile1 from '../../../icons/profilepic.jpg'
 import Profile2 from '../../../icons/profilepic2.jpg'
 import firebase from '../../Firebase'
+import { Navigation } from 'react-native-navigation'
 
 
 const picture = Math.random() > 0.5 ? Profile1 : Profile2;
@@ -35,6 +36,24 @@ class SideMenu extends Component{
                         title = "Logout"
                         type = 'solid'
                         raised
+                        onPress={()=>{
+                            firebase.auth().signOut()
+                            .then(() => {
+                                Navigation.startSingleScreenApp({
+                                    screen: {
+                                      screen: "fitmate.AuthScreen",
+                                      navigatorStyle: {
+                                          navBarHidden: true,
+                                      }
+                                    }
+                                  })
+                            })
+                            .catch((error) => {
+                                Alert.alert(error)
+                            });
+                            
+
+                        }}
                      >
           </Button>
                 </View>
