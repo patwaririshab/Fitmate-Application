@@ -1,17 +1,17 @@
 import React from 'react';
-import { View, Text, FlatList, StyleSheet, Dimensions, ListItem } from 'react-native';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 import AuthContext from '../../Context/AuthContext'
 import firebase from '../../Firebase'
 import { SearchBar, Button } from 'react-native-elements'
+//import EachFriend from '../../components/EachFriend'
+
 import SearchedFriend from '../../components/SearchedFriend'
-import Profile1 from '../../../icons/profilepic.jpg'
-import Profile2 from '../../../icons/profilepic2.jpg'
-// import SearchedFriend from '../../components/Contestants'
+
 import profileicon from '../../../icons/profile.png';
 import refreshicon from '../../../icons/refresh.png';
 
+import trophyIcon from '../../../icons/trophy.jpg'
 
-const picture = Math.random() > 0.5 ? Profile1 : Profile2;
 
 
 class AddFriendsScreen extends React.Component {
@@ -20,6 +20,9 @@ class AddFriendsScreen extends React.Component {
   static navigatorButtons = {
     rightButtons: [
       {
+        id: 'leaderBoardBtn',
+        icon: trophyIcon
+      }, {
         id: 'profileBtn',
         icon: profileicon
       },
@@ -29,6 +32,29 @@ class AddFriendsScreen extends React.Component {
       }
     ]
   };
+
+
+  openLeaderBoard = () => {
+    this.props.navigator.push({
+      screen: 'fitmate.LeaderBoard',
+      title: "LeaderBoard",
+      subtitle: undefined,
+      passProps: {
+        userID: this.state.userID
+      },
+      animated: true,
+      animationType: 'fade',
+      backButtonTitle: undefined,
+      backButtonHidden: false,
+    });
+  }
+
+  constructor(props) {
+    super(props);
+    // if you want to listen on navigator events, set this up
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
+  }
+
 
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
     if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
@@ -40,9 +66,13 @@ class AddFriendsScreen extends React.Component {
           side: 'right'
         });
       }
+      if (event.id == 'leaderBoardBtn') {
+        this.openLeaderBoard();
+
+      }
+
     }
   }
-
 
   state = {
     text: "",
@@ -56,24 +86,8 @@ class AddFriendsScreen extends React.Component {
   }
 
 
-
-  constructor(props) {
-    super(props);
-    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
-  }
-
-  onNavigatorEvent = event => {
-    if(event.type === "NavBarButtonPress") {
-      if(event.id === "profileBtn") {
-        this.props.navigator.toggleDrawer({
-          side: 'right'     
-        });
-      }
-    }
-  }
-
   static contextType = AuthContext;
-  
+
 
   getAllFriends = (user) => {
     const allFriends = firebase.firestore().collection('allFriends').doc(user.uid).get().then((doc) => {
@@ -106,9 +120,17 @@ class AddFriendsScreen extends React.Component {
 
     const user = firebase.auth().currentUser;
     console.log(user.uid);
+
+
     const allFriends = await this.getAllFriends(user);
+
     const allUsers = await this.getAllUsers(allFriends);
+
     this.setState({ userID: user.uid, users: [...allUsers] });
+    console.log("TESTING FIRNDS")
+    console.log(this.state.users);
+
+
   }
 
   AddRemoveFriend = (item) => {
@@ -123,8 +145,7 @@ class AddFriendsScreen extends React.Component {
         users: [...usersCpy],
         filtered: [...this.state.filtered]
       });
-    } 
-    else {
+    } else {
       firebase.firestore().collection('allFriends').doc(this.state.userID).update({
         Friends: firebase.firestore.FieldValue.arrayUnion(item.userID)
       });
@@ -141,7 +162,7 @@ class AddFriendsScreen extends React.Component {
   searchBtnPressedHandler = () => {
     const searchtext = this.state.text;
     if (searchtext === "") {
-      this.setState({filtered: []}) 
+
     } else {
       const usersCpy = this.state.users.filter((friend) => {
         return friend.name.toLowerCase().includes(searchtext.toLowerCase());
@@ -158,7 +179,7 @@ class AddFriendsScreen extends React.Component {
   }
 
   render() {
-    
+
     const friendDisplay = (
       <FlatList
         style={styles.listcontainer}
@@ -172,15 +193,15 @@ class AddFriendsScreen extends React.Component {
     return (
       <View style={styles.overallcontainer}>
         <SearchBar
-          inputContainerStyle={{ borderRadius: 20}}
-          onChangeText={ 
-            (e) => { this.setState({ text: e });
-                    this.searchBtnPressedHandler();
-          }
+          onChangeText={
+            (e) => {
+              this.setState({ text: e });
+              this.searchBtnPressedHandler();
+            }
           }
           onClearText={() => { }}
           noIcon
-          icon={{ type: 'font-awesome', name: 'search' }}
+          //icon={{ type: 'font-awesome', name: 'search' }}
           placeholder='Type Here...'
           value={this.state.text} />
         <Text>{this.state.searchtext}</Text>
@@ -193,10 +214,12 @@ class AddFriendsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
+    padding: 20,
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
   innercontainer: {
 
@@ -206,13 +229,13 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
 
-//   placeInput: {
-//     width: "70%"
-//   },
+  placeInput: {
+    width: "70%"
+  },
 
-//   placeBtn: {
-//     width: "30%"
-//   },
+  placeBtn: {
+    width: "30%"
+  },
 
 
   welcome: {
@@ -226,10 +249,10 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   listcontainer: {
-    width: "100%",
+    width: "100%"
   },
   overallcontainer: {
-    paddingBottom: 5,
+    paddingBottom: 16
   }
 });
 

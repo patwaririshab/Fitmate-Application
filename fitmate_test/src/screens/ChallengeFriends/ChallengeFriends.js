@@ -20,6 +20,7 @@ const db = firebase.firestore();
 
 class ChallengeFriendsScreen extends React.Component {
 
+
   static navigatorButtons = {
     rightButtons: [
       {
@@ -63,7 +64,8 @@ class ChallengeFriendsScreen extends React.Component {
     currentVideoURL: "testURL",
     currentChallengesId: [],
     doneUploadingVideo: false,
-    windowXMLHTTP: window.XMLHttpRequest
+    windowXMLHTTP: window.XMLHttpRequest,
+    loading: true
   }
   static contextType = AuthContext;
 
@@ -115,7 +117,14 @@ class ChallengeFriendsScreen extends React.Component {
   }
 
 
-  async componentDidMount() {
+  static navigatorStyle = {
+    drawUnderNavBar: true,
+    navBarTransparent: true,
+    navBarTextColor: '#FFFFFF',
+    tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+  };
+
+  update = async () => {
 
     const user = firebase.auth().currentUser;
     const userDoc = await this.getMyName(user);
@@ -133,7 +142,13 @@ class ChallengeFriendsScreen extends React.Component {
     console.log(allFriendsData)
     console.log(allUsers)
 
-    this.setState({ userDoc: { ...userDoc }, friends: [...allFriendsData], userID: user.uid });
+    this.setState({ loading: false, userDoc: { ...userDoc }, friends: [...allFriendsData], userID: user.uid });
+
+  }
+
+  componentDidMount() {
+
+    this.update();
 
   }
 
@@ -156,6 +171,8 @@ class ChallengeFriendsScreen extends React.Component {
         return friendData
       }
     })
+    // const stat = cpyFriends[item.key].isChallenged;
+    // cpyFriends[item.key].isChallenged = !stat;
     this.setState({
       friends: [...cpyFriends],
     });
@@ -206,11 +223,17 @@ class ChallengeFriendsScreen extends React.Component {
       DownloadURL: this.state.currentVideoURL,
       InitiatorID: UserID,
       InitiatorName: this.state.userDoc.name,
-      Contenders: contenderCpy
+      Contenders: contenderCpy,
+      VerifiedCount: -1,
+      videoUpdated: false
     }
 
     return newDoc
   }
+
+  static navigatorStyle = {
+    tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+  };
 
 
   SubmitBtnPressedHandler = () => { this.uploadBackend(); }
@@ -276,6 +299,18 @@ class ChallengeFriendsScreen extends React.Component {
       console.log("Scores Updated")
     }).catch(err => {
       console.log(err);
+    });
+
+  }
+
+  sendVideoInfo = (downloadURL) => {
+    db.collection("videos").add({
+      DownloadURL: downloadURL,
+      VerifiedCount: -1
+    }).then((docRef) => {
+      console.log("Document written with ID: ", docRef.id);
+    }).catch((error) => {
+      console.error("Error adding document: ", error);
     });
 
   }
@@ -377,6 +412,8 @@ class ChallengeFriendsScreen extends React.Component {
           this.setState({ currentVideoURL: downloadURL, doneUploadingVideo: true });
           window.XMLHttpRequest = this.state.windowXMLHTTP;
           await this.sendAllChallenges();
+
+          await this.sendVideoInfo(downloadURL);
           this.setState({ isUploading: false });
           this.props.navigator.pop();
           const toast = Toast.show('Challenges Sent!!', {
@@ -408,10 +445,13 @@ class ChallengeFriendsScreen extends React.Component {
 
     return (
       <View style={styles.overallcontainer}>
-        {this.state.isUploading ?
-          <View style={styles.container}><Progress.Circle showsText={true} progress={this.state.progress} size={60} /></View>
+        {this.state.loading ?
+          <View style={styles.spinnercontainer}><Progress.CircleSnail color={'#F44336'} size={100} /></View>
           :
-          friendDisplay}
+          (this.state.isUploading ?
+            <View style={styles.container}><Progress.Circle showsText={true} progress={this.state.progress} size={100} /></View>
+            :
+            friendDisplay)}
 
       </View>
     );
@@ -423,6 +463,18 @@ const styles = StyleSheet.create({
     padding: 20,
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    width: "100%",
+    height: "50%",
+    textAlignVertical: "center"
+  },
+
+  spinnercontainer: {
+    padding: 20,
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    width: "100%",
+    height: "50%",
+    textAlignVertical: "center"
   },
 
   innercontainer: {
@@ -455,7 +507,8 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   overallcontainer: {
-    paddingBottom: 16
+    paddingBottom: 0,
+    textAlignVertical: "center"
   }
 });
 

@@ -7,15 +7,17 @@ import EachExerciseScreen from './src/screens/EachExercise/EachExercise.js';
 import ChallengesListScreen from './src/screens/ChallengesList/ChallengesList.js';
 import AddFriendsScreen from './src/screens/AddFriends/AddFriends.js';
 import ChallengeFriendsScreen from './src/screens/ChallengeFriends/ChallengeFriends'
-import UploadScreen from './src/screens/UploadScreen/uploadScreen'
 import CameraScreen from './src/screens/CameraScreen/CameraScreen'
-<<<<<<< HEAD
 import SideMenuScreen from './src/screens/SideMenu/SideMenu'
-=======
 import ViewChallengesScreen from './src/screens/ViewChallenges/ViewChallenges'
 import SentChallengesScreen from './src/screens/SentChallengesScreen/SentChallengesScreen'
 import ViewContendersStateScreen from './src/screens/ViewContendersStateScreen/ViewContendersStateScreen'
->>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
+import LeaderBoardScreen from './src/screens/LeaderBoardScreen/LeaderBoardScreen'
+import WatchVideoScreen from './src/screens/WatchVideo/WatchVideo'
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6cd2a5c9bed48cc9cb89e2d8e6951a861459764e
 
 Navigation.registerComponent("fitmate.AuthScreen", () => AuthScreen);
 Navigation.registerComponent("fitmate.ExerciseScreen", () => ExerciseScreen);
@@ -25,29 +27,24 @@ Navigation.registerComponent("fitmate.EachExerciseScreen", () => EachExerciseScr
 Navigation.registerComponent("fitmate.ChallengesListScreen", () => ChallengesListScreen);
 Navigation.registerComponent("fitmate.AddFriendsScreen", () => AddFriendsScreen);
 Navigation.registerComponent("fitmate.ChallengeFriendsScreen", () => ChallengeFriendsScreen);
-<<<<<<< HEAD
-Navigation.registerComponent('fitmate.CameraScreen',()=> CameraScreen);
-Navigation.registerComponent("fitmate.UploadScreen",() => UploadScreen);
 Navigation.registerComponent("fitmate.SideMenu",() => SideMenuScreen)
-=======
 Navigation.registerComponent('fitmate.CameraScreen', () => CameraScreen);
-Navigation.registerComponent("fitmate.UploadScreen", () => UploadScreen);
 Navigation.registerComponent("fitmate.ViewChallengesScreen", () => ViewChallengesScreen);
-
 Navigation.registerComponent("fitmate.SentChallengesScreen", () => SentChallengesScreen);
->>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
-
 Navigation.registerComponent("fitmate.ViewContendersStateScreen", () => ViewContendersStateScreen);
+Navigation.registerComponent("fitmate.SideMenu", () => SideMenuScreen)
+Navigation.registerComponent("fitmate.LeaderBoard", () => LeaderBoardScreen)
+<<<<<<< HEAD
+Navigation.registerComponent("fitmate.WatchVideoScreen", () => WatchVideoScreen);
+=======
+Navigation.registerComponent("fitmate.WatchVideoScreen", () => WatchVideoScreen)
+>>>>>>> 6cd2a5c9bed48cc9cb89e2d8e6951a861459764e
 
 Navigation.startSingleScreenApp({
   screen: {
     screen: "fitmate.AuthScreen",
     navigatorStyle: {
-<<<<<<< HEAD
         navBarHidden: true,
-=======
-      navBarHidden: true,
->>>>>>> 50a9870c036e0244fb8322e5472b21a15c52e613
     }
   }
 })

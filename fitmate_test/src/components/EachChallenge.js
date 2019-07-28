@@ -21,7 +21,7 @@ const EachChallenge = (props) => {
     exerciseName = "Squats"
   }
   console.log("TimeStamp", props.TimeStamp)
-  const verified = (props.videoUpdated) ? "Verified" : "Unverified";
+  const verified = (props.videoUpdated) ? `Verified Count: ${props.VerifiedCount}` : "Unverified";
   const verifiedCol = (props.videoUpdated) ? "green" : "red";
   return (
     <TouchableOpacity style={styles.container} onPress={props.pressed}>
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     width: "100%"
   },
   titleTextVerified: {
-    fontSize: 10,
+    fontSize: 15,
     fontWeight: 'bold',
     textAlign: 'center',
     textAlignVertical: 'center',

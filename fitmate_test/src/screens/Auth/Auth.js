@@ -77,17 +77,8 @@ class AuthScreen extends Component {
     console.log("Logging in");
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then((user) => {
-        Alert.alert("Successfully Logged in", 'Press OK to Continue', [{
-          title: "OK",
-          text: "OK",
-          onPress: () => {
-            console.log(user)
-            startTabs();
-          }
-        },
-        ],
-          { cancelable: false },
-        );
+        startTabs();
+
       })
       .catch((error) => {
         var errorCode = error.code;

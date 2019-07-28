@@ -1,52 +1,59 @@
 import React from 'react';
-import {Button} from 'react-native'
-import { Platform, PermissionsAndroid, CameraRoll, FlatList, AppRegistry, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
+import { Platform, PermissionsAndroid, CameraRoll, Button, FlatList, AppRegistry, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native';
 
 import SentChallengeState from '../../components/SentChallengeState'
 
 
-const ChallengeFriendsScreen = (props) => {
-    const friendDisplay = (
-        <FlatList
-            style={styles.listcontainer}
-            data={props.Contenders}
-            renderItem={({ item }) => <SentChallengeState item={item} />}>
+class ChallengeFriendsScreen extends React.Component {
 
-        </FlatList>
-    );
+    static navigatorStyle = {
+        tabBarHidden: true, // make the screen content hide the tab bar (remembered across pushes)
+    };
 
-    const navButton = (
-        <Button success
-                style={styles.buttonStyle} 
-                onPress={()=>{
-                props.navigator.push({
-                    screen: 'fitmate.WatchVideoScreen',
-                    title: "Watch Video",
-                    subtitle: undefined,
-                    passProps: {
-                    Exercise: props.ExerciseNum,
-                    Number: props.Number,
-                    DownloadURL:props.DownloadURL,
 
-                    },
-                    animated: true,
-                    animationType: 'fade',
-                    backButtonTitle: undefined,
-                    backButtonHidden: false,
-                });
-                }} 
-                title={'Watch Video'}> 
-             
-        </Button>
-    )
-    
-    return (
-        <View style={styles.overallcontainer}>
-            {navButton}
-            {friendDisplay}
-        </View>
-    );
-    
+    render() {
+        const navButton = (
+            <Button 
+                color={'#008000'}
+                style={styles.buttonStyle}
+                onPress={() => {
+                    this.props.navigator.push({
+                        screen: 'fitmate.WatchVideoScreen',
+                        title: "Watch Video",
+                        subtitle: undefined,
+                        passProps: {
+                            Exercise: this.props.ExerciseNum,
+                            Number: this.props.Number,
+                            DownloadURL: this.props.DownloadURL,
+
+                        },
+                        animated: true,
+                        animationType: 'fade',
+                        backButtonTitle: undefined,
+                        backButtonHidden: false,
+                    });
+                }}
+                title={'Watch Video'}>
+
+            </Button>
+        )
+
+        const friendDisplay = (
+            <FlatList
+                style={styles.listcontainer}
+                data={this.props.Contenders}
+                renderItem={({ item }) => <SentChallengeState item={item} />}>
+
+            </FlatList>
+        );
+        return (
+            <View style={styles.overallcontainer}>
+                {friendDisplay}
+                {navButton}
+            </View>
+        );
+    }
+
 
 
 }
@@ -56,12 +63,11 @@ const styles = StyleSheet.create({
         width: "100%"
     },
     overallcontainer: {
-        paddingBottom: 16
+        paddingBottom: 0
     },
     buttonStyle: {
         flex: 1,
-
-    
+        margin: 0,
     }
 });
 
